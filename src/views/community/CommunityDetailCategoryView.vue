@@ -47,7 +47,10 @@
             <div class="main-area">
                 <div class="main-container">
                     <!-- category list 내용 -->
-                    <div class="main-content-wrapper" >
+                    <div class="main-content-wrapper" v-if="feeds?.length === 0">
+                        <h1 style="color:#707070; margin: 0 auto;">아직 게시글이 없습니다</h1>
+                    </div>
+                    <div class="main-content-wrapper" v-else>
                         <!-- 게시글 1개 -->
                         <div  v-for="feed,index in feeds" :key="index">
                             <router-link :to="`/community/detail/${communityurl}/feed/${feed.id}`">
@@ -108,10 +111,12 @@ export default {
     computed:{
         ...mapGetters(['fetchCommunityCategoryDetail']),
         community_name(){
-            return this.fetchCommunityCategoryDetail.community_title
+            //return this.fetchCommunityCategoryDetail.community_title
+            return this.$route.params.community_name
         },
         category_name(){
-            return this.fetchCommunityCategoryDetail.category_name
+            //return this.fetchCommunityCategoryDetail.category_name
+            return this.$route.params.category_name
         },
         introduction(){
             return this.fetchCommunityCategoryDetail.introduction
@@ -120,7 +125,12 @@ export default {
             return this.fetchCommunityCategoryDetail?.feed || [];
         },     
         feeds(){
-            return this.fetchCommunityCategoryDetail?.feed?.results || [];
+            if (Array.isArray(this.fetchCommunityCategoryDetail?.feed?.results) && this.fetchCommunityCategoryDetail?.feed?.results.length > 0) {
+                return [...this.fetchCommunityCategoryDetail?.feed?.results].sort((a, b) => new Date(b.is_notification) - new Date(a.is_notification));
+            } else {
+                return []; // 또는 다른 적절한 기본 값
+            }
+            //return this.fetchCommunityCategoryDetail?.feed?.results || [];
         },
         communityurl(){
             return this.$route.params.community_name
@@ -134,7 +144,8 @@ export default {
     methods:{
         async addBookmark() {
             try {
-                const response = await fetchCommunityBookmark(this.community)
+                const community_name = this.$route.params.community_name
+                const response = await fetchCommunityBookmark(community_name)
                 if (response.status == 200) {
                     alert(response.data.msg)
                 }

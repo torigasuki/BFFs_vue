@@ -98,7 +98,7 @@
                   <span class="text-view-content">{{ feed.view_count }}</span>
                 </div>
                 <button
-                  v-if="feedadmin.includes(feed.user)"
+                  v-if="feedadmin.includes(this.userid)"
                   class="noti-button"
                   @click="addNotification()"
                 >
@@ -143,7 +143,7 @@
                   <router-link
                     v-if="feed.user === this.userid"
                     class="content-edit-button"
-                    :to="`/feed/update/${feed.id}`"
+                    :to="`/${community.communityurl}/feed/update/${feed.id}`"
                     >글 수정</router-link
                   >
                   <!-- 본인 -->
@@ -220,8 +220,7 @@
                         }}</router-link>
                       </li>
                       <li class="comment-date">
-                        작성일 {{ comment?.created_at?.slice(5, 10) }} 수정일
-                        {{ comment?.updated_at?.slice(5, 10) }}
+                        작성일 {{ comment?.created_at?.slice(5, 10) }} 수정일 {{ comment?.updated_at?.slice(5, 10) }}
                       </li>
                       <li class="comment-text">
                         {{ comment.text }}
@@ -282,6 +281,20 @@
                     <button class="coco-submit-button" @keyup.enter="createCocomment(comment)" @click="createCocomment(comment)">입 력</button>
                     <button class="coco-quit-button">취 소</button>
                   </div>
+                  <!-- 대댓글 입력 폼 -->
+                  <div class="coco-input-wrapper" v-if="comment.cocommentshow">
+                    <div class="coco-text-info">
+                      <p>대댓글 달기</p>
+                    </div>
+                    <textarea
+                      autocomplete="off"
+                      class="input-coco-text"
+                      placeholder="여기에 댓글을 입력하세요"
+                      v-model="inputCocomment"
+                    ></textarea>
+                    <button class="coco-submit-button" @keyup.enter="createCocomment(comment)" @click="createCocomment(comment)">입 력</button>
+                    <button class="coco-quit-button">취 소</button>
+                  </div>
 
                   <!-- 대댓글 내용 -->
                   <div class="cocommnet-box" v-for ="cocomment,index in comment.cocomment" :key="index">
@@ -289,12 +302,12 @@
                       <div class="cocomment-card">
                           <li class="comment-author"> {{cocomment.nickname}} </li>
                           <li class="comment-date">
-                            작성일 {{ cocomment?.created_at?.slice(5, 10) }} 수정일{{ cocomment?.updated_at?.slice(5, 10) }}
+                            작성일 {{ cocomment?.created_at?.slice(5, 10) }} 수정일 {{ cocomment?.updated_at?.slice(5, 10) }}
                           </li>
                           <li class="comment-text">
                               {{cocomment.text}}
                           </li>
-                          <div class="comment-func-box">
+                          <div class="comment-func-box" v-if="userid === cocomment.user_id">
                               <button class="comment-edit-btn">
                                   <svg class="edit-icon" viewBox="0 0 512 512" height="17.5" width="15">
                                       <path
