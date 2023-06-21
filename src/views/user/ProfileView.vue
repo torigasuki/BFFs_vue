@@ -313,9 +313,10 @@ header >  #menu {
 header > .inner { 
     position: relative;
     display: flex;
-    width: 1100px;
+    width: auto;
     height: 120px;
     margin: 0 auto;
+    padding: 0px 30px;
 }
 header > .inner > .left-sd {
     display: flex;
@@ -343,6 +344,8 @@ header > .inner > .sub-menu {
     margin: auto;
     align-items: center;
     height: 78px;
+    margin-right: 40px;
+
 }
 header > .inner > .sub-menu > nav > .menu {
     list-style-type: none;

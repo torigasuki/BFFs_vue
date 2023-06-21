@@ -291,14 +291,14 @@ a{
     content: "\002B";
     position: absolute;
     color: #909090;
-    font-size: 1.3em;
-    top: 2px;
+    font-size: 1.2em;
+    bottom: 7px;
 }
   
 #checkboxInput:checked + .bookmark::before {
     content: "\2713";
-    font-size: 1.0em;
-    top: 4px;
+    font-size: 1.1em;
+    top: 1px;
     color: #ffffff;
 }
   
@@ -313,7 +313,7 @@ a{
   
 .bookmark::after {
     content: "";
-    background-color: rgba(255, 213, 0, 0.342);
+    background-color: rgba(255, 183, 0, 0.788);
     position: absolute;
     width: 10px;
     height: 10px;
@@ -444,9 +444,7 @@ a{
 }
 
 
-/* main-content! list area */
-/* main-content! list area */
-/* main-content! list area */
+/* main-content! 메인 컨텐츠 list area */
 
 .main-content-wrapper {
     display: grid;

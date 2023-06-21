@@ -88,9 +88,10 @@ h1{
 }
 header > .inner{
     position: relative;
-    width: 1100px;
+    width: auto;
     height: 120px;
     margin: 0 auto;
+    padding: 0px 30px;
 }
 
 header > .inner > h1 > .logo {
@@ -105,6 +106,7 @@ header > .inner > .sub-menu {
     position: absolute;
     top: 10;
     right: 0;
+    margin-right: 40px;
     display: flex;
 }
 

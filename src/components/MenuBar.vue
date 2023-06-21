@@ -111,28 +111,33 @@ header > #menu > .ct_1 > .alone_play {
 }
 
 header > #menu > .ct_1 > .alone_play  {
-    padding-left: 12px;
+    padding-left: 18px;
 }
 
 header > #menu > .ct_1 > .alone_play > li {
     margin: 8px 0;
+    color: #f0f0f0;
+
 }
 
 header > #menu > .ct_1 > .alone_play > li > a {
     margin-left: 24px;
+    color: #D7C0CD;
+
 }
 
 header > #menu > .ct_2 > .together_play {
-    padding-left: 12px;
+    padding-left: 18px;
 }
 
 header > #menu > .ct_2 > .together_play > li {
     margin: 8px 0;
+    color: #f0f0f0;
 }
 
 header > #menu > .ct_2 > .together_play > li > a {
     margin-left: 24px;
-    color: #454545;
+    color: #D7C0CD;
 }
 
 header > #menu > .ct_2 > .together_play {
@@ -157,16 +162,18 @@ header > #menu > .suggestions > p {
 header > #menu > .ct_1 > .alone_play > li > h4 > a {
     font-style: italic;
     font-weight: bold;
-    color: #9E2067;
+    color: #f0f0f0;
 }
 
 header > .inner{
-        position: relative;
-        width: 1100px;
-        height: 120px;
-        margin: 0 auto;
-        background-color: #fff;
-        opacity: 0.6;
+    position: relative;
+    width: auto;
+    height: 120px;
+    margin: 0 auto;
+    padding: 0px 30px;
+    background-color: #fff;
+    opacity: 0.6;
+
 }
 
 header > .inner > h1 > .logo {
@@ -182,6 +189,8 @@ header > .inner > .sub-menu {
     top: 10;
     right: 0;
     display: flex;
+    margin-right: 40px;
+
 }
 
 header > .inner > .sub-menu > nav > h2 {
