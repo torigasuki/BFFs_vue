@@ -1,9 +1,5 @@
 <template>
-    <div>
-        <section class="head-section">
-            <div class="head-area">
-            </div>
-        </section>
+    <div class="test">
         <section class="main-section">
             <div class="main-area">
                 <div class="main-container">
@@ -86,17 +82,12 @@ export default {
 </script>
 
 <style scoped>
+.test{
+    margin-bottom: 100px !important;
+}
 body {
     margin: 0;
     padding: 0;
-}
-
-.head-area {
-    width: 100%;
-    height: 120px;
-    position: relative;
-    /* 나중에 삭제할 부분, 크기 위치 조정을 위해 넣어둠 */
-    background: rgb(39, 35, 116); 
 }
 
 .main-section {

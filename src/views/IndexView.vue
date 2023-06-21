@@ -39,7 +39,7 @@
           <div class="card-container" id="profile-card-list">
             <!-- 혼자놀기 카드 박스 -->
             <router-link :to="`/profile/${profile.id}`" class="alone-card-box" v-for="(profile, index) in profile" :key="index">
-              <div class="card-image" v-if="profile.profileimageurl.slice(37, 42) === 'kakao'">
+              <div class="card-image" v-if="profile.profileimageurl.includes('kakao') || profile.profileimageurl.includes('google')">
                 <img :src="profile.profileimageurl.slice(28)" />
               </div>
               <div class="card-image" v-else>
@@ -509,7 +509,7 @@ img {
   font-size: 0.9rem;
 }
 .with-card-subtext img {
-  margin-top: 3px;
+  margin-right: 3px;
   width: 20px;
   height: 15px;
 }

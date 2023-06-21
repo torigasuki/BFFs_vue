@@ -67,6 +67,7 @@
                 placeholder="Search"
                 name="text"
                 class="input"
+                v-model="searchname" @keyup.enter="searchFeed()"
               />
               <svg
                 fill="#000000"
@@ -102,7 +103,7 @@
                   class="noti-button"
                   @click="addNotification()"
                 >
-                  공지 등록
+                  {{ feed.is_notification ? '공지 취소' : '공지 등록' }}
                   <svg viewBox="0 0 512 512" class="bell">
                     <path
                       d="M224 0c-17.7 0-32 14.3-32 32V49.9C119.5 61.4 64 124.2 64 200v33.4c0 45.4-15.5 89.5-43.8 124.9L5.3 377c-5.8 7.2-6.9 17.1-2.9 25.4S14.8 416 24 416H424c9.2 0 17.6-5.3 21.6-13.6s2.9-18.2-2.9-25.4l-14.9-18.6C399.5 322.9 384 278.8 384 233.4V200c0-75.8-55.5-138.6-128-150.1V32c0-17.7-14.3-32-32-32zm0 96h8c57.4 0 104 46.6 104 104v33.4c0 47.9 13.9 94.6 39.7 134.6H72.3C98.1 328 112 281.3 112 233.4V200c0-57.4 46.6-104 104-104h8zm64 352H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7s18.7-28.3 18.7-45.3z"
@@ -276,24 +277,10 @@
                       autocomplete="off"
                       class="input-coco-text"
                       placeholder="여기에 댓글을 입력하세요"
-                      v-model="inputCocomment"
+                      v-model="inputCocomment" @keyup.enter="createCocomment(comment)"
                     ></textarea>
-                    <button class="coco-submit-button" @keyup.enter="createCocomment(comment)" @click="createCocomment(comment)">입 력</button>
-                    <button class="coco-quit-button">취 소</button>
-                  </div>
-                  <!-- 대댓글 입력 폼 -->
-                  <div class="coco-input-wrapper" v-if="comment.cocommentshow">
-                    <div class="coco-text-info">
-                      <p>대댓글 달기</p>
-                    </div>
-                    <textarea
-                      autocomplete="off"
-                      class="input-coco-text"
-                      placeholder="여기에 댓글을 입력하세요"
-                      v-model="inputCocomment"
-                    ></textarea>
-                    <button class="coco-submit-button" @keyup.enter="createCocomment(comment)" @click="createCocomment(comment)">입 력</button>
-                    <button class="coco-quit-button">취 소</button>
+                    <button class="coco-submit-button" @click="createCocomment(comment)">입 력</button>
+                    <button class="coco-quit-button" @click="cocommentShow(comment)">취 소</button>
                   </div>
 
                   <!-- 대댓글 내용 -->
@@ -388,6 +375,7 @@ export default {
       email: "",
       inputComment: "",
       inputCocomment:"",
+      searchname: '',
     };
   },
   created() {
@@ -425,6 +413,8 @@ export default {
         const response = await fetchFeedNotification(this.community.communityurl, feed_id);
         if (response.status === 200) {
           alert(response.data.message);
+          this.feed.is_notification = !this.feed.is_notification;
+  
         }
       } catch (error) {
         console.log(error);
@@ -452,6 +442,11 @@ export default {
         if (response.status === 200) {
           alert(response.data);
           this.feed.like_bool = !this.feed.like_bool;
+          if(this.feed.like_bool){
+            this.feed.likes_count+=1;
+          }else{
+            this.feed.likes_count-=1;
+          }
         }
       } catch (error) {
         if (error.response.status === 401) {
@@ -559,6 +554,9 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+    searchFeed() {
+        this.$router.push(`/feed/search/${this.searchname}`)
     },
   }
 };

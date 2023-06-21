@@ -28,14 +28,14 @@
                         <em class="mail-veerification" @click="verify">메일인증</em>
                     </div>
                     
-                    <div class="form-item">
+                    <form class="form-item">
                         <i class="icon"><font-awesome-icon :icon="['fas', 'lock']" size="xl" style="color: #000000;" /></i>
                         <input :type="inputType" id="password" placeholder="비밀번호" class="input" maxlength="20" autocomplete="new_password" v-model="password">
                         <i class="icon">
                             <font-awesome-icon v-if='visiable' :icon="['far', 'eye']" @click="togglePassword"/>
                             <font-awesome-icon v-else :icon="['far', 'eye-slash']" @click="togglePassword"/>
                         </i>
-                    </div>
+                    </form>
                     <div class="form-item">
                         <i class="icon"><font-awesome-icon :icon="['fas', 'user']" size="xl" style="color: #000000;" /></i>
                         <input autocomplete="off" type="text" id="name" placeholder="이름" class="input" maxlength="17" v-model="name">
@@ -173,7 +173,7 @@ h1{
     flex-direction: column;
     display: flex;
     
-    margin-top: 100px;
+    margin-top: 200px;
     margin-bottom: 100px;
 }
 

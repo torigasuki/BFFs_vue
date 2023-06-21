@@ -263,58 +263,6 @@ header >  #menu {
     background-color: #9E2067;
 }
 
-header > .inner { 
-    position: relative;
-    display: flex;
-    width: auto;
-    height: 120px;
-    margin: 0 auto;
-    padding: 0px 30px;
-}
-
-header > .inner > .left-sd {
-    display: flex;
-
-    align-items: center;
-    height: 120px;
-}
-
-header > .inner > .left-sd >  h1 {
-    margin-right: 18px;
-}
-
-header > .inner > .left-sd > .line > h3 > a::before {
-    content: "";
-    display: block;
-    float: left;
-    margin-right: 6px;
-    width: 3px;
-    height: 28px;
-    background-color: #9E2067;
-}
-
-header > .inner > .sub-menu {
-    position: absolute;
-    display: flex;
-    top: 0;
-    bottom: 0;
-    right: 80px;
-    margin: auto;
-    align-items: center;
-    height: 78px;
-    margin-right: 40px;
-}
-
-header > .inner > .sub-menu > nav > .menu {
-    list-style-type: none;
-    display: flex;
-
-}
-
-header > .inner > .sub-menu > nav > .menu > li {
-    margin-right: 14px;
-}
-
 header > .profile > h3 {
     padding: 48px 0 24px 118px;
 }

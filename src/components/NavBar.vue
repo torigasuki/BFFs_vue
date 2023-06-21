@@ -19,9 +19,16 @@
 							<li><router-link to="/user/register">Join us</router-link></li>
 						</ul>                        
 					</nav>
-					<div class="hamburger" @click="menuShow">
+          <input id="checkbox" type="checkbox" @click="menuShow">
+            <label class="toggle" for="checkbox" :class="{togglechecked:menubar}">
+                <div id="bar1" class="bars" :class="{bar1checked:menubar}"></div>
+                <div id="bar2" class="bars" :class="{bar2checked:menubar}"></div>
+                <div id="bar3" class="bars"></div>
+            </label>
+
+					<!-- <div class="hamburger" @click="menuShow">
                         <div class="material-icons">menu</div>
-                    </div>
+                    </div> -->
 				</div>
 			</div>
 		</header>
@@ -117,7 +124,7 @@ header > .inner > .sub-menu > nav > h2 {
 header > .inner > .sub-menu > nav > .menu {
     list-style-type: none;
     display: flex;
-    padding-right: 48px;
+    padding-right: 70px;
     align-items: center;
     height: 70px;
 }
@@ -153,7 +160,7 @@ header > .inner > .sub-menu > nav > .menu > li > a:hover {
     cursor: pointer;
 }
 
-header > .inner > .sub-menu > .hamburger {
+/*header > .inner > .sub-menu > .hamburger {
     position: relative;
 }
 
@@ -168,7 +175,7 @@ header > .inner > .sub-menu > .hamburger > .material-icons {
 
 .hamburger:hover {
     cursor: pointer;
-}
+}*/
 
 .menu-bar {
     position: absolute;
@@ -190,4 +197,51 @@ header > .inner > .sub-menu > .hamburger > .material-icons {
   transform: translateX(20px);
   opacity: 0;
 }
+
+#checkbox {
+  display: none;
+}
+
+.toggle {
+  position: absolute;
+  right: 5%;
+  top: 35%;
+
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition-duration: .3s;
+}
+
+.bars {
+  width: 100%;
+  height: 4px;
+  background-color: #9E2067;
+  border-radius: 4px;
+  transition-duration: .3s;
+}
+
+.bar1checked{
+  transform: translateY(24px) rotate(-60deg);
+  transition-duration: .3s;
+  transform-origin: left;
+  z-index: 1;
+}
+.bar2checked{
+  transform: translateY(12px) rotate(60deg);
+  margin-left: 0;
+  transform-origin: right;
+  transition-duration: .3s;
+  z-index: 2;
+}
+.togglechecked{
+  transform: rotate(-90deg);
+}
+
+
 </style>
