@@ -1,6 +1,7 @@
 import {
     fetchProfile,
     fetchAllProfile,
+    fetchMeetAI,
 }from '@/api/index.js'
 
 
@@ -8,6 +9,7 @@ const state ={
     user: {},
     profile: [],
     menubar : false,
+    meetai: {},
 }
 
 const getters ={
@@ -20,6 +22,9 @@ const getters ={
     menubar(state) {
         return state.menubar
     },
+    fetchMeetAI(state) {
+        return state.meetai
+    },
 }
 
 const mutations ={
@@ -31,6 +36,9 @@ const mutations ={
     },
     toggleMenubar(state, menubar) {
         state.menubar = menubar
+    },
+    SET_MEET_AI(state, meetai) {
+        state.meetai = meetai
     },
 }
 
@@ -56,6 +64,15 @@ const actions={
     checkMenubar(context, menubar) {
         context.commit('toggleMenubar', menubar)
         return menubar
+    },
+    async FETCH_MEET_AI(context) {
+        try {
+            const response = await fetchMeetAI()
+            context.commit('SET_MEET_AI', response.data)
+            return response
+        } catch (error) {
+            console.log(error)
+        }
     },
 }
 export default {

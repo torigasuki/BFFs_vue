@@ -28,7 +28,7 @@
                     <ul class="together_play">
                         <li><h3><a href="">같이 놀기</a></h3></li>
                         <li><router-link to="/community/main">같이 놀기 페이지로 이동</router-link></li>
-                        <li><router-link to="/community/create">커뮤니티 생성 신청하기</router-link></li>         
+                        <li><router-link to="/community/create">커뮤니티 생성 신청하기</router-link></li>        
                     </ul>
                 </div>
 

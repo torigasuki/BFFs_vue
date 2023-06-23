@@ -69,7 +69,12 @@ export default {
             password:'',
         }
     },
-    
+    mounted(){
+        const social_error = this.$route.query.error
+        if(social_error){
+            alert('선택한 이메일은 다른 방법으로 회원가입을 하셨습니다. 다른 방법으로 로그인 해주세요.')
+        }
+    },
     methods: {
         passwordModal(){
             this.modalopen = true;
