@@ -93,11 +93,8 @@
 
                 <div class="user_profile" v-if="profile">
                     <div class="card">
-                        <div class="card-image" v-if="profile.profileimageurl.slice(37,42) === 'kakao'">
-                            <img :src="profile.profileimageurl.slice(28)" />
-                        </div>
-                        <div class="card-image" v-else>
-                            <img :src="profile.profileimageurl.slice(28)" v-if="profile.profileimage !== null" />
+                        <div class="card-image">
+                            <img :src="profile.profileimageurl.slice(29)" v-if="profile.profileimage !== null" />
                             <img src="@/assets/room_image(5).jpg" v-else />
                         </div>
                             <div class="category"> {{ profile.nickname }} | {{ profile.region }} </div>

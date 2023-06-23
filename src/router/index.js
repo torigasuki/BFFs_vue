@@ -163,7 +163,15 @@ export const router = new VueRouter({
         {
             path:'/meetai',
             name:'meet-ai',
-            component:MeetAI
+            component:MeetAI,
+            beforeEnter: (to, from, next) => {
+                if (localStorage.getItem('access_token')) {
+                    next()
+                } else {
+                    alert('로그인이 필요해요!')
+                    next(false)
+                }
+            }
         },
     ],
     scrollBehavior() {

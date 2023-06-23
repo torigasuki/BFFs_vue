@@ -14,7 +14,7 @@
                             <h3>커뮤니티 이름</h3>
                             <p id="community_title">{{ fetchCommunityDetail.data.title }}</p>
                             </span>
-                            <img class="input-image" :src="fetchCommunityDetail.data.imageurl" :style="{ opacity: fetchCommunityDetail.data.imageurl !== 'http://127.0.0.1:8000/media/' ? 1 : 0 }">
+                            <img class="input-image" :src="fetchCommunityDetail.data.imageurl" :style="{ opacity: fetchCommunityDetail.data.imageurl !== 'https://makebestie.com/' ? 1 : 0 }">
                         </div>
                         <div class="image-box">
                             <label class="custum-file-upload" for="file">
