@@ -68,7 +68,7 @@
                             <img :src="profile.profileimageurl.slice(28)" />
                         </div> -->
                         <div class="card-image">
-                            <img :src="profile.profileimageurl.slice(29)" v-if="profile.profileimage !== null" :style="{ opacity: profile.profileimage !== null ? 1 : 0 }" />
+                            <img :src="profile.profileimageurl.slice(33)" v-if="profile.profileimage !== null" :style="{ opacity: profile.profileimage !== null ? 1 : 0 }" />
                             <img src="@/assets/room_image(5).jpg" v-else />
                         </div>
                         <div class="image-box">
