@@ -64,12 +64,12 @@
 
                 <div class="user_profile">
                     <div class="card">
-                        <div class="card-image" v-if="profile.profileimageurl.slice(37,42) === 'kakao'">
+                        <!-- <div class="card-image" v-if="profile.profileimage !== null">
                             <img :src="profile.profileimageurl.slice(28)" />
-                        </div>
-                        <div class="card-image" v-else>
-                            <img :src="profile.profileimageurl" v-if="profile.profileimage != null" />
-                            <img src="@/assets/unity.png" v-else />
+                        </div> -->
+                        <div class="card-image">
+                            <img :src="profile.profileimageurl.slice(28)" v-if="profile.profileimage !== null" :style="{ opacity: profile.profileimage !== null ? 1 : 0 }" />
+                            <img src="@/assets/room_image(5).jpg" v-else />
                         </div>
                         <div class="image-box">
                             <label class="custum-file-upload" for="file">
@@ -103,13 +103,28 @@ export default {
             return this.fetchProfile.profile;
         },
     },
+    watch:{
+        $route(){
+            const target_user = this.$route.params.id
+            const payload = localStorage.getItem("payload")
+            const { user_id } = JSON.parse(payload)
+            if(target_user!=user_id){
+                this.$router.go(-1)
+            }
+        }
+    },
     data() {
         return {
         }
     },
     created() {
-        const user_id = this.$route.params.id
-        this.$store.dispatch("FETCH_USER_PROFILE", user_id);
+        const target_user = this.$route.params.id
+        this.$store.dispatch("FETCH_USER_PROFILE", target_user);
+        const payload = localStorage.getItem("payload")
+        const { user_id } = JSON.parse(payload)
+        if(target_user!=user_id){
+            this.$router.go(-1)
+        }
     },
     methods: {
         goBack(){

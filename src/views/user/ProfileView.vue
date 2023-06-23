@@ -97,7 +97,7 @@
                             <img :src="profile.profileimageurl.slice(28)" />
                         </div>
                         <div class="card-image" v-else>
-                            <img :src="profile.profileimageurl" v-if="profile.profileimage != null" />
+                            <img :src="profile.profileimageurl.slice(28)" v-if="profile.profileimage !== null" />
                             <img src="@/assets/room_image(5).jpg" v-else />
                         </div>
                             <div class="category"> {{ profile.nickname }} | {{ profile.region }} </div>

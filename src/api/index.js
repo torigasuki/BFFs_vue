@@ -506,6 +506,31 @@ function imageUpload(file) {
 //     })
 // }
 
+// AI 대화하기
+function fetchMeetAI() {
+    const token = access_token()
+    if (token) {
+        return axios.get(`${config.baseUrl}/meetai/`,{
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            }
+        })
+    } else {
+        return axios.get(`${config.baseUrl}/meetai/`)
+    }
+}
+function fetchMeetAICreate(user_input) {
+    return axios.post(`${config.baseUrl}/meetai/`, {
+        user_input,
+    },
+    {
+        headers: {
+            'Authorization': `Bearer ${access_token()}`,
+            'Content-Type': 'application/json',
+        }
+    })
+}
+
 export {
     fetchSignup,
     fetchLogin,
@@ -567,5 +592,6 @@ export {
     //fetchGroupPurchaseCommentCreate,
     //fetchGroupPurchaseCommentEdit,
     //fetchGroupPurchaseCommentDelete,
-    
+    fetchMeetAI,
+    fetchMeetAICreate,
 }

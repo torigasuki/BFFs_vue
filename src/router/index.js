@@ -50,7 +50,15 @@ export const router = new VueRouter({
         {
             path: '/community/create',
             name: 'community-create',
-            component: CommunityCreateView
+            component: CommunityCreateView,
+            beforeEnter: (to, from, next) => {
+                if (localStorage.getItem('access_token')) {
+                    next()
+                } else {
+                    alert('로그인이 필요해요!')
+                    next(false)
+                }
+            }
         },
         {
             path: '/community/manage/:name',
@@ -78,14 +86,39 @@ export const router = new VueRouter({
             component: CommunityDetailCategoryView
         },
         {
+            path:'/profile/',
+            beforeEnter(to, from, next) {
+                alert('로그인이 필요해요!')
+                next(false)
+            }
+        },
+        {
             path: '/profile/:id',
             name: 'profile',
-            component:ProfileView
+            component:ProfileView,
+            beforeEnter: (to, from, next) => {
+                const id = to.params.id
+                if(id == 'update'){
+                    alert('로그인이 필요해요!')
+                    next(false)
+                }else{
+                    next()
+                }
+            }
         },
         {
             path: '/profile/update/:id',
             name: 'profile-update',
-            component:ProfileUpdateView
+            component:ProfileUpdateView,
+            beforeEnter: (to, from, next) => {
+                if (localStorage.getItem('access_token')) {
+                    
+                    next()
+                } else {
+                    alert('로그인이 필요해요!')
+                    next(false)
+                }
+            }    
         },
         {
             path: '/:community_name/write',
@@ -136,4 +169,5 @@ export const router = new VueRouter({
     scrollBehavior() {
         return { x: 0, y: 0 }
     },
+    
 })

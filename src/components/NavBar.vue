@@ -61,6 +61,29 @@ export default {
   computed:{
     ...mapGetters(['menubar']),
   },
+  created(){
+    this.$router.beforeEach((to, from, next) => {
+      const currentTime = Math.floor(Date.now() / 1000);
+      const { exp } = JSON.parse(localStorage.getItem('payload') || '{}');
+      if(exp<currentTime){
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
+        localStorage.removeItem('payload');
+        alert('로그인 시간이 만료되었습니다.');
+        next(false)
+        const access = localStorage.getItem('access_token')
+        this.loginuser = access !== null ? true : false;
+
+        const payload = localStorage.getItem('payload');
+        if (payload) {
+          const { user_id } = JSON.parse(payload);
+          this.userid = user_id;
+        }
+      }else{
+        next()
+      }
+    })
+  },
   mounted() {
     const access = localStorage.getItem('access_token')
     this.loginuser = access !== null ? true : false;

@@ -43,7 +43,6 @@ export default {
 </script>
 
 <style>
-@import '~quill/dist/quill.bubble.css';
 
 @font-face {
     font-family: 'SUITE-Regular';

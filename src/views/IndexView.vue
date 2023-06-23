@@ -39,11 +39,11 @@
           <div class="card-container" id="profile-card-list">
             <!-- 혼자놀기 카드 박스 -->
             <router-link :to="`/profile/${profile.id}`" class="alone-card-box" v-for="(profile, index) in profile" :key="index">
-              <div class="card-image" v-if="profile.profileimageurl.includes('kakao') || profile.profileimageurl.includes('google')">
+              <!-- <div class="card-image" v-if="profile.profileimageurl.includes('kakao') || profile.profileimageurl.includes('google')">
                 <img :src="profile.profileimageurl.slice(28)" />
-              </div>
-              <div class="card-image" v-else>
-                <img :src="profile.profileimageurl" v-if="profile.profileimage != null"/>
+              </div> -->
+              <div class="card-image">
+                <img :src="profile.profileimageurl.slice(28)" v-if="profile.profileimage !== null"/>
                 <img src="@/assets/room_image(5).jpg" v-else />
               </div>
               <div class="card-text">
