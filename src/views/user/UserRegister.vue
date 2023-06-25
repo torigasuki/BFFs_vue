@@ -202,7 +202,7 @@ h1{
 }
 /* 개인정보 동의 area */
 .privacy-policy-form {
-    margin:auto 20%;
+    margin:auto 30%;
     height: auto;
 }
 .privacy-policy-form h3{
