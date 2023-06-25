@@ -43,12 +43,12 @@
             <div class="policy-checkbox">
                 <p>개인정보 수집 동의 :</p>
                 <!-- 함수에서 get할때 날짜 불러다 넣어주기, user 정보에 boolean으로 함께 저장되도록 하기 -->
-                <p>년 월 일</p>
+                <p>2023년 06월 26일</p>
                 <p>동의</p>
                 <input type="radio" name="policy-check" id="agree_check" />
                 <!-- 거부할 시 '동의가 필요하다'는 alert 띄워주기 -->
                 <p>거부</p>
-                <input type="radio" name="policy-check" id="disagree_check" />                
+                <input type="radio" name="policy-check" id="disagree_check" />
             </div>
         </div>        
         <div class="register-container">
@@ -250,7 +250,6 @@ h1{
     display: flex;
     clear: both;
     
-    margin-top: 200px;
     margin-bottom: 100px;
 }
 
