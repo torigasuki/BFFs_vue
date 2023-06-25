@@ -18,8 +18,40 @@
             </verify-modal>
         </Transition>
         <div class="modal-overlay" v-if="modalopen" @click="modalopen=false"></div>
+        <h1>Register</h1>
+        <div class="privacy-policy-form">
+            <div class="policy-item">
+                <h3>개인정보 약관 동의</h3>
+                <textarea readonly class="policy-textarea">
+이용자가 제공한 모든 정보는 다음의 목적을 위해 활용하며, 하기 목적 이외의 용도로는 사용되지 않습니다.
+① 개인정보 수집 항목 및 수집·이용 목적 
+  가) 수집 항목 (필수항목)
+    - 성명(국문), 주소, 사진, 이메일, 나이, 소셜 로그인 인증정보 등 유저가 가입 시 제공한 또는 정보 프로필에 기재한 내용 
+  나) 수집 및 이용 목적
+    - 당신의 찐친 BFF 웹사이트 서비스 이용에 따른 본인 확인 절차에 이용
+    - 공동구매 게시, 참여 시 실명 확인 및 지역 정보 활용
+② 개인정보 보유 및 이용기간
+  - 수집·이용 동의일로부터 개인정보의 수집·이용목적을 달성할 때까지
+  - 입력일로부터 3년까지
+  - 회원 탈퇴 신청 시 부터 5년까지 회원 정보 보관 
+  - 공동구매 게시글에 대한 분쟁 처리 관련 기록 3년간 보관
+③ 동의거부관리 
+  - 사용자는 서비스 이용에 필요한 최소한의 개인정보 수집, 이용에 대하여 동의를 거부하실 권리가 있습니다. 다만, 귀하가 개인정보의 수집/이용에 동의를 거부하시는 경우에 사이트의 회원 전용 서비스 이용이 불가능함을 알려드립니다.
+                </textarea>
+                <p class="policy-item-text">본인은 위의 동의서 내용을 충분히 숙지하였으며, 개인정보 수집, 이용, 제공하는 것에 동의합니다.</p>
+            </div>
+            <div class="policy-checkbox">
+                <p>개인정보 수집 동의 :</p>
+                <!-- 함수에서 get할때 날짜 불러다 넣어주기, user 정보에 boolean으로 함께 저장되도록 하기 -->
+                <p>2023년 06월 26일</p>
+                <p>동의</p>
+                <input type="radio" name="policy-check" id="agree_check" />
+                <!-- 거부할 시 '동의가 필요하다'는 alert 띄워주기 -->
+                <p>거부</p>
+                <input type="radio" name="policy-check" id="disagree_check" />
+            </div>
+        </div>        
         <div class="register-container">
-            <h1>Register</h1>
             <div class="register-form">
                 <div class="user_form">
                     <div class="form-item">
@@ -160,6 +192,7 @@ a{
 }
 h1{
     text-align: center;
+    justify-content: center;
     font-size: 30px;
     font-weight: 700;
     line-height: 1.2;
@@ -167,13 +200,56 @@ h1{
     color: #000000;
     margin-bottom: 50px;
 }
+/* 개인정보 동의 area */
+.privacy-policy-form {
+    margin:auto 20%;
+    height: auto;
+}
+.privacy-policy-form h3{
+    margin: 10px;
+    color: #454545;
+}
+.policy-item {
+    justify-content: center;
+    padding-left: 5px;
+}
+.policy-textarea {
+    width: 100%;
+    max-width: 700px;
+    min-width: 200px;
+    height: 200px;
+    resize: none;
+
+    background-color: #05060f0a;
+    border-radius: .5rem;
+    padding: 0 1rem;
+    border: 2px solid transparent;
+    font-size: 0.9rem;
+    transition: border-color .3s cubic-bezier(.25,.01,.25,1) 0s, color .3s cubic-bezier(.25,.01,.25,1) 0s,background .2s cubic-bezier(.25,.01,.25,1) 0s;
+}
+.policy-item-text {
+    margin-left: 10px;
+    color: #454545;
+}
+.policy-checkbox {    
+    display: flex;
+    float: right;
+    margin: 5px 30px;
+    margin-bottom: 80px;
+    color: #454545;
+}
+.policy-checkbox p {
+    margin-left: 20px;
+    white-space: nowrap;
+}
+/* 유저 정보 입력 area */
 .register-container {
     margin: 0 auto;
     width: 450px;
     flex-direction: column;
     display: flex;
+    clear: both;
     
-    margin-top: 200px;
     margin-bottom: 100px;
 }
 
