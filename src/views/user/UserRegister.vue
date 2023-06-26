@@ -171,7 +171,7 @@ export default {
                 const response = await fetchSignup(this.email, this.password, this.name, this.age, this.region, this.nickname);
                 if(response.status === 200){
                     alert("회원가입이 완료되었습니다.");
-                    this.$router.push({name: 'Login'});
+                    this.$router.push({name: 'user-login'});
                 }
             }catch(error){
                 console.log(error);

@@ -65,9 +65,7 @@ export default {
       async handleImageAdded(file, Editor, cursorLocation, resetUploader) {
           const formData = new FormData();
           formData.append("image", file);
-          console.log(file)
           const response = await this.$store.dispatch("FETCH_IMAGE_UPLOAD", formData)
-          console.log(response)
           if(response.status === 201){
               const imageUrl = response.data.image_url;
               Editor.insertEmbed(cursorLocation, "image", imageUrl);
