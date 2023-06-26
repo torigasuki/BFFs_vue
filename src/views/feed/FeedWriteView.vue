@@ -146,7 +146,7 @@ export default {
 .submit-box {
     display: flex;
     justify-content: right;
-    margin-bottom: 50px;
+    margin-bottom: 80px;
     margin-top: 40px;
 }
 
