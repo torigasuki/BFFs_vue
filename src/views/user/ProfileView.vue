@@ -13,7 +13,7 @@
                         <h3>북마크한 커뮤니티</h3>
                         <div class="main-container">
                             <div class="main-box">
-                                <div class="new-card-wrapper" v-if="bookmark?.length == 0 || true">
+                                <div class="new-card-wrapper" v-if="bookmark?.length == 0">
                                     <p>북마크한 커뮤니티가 없습니다</p>
                                 </div>
                                 <div class="new-card-wrapper" v-else>                                    
@@ -934,6 +934,7 @@ header > .profile > h3 {
     grid-column: 2 / 3;
     margin: 0 auto;
     width: 92%;
+    resize: none;
 
     background-color: #05060f0a;
     border-radius: .5rem;

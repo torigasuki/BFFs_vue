@@ -32,7 +32,9 @@
       <div class="main-container">
         <div class="main-title">
           <div>
-            <h3>혼자 놀기</h3>
+            <h3>혼자 놀기<router-link to="/meetfriend">
+              <img src="@/assets/heart_ballon.png" class="play-button"/></router-link>
+            </h3>            
           </div>
         </div>
         <div class="main-box">
@@ -68,7 +70,9 @@
       <div class="main-container">
         <div class="main-title">
           <span>
-            <h3>같이 놀기</h3>
+            <h3>같이 놀기<router-link to="/community/main">
+              <img src="@/assets/heart_ballon.png" class="play-button"/></router-link>
+            </h3>
           </span>
         </div>
         <div class="main-box">
@@ -291,7 +295,15 @@ img {
   width: 40px;
   height: auto;
 }
-
+.play-button {
+  margin-left: -100px;
+  width: 40px;
+  height: auto;
+}
+.play-button:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+}
 /***** 혼자 놀기 *****/
 .alone-card-box {
   margin-right: 40px;

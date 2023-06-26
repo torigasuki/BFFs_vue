@@ -64,7 +64,7 @@
               <input
                 autocomplete="off"
                 type="text"
-                placeholder="Search"
+                placeholder=" Feed Search"
                 name="text"
                 class="input"
                 v-model="searchname" @keyup.enter="searchFeed()"

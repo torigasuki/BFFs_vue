@@ -56,7 +56,7 @@ export const router = new VueRouter({
                     next()
                 } else {
                     alert('로그인이 필요해요!')
-                    next(false)
+                    next('/user/login')
                 }
             }
         },
@@ -89,7 +89,7 @@ export const router = new VueRouter({
             path:'/profile/',
             beforeEnter(to, from, next) {
                 alert('로그인이 필요해요!')
-                next(false)
+                next('/user/login')
             }
         },
         {
@@ -100,7 +100,7 @@ export const router = new VueRouter({
                 const id = to.params.id
                 if(id == 'update'){
                     alert('로그인이 필요해요!')
-                    next(false)
+                    next('/user/login')
                 }else{
                     next()
                 }
@@ -112,11 +112,10 @@ export const router = new VueRouter({
             component:ProfileUpdateView,
             beforeEnter: (to, from, next) => {
                 if (localStorage.getItem('access_token')) {
-                    
                     next()
                 } else {
                     alert('로그인이 필요해요!')
-                    next(false)
+                    next('/user/login')
                 }
             }    
         },
@@ -126,13 +125,12 @@ export const router = new VueRouter({
             component:FeedWriteView,
             beforeEnter: (to, from, next) => {
                 if (localStorage.getItem('access_token')) {
-                    
                     next()
                 } else {
                     alert('로그인이 필요해요!')
-                    next(false)
+                    next('/user/login')
                 }
-            }    
+            } 
         },
         {
             path:'/:community_name/feed/update/:feed_id',
@@ -152,7 +150,15 @@ export const router = new VueRouter({
         {
             path:'/community/:community_name/purchase/write',
             name:'purchase-create',
-            component:PurchaseWriteView
+            component:PurchaseWriteView,
+            beforeEnter: (to, from, next) => {
+                if (localStorage.getItem('access_token')) {
+                    next()
+                } else {
+                    alert('로그인이 필요해요!')
+                    next('/user/login')
+                }
+            } 
         },
         {
             path:'/community/update/purchase/:purchase_id',
@@ -178,7 +184,7 @@ export const router = new VueRouter({
                     next()
                 } else {
                     alert('로그인이 필요해요!')
-                    next(false)
+                    next('/user/login')
                 }
             }
         },
