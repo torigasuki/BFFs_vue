@@ -247,7 +247,7 @@ export default {
         },
         forbiddens(){
             if(this.fetchCommunityDetail.forbiddens){
-                return this.fetchCommunityDetail.data.forbiddens
+                return this.fetchCommunityDetail.data.forbiddenword
             }else{
                 return []
             }

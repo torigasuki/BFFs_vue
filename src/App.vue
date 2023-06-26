@@ -1,8 +1,10 @@
 <template>
   <div id="app">
-      <nav-bar v-if="nav" id="navigation"></nav-bar>
+    <div id="test">
+      <nav-bar id="navigation"></nav-bar>
       <router-view id="app_content"></router-view>
-      <footer-bar v-if="footer" :style="{ display: footer ? 'fixed' : 'none' }"></footer-bar>
+      <footer-bar id="footer"></footer-bar>
+    </div>
   </div>
 </template>
 
@@ -15,29 +17,6 @@ export default {
     NavBar,
     FooterBar,
   },
-  data(){
-    return{
-      nav: true,
-      footer: false,
-    }
-  },
-  mounted() {
-    window.addEventListener('scroll', this.handleScroll);
-  },
-  beforeDestroy() {
-    window.removeEventListener('scroll', this.handleScroll);
-  },
-  methods: {
-    handleScroll() {
-      const scrollHeight = document.documentElement.scrollHeight
-      const clientHeight = document.documentElement.clientHeight
-      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
-      const isBottom = scrollTop + clientHeight >= scrollHeight
-      this.footer = isBottom
-      this.nav = window.pageYOffset < 30;
-    }
-  }
-
 }
 
 </script>
@@ -53,6 +32,8 @@ export default {
 
 * {
   font-family: 'SUITE-Regular' !important;
+  margin:0;
+  padding:0;
 }
 
 body {
@@ -63,15 +44,20 @@ body {
   -ms-overflow-style: none;
 }
 #navigation{
-  position: fixed;
-  top: 0;
   width: 100%;
   height: 120px;
-  z-index: 100;
   background-color:#fff
 }
+#test{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow: hidden;
+}
 #app_content{
-  margin-top:120px;
-  margin-bottom:70px;
+  flex: 1;
+}
+#footer{
+  flex-shrink: 0;
 }
 </style>
