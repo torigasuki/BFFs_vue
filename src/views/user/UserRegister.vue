@@ -161,15 +161,16 @@ export default {
                 const response = await fetchVerificationEmail(this.otp,this.email)
                 if(response.status === 200){
                     this.modalopen = false;
+                    alert(response.data.message);
                 }
             }catch(error){
-                console.log(error);
+                alert("인증번호가 일치하지 않습니다.");
             }
         },
         async userRegister(){
             try{
                 const response = await fetchSignup(this.email, this.password, this.name, this.age, this.region, this.nickname);
-                if(response.status === 200){
+                if(response.status === 201){
                     alert("회원가입이 완료되었습니다.");
                     this.$router.push({name: 'user-login'});
                 }

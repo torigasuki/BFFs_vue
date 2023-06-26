@@ -221,6 +221,12 @@ export default {
             this.userid = user_id;
         }
     },
+    watch:{
+        $route() {
+            const user_id = this.$route.params.id
+            this.$store.dispatch("FETCH_USER_PROFILE", user_id);
+        }
+    },
     methods: {
         async createComment() {
             try {
@@ -345,8 +351,8 @@ header > .profile > h3 {
     display: flex;
     justify-content: left;
     margin-left: -75px;
-    margin-top: 70px;
-    height: 3em;
+    margin-top: 80px;
+    height: 2.5em;
     width: 100px;
     align-items: center;
     justify-content: center;
@@ -477,23 +483,15 @@ header > .profile > h3 {
 
 
 .mypage {
-
     width: 1200px;
-
-    top: 0;
-    bottom: 0;
-    height: 100vh;
-
     margin: auto;
-
+    margin-top:200px;
     display: grid;
-    place-items: center;
+    place-items: start;
     grid-template-rows: (1, 48px);
     grid-template-columns: repeat(9, 680px);
     grid-template-columns: repeat(8, 1fr);
     grid-auto-rows: auto;
-
-
 }
 
 
@@ -795,7 +793,7 @@ header > .profile > h3 {
 }
 .new-text-introduction {
     margin: 0px 8px 6px 15px;
-    height: 100%;
+    height: 50%;
     font-size: 0.8rem;
     color: #909090;
     text-indent: 7px;
@@ -804,6 +802,13 @@ header > .profile > h3 {
     overflow: hidden;
     grid-column: 2/4;
     grid-row: 2;
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-break: keep-all;
 }
 .post-card {
   width: 100%;

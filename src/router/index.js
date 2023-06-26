@@ -123,7 +123,16 @@ export const router = new VueRouter({
         {
             path: '/:community_name/write',
             name: 'feed-create',
-            component:FeedWriteView
+            component:FeedWriteView,
+            beforeEnter: (to, from, next) => {
+                if (localStorage.getItem('access_token')) {
+                    
+                    next()
+                } else {
+                    alert('로그인이 필요해요!')
+                    next(false)
+                }
+            }    
         },
         {
             path:'/:community_name/feed/update/:feed_id',
