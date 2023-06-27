@@ -4,7 +4,8 @@
             <div class="head-area">
                 <!-- 커뮤니티 관련 내용 넣기 -->
                 <div class="image-box">
-                    <img id="head_img" class="head_img" src="@/assets/comu_image(2).jpg">
+                    <img v-if="community?.image !== null" id="head_img" class="head_img" :src="community?.imageurl">
+                    <img v-else id="head_img" class="head_img" src="@/assets/comu_image(2).jpg">
                 </div>
                 <p class="head-title">{{ community?.title }} | {{ community?.communityurl }}</p>
                 <div class="button-box">
@@ -266,17 +267,15 @@ export default {
             if (Array.isArray(this.fetchFeedList.results) && this.fetchFeedList.results.length > 0) {
                 return [...this.fetchFeedList.results].sort((a, b) => new Date(b.view_count) - new Date(a.view_count));
             } else {
-                return null; // 또는 다른 적절한 기본 값
+                return null;
             }
-            // return [...this.fetchFeedList.results].sort((a, b) => new Date(b.view_count) - new Date(a.view_count));
         },
         newfeeds(){
             if (Array.isArray(this.fetchFeedList.results) && this.fetchFeedList.results.length > 0) {
                 return [...this.fetchFeedList.results].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
             } else {
-                return null; // 또는 다른 적절한 기본 값
+                return null;
             }
-            // return [...this.fetchFeedList.results].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
         },
     },
     watch: {
@@ -466,7 +465,7 @@ header >  #menu {
 }
 
 #realname {
-    width: 92px;
+    width: 90px;
 }
 
 #nickname {
@@ -477,12 +476,12 @@ header >  #menu {
     width: 180px;
     white-space: nowrap;
     overflow: hidden;
-    margin-left: 55px;
+    margin-left: 45px;
 }
 
 #subadmin {
     width: 20px;
-    padding-left: 270px;
+    padding-left: 263px;
 }
 
 .button-box {
@@ -826,6 +825,7 @@ header >  #menu {
   background-repeat: no-repeat;  
 }
 
+
 .title {
   margin-top: 0.25rem;
   font-size: 1.125rem;
@@ -845,13 +845,35 @@ header >  #menu {
 }
 
 .message {
-    width: 100%;
-    height: 100%;
+    width: 880px;
+    height: 440px;
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     margin-top: 1rem;
     color: rgba(107, 114, 128, 1);
+}
+
+.message >>> img {
+    width: 320px !important;
+    height: 310px!important;
+    object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    object-fit: cover;
+}
+
+
+
+.message >>>  p {
+  width: 328px;
+  color: #707070;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }
 
 .btn {

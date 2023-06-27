@@ -13,7 +13,7 @@
                         <h3>북마크한 커뮤니티</h3>
                         <div class="main-container">
                             <div class="main-box">
-                                <div class="new-card-wrapper" v-if="bookmark?.length == 0 || true">
+                                <div class="new-card-wrapper" v-if="bookmark?.length == 0">
                                     <p>북마크한 커뮤니티가 없습니다</p>
                                 </div>
                                 <div class="new-card-wrapper" v-else>                                    
@@ -239,7 +239,9 @@ export default {
                     this.inputComment='';
                 }
             } catch (error) {
-                console.log(error)
+                if (error.response.status === 401) {
+                alert("로그인을 해주세요");
+        }
             } 
         },
         async editComment(guestbook_id) {
@@ -477,6 +479,10 @@ header > .profile > h3 {
 
 .mypage {
     width: 1200px;
+
+
+    top: 0;
+    bottom: 0;
     margin: auto;
     display: grid;
     place-items: start;
@@ -934,6 +940,7 @@ header > .profile > h3 {
     grid-column: 2 / 3;
     margin: 0 auto;
     width: 92%;
+    resize: none;
 
     background-color: #05060f0a;
     border-radius: .5rem;
@@ -945,11 +952,11 @@ header > .profile > h3 {
 
 .input-sub-text:hover, .input-sub-text:focus, .input {
     outline: none;
-    border-color: #9E2070;
+    border-color: #9E2067;
 }
 
 .input-group:hover, .input:focus {
-    color: #9E2070;
+    color: #9E2067;
 }
 
 

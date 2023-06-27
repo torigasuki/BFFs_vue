@@ -3,9 +3,10 @@
         <section class="head-section">
             <div class="head-area">
                 <!-- 커뮤니티 관련 내용 넣기 -->
-                <img id="head_img" class="head_img" src="@/assets/comu_image(2).jpg">
+                <img v-if="community?.image !== null" id="head_img" class="head_img" :src="community?.imageurl">
+                <img v-else id="head_img" class="head_img" src="@/assets/comu_image(2).jpg">
                 <div class="headline">
-                    <li class="head-title">{{ community_name }} :</li>
+                    <li class="head-title"><router-link :to="`/community/detail/${community_name}`" style="color:white">{{ community_name }}</router-link> :</li>
                     <li class="head-title">{{ category_name }}</li>
                 </div>
                 <div class="intro-box">
@@ -32,10 +33,19 @@
         </section>
         <section class="category-section">
             <div class="search-category-area">
+                <div class="head-category-wrapper">
+                    <ul class="head-category">
+                        <div class="category-item-box">
+                            <router-link v-for="categories,index in categories"
+                                    :key="index" :to="`/community/${community_url}/category/${categories[2]}`">{{
+                                        categories[1] }}</router-link>
+                        </div>
+                    </ul>
+                </div>
                 <!-- 검색 -->
                 <div class="search-box">
                     <div class="container-input">
-                        <input autocomplete="off" type="text" placeholder="Search" name="text" class="input" v-model="searchname" @keyup.enter="searchFeed()">
+                        <input autocomplete="off" type="text" placeholder=" Feed Search" name="text" class="input" v-model="searchname" @keyup.enter="searchFeed()">
                         <svg fill="#000000" width="20px" height="20px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
                             <path d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z" fill-rule="evenodd"></path>
                         </svg>
@@ -46,6 +56,18 @@
         <section class="main-section">
             <div class="main-area">
                 <div class="main-container">
+                    <!-- 공지 section -->
+                    <div class="notification-section" v-if="notification_feeds?.length !== 0">
+                        <router-link :to="`/community/detail/${communityurl}/feed/${feed.id}`" class="notification-wrap" v-for="feed, index in notification_feeds" :key="index">
+                            <div class="notification-list">
+                                <p class="notification-title">[공지]</p>
+                                <p class="notification-text">{{ feed.title }}</p>
+                                <p class="notification-comment">({{ feed.comments_count }})</p>
+                                <p class="notification-author">- {{ feed.nickname }}</p>
+                            </div>
+                            <p class="notification-date">{{ feed.created_at.slice(0, 10) }}</p>
+                        </router-link>
+                    </div>
                     <!-- category list 내용 -->
                     <div class="main-content-wrapper" v-if="feeds?.length === 0">
                         <h1 style="color:#707070; margin: 0 auto;">아직 게시글이 없습니다</h1>
@@ -111,16 +133,25 @@ export default {
     },
     computed:{
         ...mapGetters(['fetchCommunityCategoryDetail']),
+        community(){
+            return this.fetchCommunityCategoryDetail.community
+        },
         community_name(){
-            //return this.fetchCommunityCategoryDetail.community_title
+            return this.fetchCommunityCategoryDetail.community.title
+            //return this.$route.params.community_name
+        },
+        community_url(){
             return this.$route.params.community_name
         },
         category_name(){
-            //return this.fetchCommunityCategoryDetail.category_name
-            return this.$route.params.category_name
+            return this.fetchCommunityCategoryDetail.category_name
+            //return this.$route.params.category_name
+        },
+        categories(){
+            return this.fetchCommunityCategoryDetail?.categories?.categories
         },
         introduction(){
-            return this.fetchCommunityCategoryDetail.introduction
+            return this.fetchCommunityCategoryDetail?.community?.introduction
         },
         pagination(){
             return this.fetchCommunityCategoryDetail?.feed || [];
@@ -129,9 +160,11 @@ export default {
             if (Array.isArray(this.fetchCommunityCategoryDetail?.feed?.results) && this.fetchCommunityCategoryDetail?.feed?.results.length > 0) {
                 return [...this.fetchCommunityCategoryDetail?.feed?.results].sort((a, b) => new Date(b.is_notification) - new Date(a.is_notification));
             } else {
-                return []; // 또는 다른 적절한 기본 값
+                return [];
             }
-            //return this.fetchCommunityCategoryDetail?.feed?.results || [];
+        },
+        notification_feeds(){
+            return this.fetchCommunityCategoryDetail?.feed?.results.filter(feed => feed.is_notification) || [];
         },
         communityurl(){
             return this.$route.params.community_name
@@ -142,6 +175,13 @@ export default {
         const category_name= this.$route.params.category_name
         this.$store.dispatch('FETCH_COMMUNITY_CATEGORY_FEED',{community_name,category_name})
     },
+    watch: {
+        $route(){
+            const community_name = this.$route.params.community_name
+            const category_name= this.$route.params.category_name
+            this.$store.dispatch('FETCH_COMMUNITY_CATEGORY_FEED',{community_name,category_name})
+        },
+    },    
     methods:{
         async addBookmark() {
             try {
@@ -186,7 +226,6 @@ a{
     color:black;
 }
 .head-area {
-    margin-top: 30px;
     width: 100%;
     height: 220px;
     position: relative;
@@ -255,6 +294,66 @@ a{
     padding: 30px;
 }
 
+.head-category-wrapper {
+    position: relative;
+}
+
+.head-category {
+    margin-left: -40px;
+    display: flex;
+    align-items: center;
+}
+
+.category-item-box {
+    display: flex;
+}
+.category-item-box a {
+    margin-right: 20px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #707070;
+}
+
+.notification-section {
+    width: 95%;
+    margin-top: -50px;
+    padding: 20px;
+}
+
+.notification-wrap {
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.notification-list {
+    display: flex;
+}
+
+.notification-title {
+    color:#9E2067;
+    font-weight: bold;
+}
+
+.notification-text {
+    color:#454545;
+    margin-left: 5px;
+}
+
+.notification-comment {
+    color:#9E2067;
+    margin-left: 5px;
+}
+
+.notification-author {
+    color:#454545;
+    margin-left: 5px;
+}
+
+.notification-date {
+    color:#909090;
+    margin-right: 30px;
+}
 
 /***** 버튼 css *****/
 
