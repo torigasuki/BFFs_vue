@@ -477,6 +477,10 @@ header > .profile > h3 {
 
 .mypage {
     width: 1200px;
+
+
+    top: 0;
+    bottom: 0;
     margin: auto;
     display: grid;
     place-items: start;
