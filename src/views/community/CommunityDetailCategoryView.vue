@@ -134,17 +134,17 @@ export default {
     computed:{
         ...mapGetters(['fetchCommunityCategoryDetail']),
         community(){
-            return this.fetchCommunityCategoryDetail.community
+            return this.fetchCommunityCategoryDetail?.community
         },
         community_name(){
-            return this.fetchCommunityCategoryDetail.community.title
+            return this.fetchCommunityCategoryDetail?.community?.title
             //return this.$route.params.community_name
         },
         community_url(){
             return this.$route.params.community_name
         },
         category_name(){
-            return this.fetchCommunityCategoryDetail.category_name
+            return this.fetchCommunityCategoryDetail?.category_name
             //return this.$route.params.category_name
         },
         categories(){
