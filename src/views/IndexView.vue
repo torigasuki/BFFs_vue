@@ -33,7 +33,7 @@
         <div class="main-title">
           <div>
             <h3>혼자 놀기<router-link to="/meetfriend">
-              <img src="@/assets/heart_ballon.png" class="play-button"/></router-link>
+              <img src="@/assets/heart_ballon2.png" class="play-button"/></router-link>
             </h3>            
           </div>
         </div>
@@ -71,7 +71,7 @@
         <div class="main-title">
           <span>
             <h3>같이 놀기<router-link to="/community/main">
-              <img src="@/assets/heart_ballon.png" class="play-button"/></router-link>
+              <img src="@/assets/heart_ballon2.png" class="play-button"/></router-link>
             </h3>
           </span>
         </div>

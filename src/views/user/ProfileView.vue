@@ -239,7 +239,9 @@ export default {
                     this.inputComment='';
                 }
             } catch (error) {
-                console.log(error)
+                if (error.response.status === 401) {
+                alert("로그인을 해주세요");
+        }
             } 
         },
         async editComment(guestbook_id) {

@@ -11,7 +11,7 @@
               src="@/assets/comu_image(2).jpg"
             />
           </div>
-          <p class="head-title">{{ community?.title }} | {{ community?.communityurl }}</p>
+          <router-link :to="`/community/detail/${communityurl}`" class="head-title">{{ community?.title }} | {{ community?.communityurl }}</router-link>
           <div class="button-box">
             <div class="bookmark">
               <input
@@ -363,6 +363,9 @@ export default {
     community() {
       return this.data?.community;
     },
+    communityurl() {
+      return this.data?.community?.communityurl;
+    },
     feed() {
       return this.data?.feed;
     },
@@ -626,6 +629,7 @@ textarea{
 }
 
 .head-title {
+  margin-top: 20px;
   margin-left: auto;
   margin-right: 40px;
   text-align: right;
