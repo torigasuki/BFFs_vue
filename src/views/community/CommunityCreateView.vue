@@ -179,17 +179,17 @@ body {
 
 .input-title:hover, .input-title:focus, .input {
     outline: none;
-    border-color: #9E2070;
+    border-color: #9E2067;
 }
 
 .input-introduction:hover, .input-introduction:focus, .input {
     outline: none;
-    border-color: #9E2070;
+    border-color: #9E2067;
 }
 
   
 .input-group:hover .label, .input:focus {
-    color: #9E2070;
+    color: #9E2067;
 }
 
 

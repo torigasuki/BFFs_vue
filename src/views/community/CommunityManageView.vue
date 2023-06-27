@@ -5,6 +5,15 @@
                 <div class="main-container">
                     <div class="main-title">
                         <h1>커뮤니티 관리하기</h1>
+                        <!-- 이동 -> 버튼 -->
+                        <router-link :to="`/community/detail/${fetchCommunityDetail.data.communityurl}` " class="visit-button"> 
+                            <p class="paragraph">커뮤니티로 이동</p>
+                            <span class="icon-wrapper">
+                            <svg class="icon" height="30" width="30" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1024 1024">
+                                <path d="M874.690416 495.52477c0 11.2973-9.168824 20.466124-20.466124 20.466124l-604.773963 0 188.083679 188.083679c7.992021 7.992021 7.992021 20.947078 0 28.939099-4.001127 3.990894-9.240455 5.996574-14.46955 5.996574-5.239328 0-10.478655-1.995447-14.479783-5.996574l-223.00912-223.00912c-3.837398-3.837398-5.996574-9.046027-5.996574-14.46955 0-5.433756 2.159176-10.632151 5.996574-14.46955l223.019353-223.029586c7.992021-7.992021 20.957311-7.992021 28.949332 0 7.992021 8.002254 7.992021 20.957311 0 28.949332l-188.073446 188.073446 604.753497 0C865.521592 475.058646 874.690416 484.217237 874.690416 495.52477z"></path>
+                            </svg>
+                            </span>
+                        </router-link>
                     </div>
                 </div>
                 <div class="main-container">
@@ -158,7 +167,7 @@
 <script>
 import { mapGetters } from "vuex";
 import { fetchForbiddenCreate, fetchForbiddenDelete, fetchSubAdminCreate, fetchSubAdminDelete, 
-    fetchCommunityEdit, fetchCommunityDelete } from "@/api/index.js";
+    fetchCommunityEdit, fetchCommunityDelete} from "@/api/index.js";
 
 export default {
     data() {
@@ -180,7 +189,6 @@ export default {
         const community_name = this.$route.params.name
         this.$store.dispatch("FETCH_COMMUNITY_DETAIL", community_name);
         this.$store.dispatch("FETCH_USER_LIST", community_name);
-        
     },
     methods: {
         async forbidden() {
@@ -316,8 +324,9 @@ body {
 /***** Title area *****/
 
 .main-title {
-    width:100%;
-    vertical-align:middle;
+    display: grid;
+    grid-template-columns: 80% 150px;
+    align-items: center;
 }
 
 .main-title h1 {
@@ -482,11 +491,11 @@ body {
 
 .input-introduction:hover, .input-introduction:focus, .input {
     outline: none;
-    border-color: #9E2070;
+    border-color: #9E2067;
 }
 
 .input-group:hover .label, .input:focus {
-    color: #9E2070;
+    color: #9E2067;
 }
 
 .forbidden-wrapper {
@@ -734,5 +743,99 @@ body {
     color: hsl(0, 0%, 100%);
     background-color: #909090;
     box-shadow: 0 2px 5px rgba(70, 70, 70, 0.5);
+}
+
+/* 방문 button */
+
+.visit-button-box {
+    display: block;
+    justify-content: center;
+}
+
+.visit-button {
+    background-color: white;
+    margin-top: 5px;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border: none;
+    position: relative;
+    border-radius: 10px;
+    -webkit-transition: .2s linear;
+    transition: .2s linear;
+    transition-delay: .2s;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    justify-content: center;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: space-between;
+}
+  
+.visit-button:hover {
+    width: 180px;
+    transition-delay: .2s;
+    background-color:#9E2067
+}
+  
+.visit-button:hover > .paragraph {
+    visibility: visible;
+    opacity: 1;
+    -webkit-transition-delay: .4s;
+    transition-delay: .4s;
+}
+  
+.visit-button:hover > .icon-wrapper .icon {
+    transform: scale(1.0);
+    transform: rotate(180deg);
+    fill: white;
+
+}
+  
+.visit-button:hover > .icon-wrapper .icon path {
+    stroke: rgb(255, 255, 255);
+}
+  
+.paragraph {
+    color: rgb(255, 255, 255);
+    visibility: hidden;
+    opacity: 0;
+    font-size: 18px;
+    margin-right: 20px;
+    padding-left: 20px;
+    -webkit-transition: .2s linear;
+    transition: .2s linear;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+  
+.icon-wrapper {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+.icon {
+    transform: scale(1.0);
+    transition: .2s linear;
+    transform: rotate(180deg);
+    fill: #9E2067;
+
+}
+  
+.icon path {
+    stroke: #000;
+    stroke-width: 2px;
+    -webkit-transition: .2s linear;
+    transition: .2s linear;
 }
 </style>

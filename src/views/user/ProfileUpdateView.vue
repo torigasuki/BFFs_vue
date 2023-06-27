@@ -351,7 +351,7 @@ dt {
 
 .input-title-box:hover, .input-title-box:focus{
     outline: none;
-    border-color: #9E2070;
+    border-color: #9E2067;
 }
 
 .submit-box {

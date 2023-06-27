@@ -950,11 +950,11 @@ header > .profile > h3 {
 
 .input-sub-text:hover, .input-sub-text:focus, .input {
     outline: none;
-    border-color: #9E2070;
+    border-color: #9E2067;
 }
 
 .input-group:hover, .input:focus {
-    color: #9E2070;
+    color: #9E2067;
 }
 
 

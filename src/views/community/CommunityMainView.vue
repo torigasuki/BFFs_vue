@@ -52,11 +52,15 @@
                     <!-- random-comu의 인기 게시글 -->
                     <ul class="random-text-box">
                         <li id="" v-for="(feeds, index) in popularfeeds" :key=index>
-                            <router-link :to="`/community/detail/${popularcommunity?.communityurl}/feed/${feeds.id}`" style="width: 300px;">
-                                <a class="random-text-content">{{feeds.title}}</a>
-                                <div class="random-text-view-box">
-                                    <img src="@/assets/view_look.png">
-                                    <span class="random-text-view">{{feeds.view_count}}</span>
+                            <router-link :to="`/community/detail/${popularcommunity?.communityurl}/feed/${feeds.id}`">
+                                <div class="random-text-wrapper">
+                                    <div class="random-text-content-box">
+                                        <a class="random-text-content">{{feeds.title}}</a>
+                                    </div>
+                                    <div class="random-text-view-box">
+                                        <img src="@/assets/view_look.png">
+                                        <span class="random-text-view">{{feeds.view_count}}</span>
+                                    </div>
                                 </div>
                             </router-link>
                         </li>
@@ -487,21 +491,22 @@ a {
     grid-row: 2 / 3;
 }
 .random-text-box li {    
-    display: flex;
     line-height: 2.0;
     list-style-type: none;
 }
-.random-text-view-box{
+
+.random-text-wrapper {
     display: flex;
-    margin-left: 50px;
 }
-.random-text-content {
-    margin-left: 10px;
-    width: 240px;
-    text-align: left;
+
+.random-text-content-box {
+    width: 60%;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+}
+.random-text-content {
+    text-align: left;
     color: #808080;
     font-weight: 400;
     font-size: 1.0rem;
@@ -510,6 +515,7 @@ a {
     display: flex;
     float: right;
     margin-top: 3px;
+    margin-left: 50px;
 }
 .random-text-view-box img {
     text-align: center;
@@ -641,7 +647,7 @@ a {
   right: 0;
   background-color: rgba(0, 0, 0, 0.1);  배경색 
   z-index: -1;
-}*/
+} */
 
 .new-card-box {
     width: 300px;

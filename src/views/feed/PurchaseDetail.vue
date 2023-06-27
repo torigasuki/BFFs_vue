@@ -591,7 +591,7 @@ body {
 }
 
 .ended-button:hover {
-    background-color: #9E2070;
+    background-color: #9E2067;
 }
 
 .ended-button:active {
@@ -963,11 +963,11 @@ body {
 
 .purchase-submit-input:hover, .purchase-submit-input:focus, .input {
     outline: none;
-    border-color: #9E2070;
+    border-color: #9E2067;
 }
 
 .input-group:hover, .input:focus {
-    color: #9E2070;
+    color: #9E2067;
 }
 
 .submit-button {
@@ -1145,11 +1145,11 @@ body {
 
 .input-sub-text:hover, .input-sub-text:focus, .input {
     outline: none;
-    border-color: #9E2070;
+    border-color: #9E2067;
 }
 
 .input-group:hover, .input:focus {
-    color: #9E2070;
+    color: #9E2067;
 }
 
 
