@@ -1,8 +1,7 @@
 import axios from 'axios'
 
 const config = {
-    // baseUrl: 'https://api.makebestie.com'
-    baseUrl: 'http://127.0.0.1:8000'
+    baseUrl: 'https://api.makebestie.com'
 }
 const access_token = () => {
     return localStorage.getItem('access_token')
