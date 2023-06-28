@@ -21,15 +21,32 @@
                         <!-- 대화창 -->
                         <div class="card-container">
                             <div class="card-body">
+                                <!-- 이전 대화 내용 추가하고 싶음-->
+                                <!-- <div v-for="(meetai, index) in meetai" :key="index">-->
+                                    <!-- ai -->
+                                    <!-- <div class="messages-container left">
+                                        <div class="message-box left">
+                                            <p class="left-text">{{ aitext }}</p>
+                                        </div>
+                                    </div> -->
+                                    <!-- user -->
+                                    <!-- <div class="messages-container right" v-if="index % 2 === 0">
+                                        <div class="message-box right">
+                                            <p class="right-text">{{ usertext }}</p>
+                                        </div>
+                                    </div>
+                                </div> -->
+
+
                                 <!-- ai 대화 -->
                                 <div class="messages-container left">
                                     <div class="message-box left">
+                                        <p class="left-text">안녕! 반가워:D</p>
                                         <!-- loader -->
                                         <div class="loader" v-if="firstloader">
                                             <div class="loader-text">잠시만! 생각 중이야:)</div>
                                             <div class="loader-bar"></div>
                                         </div>
-                                        <p class="left-text">안녕! 반가워:D</p>
                                     </div>
                                 </div>
 
@@ -44,12 +61,16 @@
                                     <!-- ai 대화 -->
                                     <div class="messages-container left" v-else>
                                         <div class="message-box left">
+                                            <p class="left-text" v-if="conversation.length-1 === index">{{ text }}</p>
+                                        </div>
+                                    </div>
                                             <!-- loader -->
-                                            <div class="loader" v-if="loadershow&&conversation.length-1 === index">
+                                    <div class="messages-container left" v-if="loadershow">
+                                        <div class="message-box left">
+                                            <div class="loader">
                                                 <div class="loader-text">잠시만! 생각 중이야:)</div>
                                                 <div class="loader-bar"></div>
                                             </div>
-                                            <p class="left-text">{{ text }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -62,7 +83,7 @@
                             <p> 개인 정보 등 민감 정보를 입력하지 않도록 주의하세요!</p>
                         </div>
                         <textarea autocomplete="off" class="input-text" placeholder="말을 걸어보세요:)" v-model="text" @keyup.enter="createConversation()"></textarea>
-                        <button class="submit-button" @click="createConversation()">입 력</button>
+                        <button class="submit-button" @click="createConversation()" :disabled="isDisabled">입 력</button>
                     </div>
                 </div>
             </div>
@@ -72,27 +93,60 @@
 
 <script>
 import { fetchMeetAICreate } from "@/api/index.js";
+// import { mapGetters } from "vuex";
 
 export default {
+    // computed: {
+    //     ...mapGetters({ data : "fetchMeetAI" }),
+    //     aiText() {
+    //         if (Array.isArray(this.data.meetai.ai_text)) {
+    //             return this.data.meetai.ai_text.map(ai_text => ({
+    //                 ...ai_text,
+    //             }))
+    //         }
+    //         return [];
+    //     },
+    //     userText() {
+    //         if (Array.isArray(this.data.meetai.user_text)) {
+    //             return this.data.meetai.user_text.map(user_text => ({
+    //                 ...user_text,
+    //             }))
+    //         }
+    //         return [];
+    //     }
+    // },
     data() {
         return {
             text: '',
             conversation: [],
             firstloader: false,
             loadershow: false,
+            isDisabled: false
         }
     },
+
     methods: {
         goHome() {
             this.$router.push('/')
         },
+
         async createConversation() {
         try {
+            if (this.isCreateConversation) return;
+            this.isDisabled = true;
+            //console.log("요청 확인")
+
+            if (!this.text || this.text==="") {
+                alert("하고싶은 말을 적어주세요:)");
+                return response.error
+            }
+
             if (this.conversation.length === 0) {
                 this.firstloader = true;
             } else {
                 this.loadershow = true;
             }
+
             const response = await fetchMeetAICreate(this.text);
             if (response.status === 200) {
                 this.firstloader = this.loadershow = false;
@@ -105,7 +159,8 @@ export default {
                 if (error.response.status === 500) {
                     alert('잠시 후 다시 시도해 주세요!')
                 }
-
+            } finally {
+                this.isDisabled = false;
             }
         },
     },
