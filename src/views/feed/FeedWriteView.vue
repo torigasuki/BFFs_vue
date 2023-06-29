@@ -31,6 +31,7 @@
 import { VueEditor } from "vue2-editor";
 import { mapGetters } from "vuex";
 import PurchaseWrite from "@/components/PurchaseWrite.vue"
+import bus from "@/utils/bus.js";
 
 export default {
 	components: {
@@ -65,12 +66,17 @@ export default {
               content: this.content,
               categoryId: this.categoryId,
             });
-            if(response.status === 201){
-              alert(response.data.message)
+            if(response && response.status === 201){
+              this.snotify('success',response.data.message)
               this.$router.push({name: "community-detail", params: {name: this.$route.params.community_name}});
             }
         }catch(error){
-            alert('금지어가 포함되어 있습니다');
+          if(error.response.status == 400){
+            this.snotify('error',error.response.data.message)
+          }
+          else{
+            this.snotify('error','카테고리를 입력해주세요')
+          }
         }
     },
     async handleImageAdded(file, Editor, cursorLocation, resetUploader) {
@@ -92,6 +98,12 @@ export default {
         this.editoropen = true;
       }
     },
+    snotify(type,message){
+        bus.$emit('showSnackbar',{
+            type,
+            message
+        });
+    }
   },
 }
 

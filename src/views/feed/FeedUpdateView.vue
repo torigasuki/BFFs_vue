@@ -16,6 +16,7 @@
 <script>
 import { VueEditor } from "vue2-editor";
 import { fetchFeedDetail,fetchFeedEdit } from "@/api";
+import bus from "@/utils/bus.js";
 export default {
   components: {
       VueEditor
@@ -50,16 +51,22 @@ export default {
           try{
               const response = await fetchFeedEdit(feed_id, this.title, this.content);
               if(response.status === 200){
-                alert(response.data.message);
+                this.snotify("success",response.data.message);
                 this.$router.push({name: "feed-detail", params: {feed_id: feed_id}});
               }
           }catch(error){
-              console.log(error);
+              this.snotify("error",'수정에 실패하였습니다.');
           }
       },
       goBack() {
         this.$router.go(-1);
       },
+      snotify(type,message){
+          bus.$emit('showSnackbar',{
+              type,
+              message
+          });
+      }
   }
 }
 </script>
