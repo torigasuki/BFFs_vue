@@ -3,7 +3,8 @@ import{
     fetchFeedDetail,
     fetchFeedCreate,
     imageUpload,
-    fetchPurchaseDetail,
+    fetchGroupPurchaseCreate,
+    fetchGroupPurchaseDetail,
 } from '@/api/index.js'
 
 const state ={
@@ -19,7 +20,7 @@ const getters ={
     fetchFeedDetail(state) {
         return state.feeddetail
     },
-    fetchPurchaseDetail(state) {
+    fetchGroupPurchaseDetail(state) {
         return state.purchasedetail
     },
 }
@@ -31,7 +32,7 @@ const mutations ={
     SET_FEED_DETAIL(state, feeddetail) {
         state.feeddetail = feeddetail
     },
-    SET_PURCHASE_DETAIL(state, purchasedetail) {
+    SET_GROUPPURCHASE_DETAIL(state, purchasedetail) {
         state.purchasedetail = purchasedetail
     },
 }
@@ -74,10 +75,33 @@ const actions ={
             console.log(error)
         }
     },
-    async FETCH_PURCHASE_DETAIL(context, id) {
+    async FETCH_GROUPPURCHASE_CREATE(context, purchaseData) {
         try {
-            const response = await fetchPurchaseDetail(id)
-            context.commit('SET_PURCHASE_DETAIL', response.data)
+            const community_url = purchaseData.community_url
+            const title = purchaseData.title
+            const content = purchaseData.content
+            const product_name = Number(purchaseData.name)
+            const product_number = Number(purchaseData.number)
+            const product_price = purchaseData.price
+            const person_limit = Number(purchaseData.person)
+            const link = purchaseData.link
+            const open_at = purchaseData.open_at
+            const close_at = purchaseData.close_at
+            const end_option = purchaseData.end_option
+            const location = purchaseData.location
+            const meeting_at = purchaseData.meeting_at
+
+            const response = await fetchGroupPurchaseCreate(community_url, title, content, product_name, product_number, product_price, person_limit, link, open_at, close_at, end_option, location, meeting_at)
+            return response
+        } catch (error) {
+            console.log(error)
+        }
+    },
+    async FETCH_GROUPPURCHASE_DETAIL(context, data) {
+        try {
+            const response = await fetchGroupPurchaseDetail(data.community_name, data.grouppurchase_id)
+
+            context.commit('SET_GROUPPURCHASE_DETAIL', response.data)
             return response
         } catch (error) {
             console.log(error)
