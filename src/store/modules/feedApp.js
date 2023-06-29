@@ -3,7 +3,7 @@ import{
     fetchFeedDetail,
     fetchFeedCreate,
     imageUpload,
-    fetchPurchaseDetail,
+    fetchGroupPurchaseDetail,
 } from '@/api/index.js'
 
 const state ={
@@ -19,7 +19,7 @@ const getters ={
     fetchFeedDetail(state) {
         return state.feeddetail
     },
-    fetchPurchaseDetail(state) {
+    fetchGroupPurchaseDetail(state) {
         return state.purchasedetail
     },
 }
@@ -31,7 +31,7 @@ const mutations ={
     SET_FEED_DETAIL(state, feeddetail) {
         state.feeddetail = feeddetail
     },
-    SET_PURCHASE_DETAIL(state, purchasedetail) {
+    SET_GROUPPURCHASE_DETAIL(state, purchasedetail) {
         state.purchasedetail = purchasedetail
     },
 }
@@ -74,10 +74,11 @@ const actions ={
             console.log(error)
         }
     },
-    async FETCH_PURCHASE_DETAIL(context, id) {
+    async FETCH_GROUPPURCHASE_DETAIL(context, data) {
         try {
-            const response = await fetchPurchaseDetail(id)
-            context.commit('SET_PURCHASE_DETAIL', response.data)
+            const response = await fetchGroupPurchaseDetail(data.community_name, data.grouppurchase_id)
+
+            context.commit('SET_GROUPPURCHASE_DETAIL', response.data)
             return response
         } catch (error) {
             console.log(error)
