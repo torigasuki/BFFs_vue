@@ -61,8 +61,8 @@ export default {
     },
     async writeFeed() {
         try{
-            const response = await this.$store.dispatch("FETCH_FEED_CREATE", {
-              title: this.title,
+          const response = await this.$store.dispatch("FETCH_FEED_CREATE", {
+            title: this.title,
               content: this.content,
               categoryId: this.categoryId,
             });

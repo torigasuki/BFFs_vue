@@ -28,6 +28,7 @@ const getters ={
     fetchGroupPurchaseDetail(state) {
         return state.purchasedetail
     },
+
 }
 
 const mutations ={
