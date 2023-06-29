@@ -2,6 +2,7 @@ import axios from 'axios'
 
 const config = {
     baseUrl: 'https://api.makebestie.com'
+    //baseUrl: 'http://127.0.0.1:8000'
 }
 const access_token = () => {
     return localStorage.getItem('access_token')
@@ -133,8 +134,16 @@ function fetchGuestBook(profile_id, comment){
 }
 
 // 프로필 방명록 수정
-function fetchGuestBookEdit(profile_id, guestbook_id){
-    return axios.patch(`${config.baseUrl}/user/${profile_id}/guestbook/${guestbook_id}/`)
+function fetchGuestBookEdit(profile_id, guestbook_id, comment){    
+    return axios.patch(`${config.baseUrl}/user/${profile_id}/guestbook/${guestbook_id}/`,{
+        comment,
+    },
+    {
+        headers: {
+            'Authorization': `Bearer ${access_token()}`,
+            'Content-Type': 'application/json',
+        }
+    })
 }
 
 // 프로필 방명록 삭제
@@ -562,6 +571,41 @@ function fetchMeetAICreate(user_input) {
     })
 }
 
+// 공구 생성
+function fetchPurchaseCreate(comment_id,text) {
+    return axios.post(`${config.baseUrl}/feed/${comment_id}/cocomment/`,{
+        text,
+    },{
+        headers: {
+            'Authorization': `Bearer ${access_token()}`,
+            'Content-Type': 'application/json',
+        }
+    })
+}
+
+// 공구 상세
+function fetchPurchaseDetail(grouppurchase_id) {
+    const token = access_token()
+    if (token) {
+        return axios.get(`${config.baseUrl}/grouppurchase/${grouppurchase_id}/`,{
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            }
+        })
+    } else {
+        return axios.get(`${config.baseUrl}/meetai/`)
+    }
+}
+
+// 공구 삭제
+function fetchPurchaseDelete(cocomment_id) {
+    return axios.delete(`${config.baseUrl}/feed/cocomment/${cocomment_id}/`,{
+        headers: {
+            'Authorization': `Bearer ${access_token()}`,
+        }
+    })
+}
+
 export {
     fetchSignup,
     fetchLogin,
@@ -626,4 +670,7 @@ export {
     //fetchGroupPurchaseCommentDelete,
     fetchMeetAI,
     fetchMeetAICreate,
+    fetchPurchaseCreate,
+    fetchPurchaseDetail,
+    fetchPurchaseDelete,
 }
