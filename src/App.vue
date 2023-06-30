@@ -1,22 +1,57 @@
 <template>
   <div id="app">
     <div id="test">
+      <router-loader v-if="loading"></router-loader>
       <nav-bar id="navigation"></nav-bar>
       <router-view id="app_content"></router-view>
       <footer-bar id="footer"></footer-bar>
     </div>
+    <vue-snotify></vue-snotify>
   </div>
 </template>
 
 <script>
 import NavBar from './components/NavBar.vue'
 import FooterBar from './components/FooterBar.vue'
-
+import RouterLoader from './components/RouterLoader.vue'
+import bus from '@/utils/bus.js'
+import snotity from '@/mixins/snotifymixin.js'
 export default {
+  mixins: [snotity],
   components: {
     NavBar,
     FooterBar,
+    RouterLoader,
   },
+  data(){
+    return{
+        loading: false,
+        axioscount:0,
+    }
+  },
+  created(){
+    bus.$on('showSnackbar', ({type, message}) => {
+      this.snotify(type,message)
+    })
+    bus.$on('axiosStart', () => {
+      this.axiosStart()
+    })
+    bus.$on('axiosEnd', () => {
+      this.axiosEnd()
+    })
+  },
+  methods:{
+    axiosStart(){
+      this.axioscount++
+      this.loading = true
+    },
+    axiosEnd(){
+      this.axioscount--
+      if(this.axioscount <= 0){
+        this.loading = false
+      }
+    }
+  }
 }
 
 </script>
@@ -58,5 +93,22 @@ body {
 }
 #footer{
   flex-shrink: 0;
+}
+.snotify{
+  opacity: 0.95;
+  width:400px !important;
+  left: calc(50% - 400px / 2) !important;
+
+}
+.snotify-centerTop{
+  top:50px !important;
+}
+.snotifyToast__inner {
+  min-height:48px !important;
+}
+.snotify-icon{
+  right: 0px !important; 
+  height: 60% !important;
+  background-repeat: no-repeat;
 }
 </style>
