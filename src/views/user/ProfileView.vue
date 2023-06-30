@@ -1,14 +1,23 @@
 <template>
     <div>
+        <div class='modal-wrap' v-if='profileModal'>
+            <div class="modal-back" @click='closeModal'></div>
+            <div class='profile-modal'>
+                <div class='modal-header'>
+                    <div @click='closeModal'>
+                        <font-awesome-icon :icon="['fas', 'xmark']" size="2xl" style="color: #fffff;" />
+                    </div>
+                </div>
+                <div class='modal-body'>
+                    <img :src="profile.profileimageurl" v-if="profile.profileimage !== null && profile.profileimage.includes('profile_img')"/>
+                    <img :src="profile.profileimageurl.slice(33)" v-else-if="profile.profileimage !== null"/>
+                    <img src="@/assets/room_image(5).jpg" v-else />
+                </div>
+            </div>
+        </div>
         <div class="inner">
-            <!-- <button>
-                <svg height="16" width="16" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1024 1024"><path d="M874.690416 495.52477c0 11.2973-9.168824 20.466124-20.466124 20.466124l-604.773963 0 188.083679 188.083679c7.992021 7.992021 7.992021 20.947078 0 28.939099-4.001127 3.990894-9.240455 5.996574-14.46955 5.996574-5.239328 0-10.478655-1.995447-14.479783-5.996574l-223.00912-223.00912c-3.837398-3.837398-5.996574-9.046027-5.996574-14.46955 0-5.433756 2.159176-10.632151 5.996574-14.46955l223.019353-223.029586c7.992021-7.992021 20.957311-7.992021 28.949332 0 7.992021 8.002254 7.992021 20.957311 0 28.949332l-188.073446 188.073446 604.753497 0C865.521592 475.058646 874.690416 484.217237 874.690416 495.52477z"></path></svg>
-            <span>뒤로</span>
-            </button> -->
-
             <div class="mypage">
                 <div class="list">
-
                     <div class="bookmark">
                         <h3>북마크한 커뮤니티</h3>
                         <div class="main-container">
@@ -146,8 +155,8 @@
                 <div class="user_profile" v-if="profile">
                     <div class="card">
                         <div class="card-image">
-                            <img :src="profile.profileimageurl" v-if="profile.profileimage !== null && profile.profileimage.includes('profile_img')"/>
-                            <img :src="profile.profileimageurl.slice(33)" v-else-if="profile.profileimage !== null"/>
+                            <img :src="profile.profileimageurl" v-if="profile.profileimage !== null && profile.profileimage.includes('profile_img')" @click='openModal'/>
+                            <img :src="profile.profileimageurl.slice(33)" v-else-if="profile.profileimage !== null" @click='openModal'/>
                             <img src="@/assets/room_image(5).jpg" v-else />
                         </div>
                             <div class="category"> {{ profile.nickname }} | {{ profile.region }} </div>
@@ -275,6 +284,7 @@ export default {
             userid: '',
             inputComment: '',
             inputUpdateComment: "",
+            profileModal: false,
         }
     },
     created() {
@@ -368,11 +378,36 @@ export default {
                 message
             });
         },
+        openModal(){
+            this.profileModal = true;
+        },
+        closeModal(){
+            this.profileModal = false;
+        },
     },
 }
 </script>
 
 <style scoped>
+.modal-back{
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+}
+.profile-modal{
+    z-index: 99999;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.modal-header{
+    float:right;
+}
 a {
     color: inherit;
     text-decoration: none;
@@ -647,7 +682,9 @@ header > .profile > h3 {
 .user_profile {
     margin-top: 40px;
 }
-
+.user_profile .card .card-image{
+    cursor: pointer;
+}
  /*.user-guestbook > .submit-box > .create-button {
     white-space: nowrap;
     text-overflow: ellipsis;
