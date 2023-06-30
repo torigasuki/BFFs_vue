@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div class="inner">
-        <h3>내 정보 수정하기</h3>
+        <section class="body-section">
+            <h3>내 정보 수정하기</h3>
 
             <div class="mypage">
                 <div class="list">
@@ -67,11 +67,6 @@
                         <!-- <div class="card-image" v-if="profile.profileimage !== null">
                             <img :src="profile.profileimageurl.slice(28)" />
                         </div> -->
-                        <div class="card-image">
-                            <img :src="profile.profileimageurl" v-if="profile.profileimage !== null && profile.profileimage.includes('profile_img')" :style="{ opacity: profile.profileimage !== null ? 1 : 0 }" />
-                            <img :src="profile.profileimageurl.slice(33)" v-else-if="profile.profileimage !== null" :style="{ opacity: profile.profileimage !== null ? 1 : 0 }" />
-                            <img src="@/assets/room_image(5).jpg" v-else />
-                        </div>
                         <div class="image-box">
                             <label class="custum-file-upload" for="file">
                                 <div class="icon">
@@ -83,11 +78,16 @@
                                 <input type="file" id="file" @change="InputImage" ref="fileInput">
                             </label>
                         </div>
+                        <div class="card-image">
+                            <img :src="profile.profileimageurl" v-if="profile.profileimage !== null && profile.profileimage.includes('profile_img')" :style="{ opacity: profile.profileimage !== null ? 1 : 0 }" />
+                            <img :src="profile.profileimageurl.slice(33)" v-else-if="profile.profileimage !== null" :style="{ opacity: profile.profileimage !== null ? 1 : 0 }" />
+                            <img src="@/assets/room_image(5).jpg" v-else />
+                        </div>
                     </div>
                 </div>
 
             </div>     
-        </div>
+        </section>
 
         
     </div>
@@ -188,7 +188,10 @@ dt {
     margin-left: 0;
     width: 70px;
 }
-
+.body-section{
+    max-width:1800px;
+    margin:0 auto;
+}
 .card {
   width: 462px;
   background: white;
@@ -210,6 +213,7 @@ dt {
     width: 100%;
     height: 60%;
     border-radius: 6px 6px 0 0;
+    margin-top: 50px;
 }
 
 .card-image:hover {
@@ -271,7 +275,7 @@ dt {
     grid-template-columns: repeat(3, 1fr);
 }
 
-.inner > h3 {
+.body-section > h3 {
     margin-top: 40px;
     text-align: center;
     font-size: 22px;
@@ -492,6 +496,6 @@ dt {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 50px;
+    margin-top: 44px;
 }
 </style>

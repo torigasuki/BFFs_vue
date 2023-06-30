@@ -76,6 +76,12 @@ body {
   -ms-overflow-style: none;
   margin:0;
   padding:0;
+  overflow-x: hidden;
+  width:100%;
+  overflow: scroll;
+}
+body::-webkit-scrollbar{
+  display:none;
 }
 #navigation{
   width: 100%;
