@@ -1,5 +1,9 @@
 <template>
     <div>
+        <Transition name="fade">
+            <password-withdrawal-modal v-if="modalopen" @close="modalopen=false"></password-withdrawal-modal>
+        </Transition>
+        <div class="modal-overlay" v-if="modalopen" @click="modalopen=false"></div>
         <div class="inner">
 
             <div class="mypage">
@@ -231,9 +235,11 @@
 </template>
 
 <script>
+import PasswordWithdrawalModal from "@/components/PasswordWithdrawalModal.vue";
 import { mapGetters } from "vuex";
 import  {  fetchGuestBook, fetchGuestBookEdit, fetchGuestBookDelete, fetchProfileDelete } from "@/api/index.js";
 import bus from '@/utils/bus.js'
+
 
 export default {
     computed: {
@@ -271,6 +277,8 @@ export default {
             userid: '',
             inputComment: '',
             inputUpdateComment: "",
+            modalopen: false,
+            password:'',
         }
     },
     created() {
@@ -342,11 +350,14 @@ export default {
                 this.snotify('error','방명록 삭제에 실패했습니다.')
             } 
         },
+
         deleteUserCheck() {
             const check = confirm('계정을 비활성화 하시겠습니까?')
+            this.modalopen = true;
             if (check) {
                 this.deleteUser();
             }
+
         },
         async deleteUser() {
             try {                
@@ -365,6 +376,9 @@ export default {
             });
         },
     },
+    components: {
+        PasswordWithdrawalModal,
+    }
 }
 </script>
 
@@ -1502,6 +1516,16 @@ header > .profile > h3 {
     margin-left:auto;
     color: #909090;
     font-size: 0.8rem;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 999;
 }
 
 </style>
