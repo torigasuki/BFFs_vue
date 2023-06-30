@@ -15,12 +15,11 @@
                 </div>
             </div>
         </div>
-        <div class="inner">
         <Transition name="fade">
             <password-withdrawal-modal v-if="modalopen" @close="modalopen=false"></password-withdrawal-modal>
         </Transition>
         <div class="modal-overlay" v-if="modalopen" @click="modalopen=false"></div>
-        <div class="inner">
+        <section class="body-section">
             <div class="mypage">
                 <div class="list">
                     <div class="bookmark">
@@ -186,7 +185,7 @@
                     </div>
                 </div>
 
-            <div class="sub-area"></div>
+            <div class="sub-area">
                 <div class="main-container-book">
                     <div class="sub-input-wrapper">
                         <div class="sub-text-info">
@@ -244,8 +243,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-
+        </section>
+    </div>
 </template>
 
 <script>
@@ -404,6 +403,10 @@ export default {
 </script>
 
 <style scoped>
+.body-section{
+    max-width:1800px;
+    margin:0 auto;
+}
 .modal-back{
     background-color: rgba(0, 0, 0, 0.5);
     position: fixed;
@@ -874,6 +877,17 @@ header > .profile > h3 {
     overflow-x: auto;
     overflow-y: hidden;
 }
+.new-card-wrapper::-webkit-scrollbar{
+    height: 7px;
+}
+.new-card-wrapper::-webkit-scrollbar-thumb{
+    background-color: #a92278;
+    border-radius: 10px;
+}
+.new-card-wrapper::-webkit-scrollbar-track{
+    background-color: #ffffff;
+    border-radius: 10px;
+}
 
 .new-card-box {
     width: 300px;
@@ -1141,7 +1155,6 @@ header > .profile > h3 {
   grid-template-rows: 30px auto;
   grid-gap: 4px;
   position: relative;
-  margin-bottom: 4px;
 
   padding: 10px 20px;
   width: auto;
@@ -1402,6 +1415,17 @@ header > .profile > h3 {
     height: 320px;
     overflow-y: auto;
     overflow-x: hidden;
+}
+.my-feeds-box:nth-child(1){
+    padding-left:0;
+}
+.my-feeds-box::-webkit-scrollbar {
+    width: 7px;
+    background-color: #F5F5F5;
+}
+.my-feeds-box::-webkit-scrollbar-thumb {
+    background-color: #9E2067;
+    border-radius: 10px;
 }
 
 .content-card {

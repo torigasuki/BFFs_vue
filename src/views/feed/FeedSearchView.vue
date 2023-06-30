@@ -11,54 +11,56 @@
             </div>      
         </div>
       </section>
-      <section class="category-section">
-        <div class="search-category-area">
-          <!-- 검색 -->
-          <div class="search-box">
-            <div class="container-input">
-              <input type="text" placeholder=" Feed Search" name="text" class="input" autocomplete="off" v-model="searchname" @keyup.enter="searchFeed()">
-              <svg fill="#000000" width="20px" height="20px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
-                <path d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z" fill-rule="evenodd"></path>
-              </svg>
+      <section class="body-section">
+        <section class="category-section">
+            <div class="search-category-area">
+            <!-- 검색 -->
+            <div class="search-box">
+                <div class="container-input">
+                <input type="text" placeholder=" Feed Search" name="text" class="input" autocomplete="off" v-model="searchname" @keyup.enter="searchFeed()">
+                <svg fill="#000000" width="20px" height="20px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z" fill-rule="evenodd"></path>
+                </svg>
+                </div>
             </div>
-          </div>
-        </div>
-      </section>
-      <section class="main-section">
-        <div class="main-area">
-          <div class="main-container">
-            <div class="search-words">
-              <p class="search-word1">검색 결과 :</p>
-              <p class="search-word2">{{this.searchname}}</p>
             </div>
-            <!-- category list 내용 -->
-            <div class="main-content-wrapper">
-              <!-- 게시글 1개 -->
-              <router-link :to="`/community/detail/${feed.community_name}/feed/${feed.id}`" class="content-card" v-for="(feed, index) in feeds" :key=index>
-                <div class="image-box">
-                  <img class="content-image" src="@/assets/room_image(3).jpg">
+        </section>
+        <section class="main-section">
+            <div class="main-area">
+            <div class="main-container">
+                <div class="search-words">
+                <p class="search-word1">검색 결과 :</p>
+                <p class="search-word2">{{this.searchname}}</p>
                 </div>
-                <div class="title-box">
-                    <span class="content-title">{{ feed.title }}</span>
+                <!-- category list 내용 -->
+                <div class="main-content-wrapper">
+                <!-- 게시글 1개 -->
+                <router-link :to="`/community/detail/${feed.community_name}/feed/${feed.id}`" class="content-card" v-for="(feed, index) in feeds" :key=index>
+                    <div class="image-box">
+                    <img class="content-image" src="@/assets/room_image(3).jpg">
+                    </div>
+                    <div class="title-box">
+                        <span class="content-title">{{ feed.title }}</span>
+                    </div>
+                    <p class="author">{{feed.nickname}}</p>
+                    <p class="content-date">{{ feed.created_at.slice(0,10) }} | {{ feed.created_at.slice(12,19) }}</p>
+                    <div class="view-box">
+                    <img src="@/assets/view_look.png">
+                    <span class="content-count">{{feed.view_count}}</span> 
+                    </div>
+                    <div class="like-box">
+                    <img src="@/assets/like.png">
+                    <span class="content-count">{{feed.likes_count}}</span>
+                    </div>
+                    <div class="comment-box">
+                    <img src="@/assets/comment.png">
+                    <span class="content-count">{{feed.comments_count}}</span>
+                    </div>
+                </router-link>
                 </div>
-                <p class="author">{{feed.nickname}}</p>
-                <p class="content-date">{{ feed.created_at.slice(0,10) }} | {{ feed.created_at.slice(12,19) }}</p>
-                <div class="view-box">
-                  <img src="@/assets/view_look.png">
-                  <span class="content-count">{{feed.view_count}}</span> 
-                </div>
-                <div class="like-box">
-                  <img src="@/assets/like.png">
-                  <span class="content-count">{{feed.likes_count}}</span>
-                </div>
-                <div class="comment-box">
-                  <img src="@/assets/comment.png">
-                  <span class="content-count">{{feed.comments_count}}</span>
-                </div>
-              </router-link>
             </div>
-          </div>
-        </div>
+            </div>
+        </section>
       </section>
     </main>
 </template>
@@ -111,17 +113,16 @@ body {
     margin: 0;
     padding: 0;
 }
-
+.body-section{
+    max-width:1800px;
+    margin:0 auto;
+}
 .head-area {
-    margin-top: 30px;
     width: 100%;
     height: 220px;
     position: relative;
     background: rgb(0, 0, 0);
-
     display: grid;
-    grid-template-columns: 17% 60% 18%;
-    grid-row: 20px 30% 50%;
     overflow: hidden;
     justify-content: center;
     align-items: center;

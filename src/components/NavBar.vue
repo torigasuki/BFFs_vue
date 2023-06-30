@@ -56,6 +56,13 @@ export default {
         userid: '',
     }
   },
+  mounted() {
+    window.addEventListener('scroll', this.handleScroll);
+    this.checkLogin();
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.handleScroll);
+  },
   watch:{
     '$route'(){
         this.$store.dispatch('checkMenubar',false);
@@ -97,9 +104,6 @@ export default {
     });
     
   },
-  mounted() {
-    this.checkLogin();
-  },
   methods: {
     menuShow() {
         this.$store.dispatch('checkMenubar',!this.menubar);
@@ -127,6 +131,10 @@ export default {
             type,
             message
         });
+    },
+    handleScroll() {
+      this.$store.dispatch('checkMenubar',false);
+
     }
   },
 }
@@ -141,7 +149,7 @@ h1{
 }
 header > .inner{
     position: relative;
-    width: auto;
+    max-width: 1800px;
     height: 120px;
     margin: 0 auto;
     padding: 0px 30px;
@@ -157,9 +165,8 @@ header > .inner > h1 > .logo {
 
 header > .inner > .sub-menu {
     position: absolute;
-    top: 10;
+    top: 10px;
     right: 0;
-    margin-right: 40px;
     display: flex;
 }
 
@@ -225,7 +232,6 @@ header > .inner > .sub-menu > .hamburger > .material-icons {
 
 .menu-bar {
     position: absolute;
-    height: 100%;
     right: 0;
     z-index: 9999;
 }

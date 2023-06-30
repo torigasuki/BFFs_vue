@@ -136,8 +136,8 @@ export default {
 .back-img {
     position: absolute;
     z-index: -999;
-    max-width: 100%;
-    min-height: 800px;
+    min-width: 100vw;
+    min-height: 100vh;
     filter: brightness(70%);
 }
 .login-wrap {
@@ -213,7 +213,7 @@ export default {
 
 .center-line a {
     text-decoration: none;
-    color: #dddddd;
+    color: white;
     margin: 0 10px;
     cursor: default;
 }
@@ -223,7 +223,7 @@ export default {
     /* margin-left: 0px;
     width: 40%; */
     height: 1px;
-    background-color: #dddddd;
+    background-color: white;
 }
 
 .right-line {
@@ -231,7 +231,7 @@ export default {
     /* margin-right: 0px;
     width: 40%; */
     height: 1px;
-    background-color: #dddddd;
+    background-color: white;
 }
 
 .form-item {
@@ -271,6 +271,7 @@ export default {
     background-color: #dddddd;
     background-color: rgba( 255, 255, 255, 0.5 );
     color: #9E2067;
+    font-size: 15px;
 }
 
 .button {
@@ -283,7 +284,7 @@ export default {
     border: none;
     outline: 2px solid;
     cursor: pointer;
-    color: #dddddd;
+    color: white;
     background-color: transparent;
 }
 
@@ -302,7 +303,7 @@ export default {
 }
 
 .wrap a {
-    color: #dddddd;
+    color: white;
     text-decoration: none;
     margin-left: 20px;
     margin-right: 20px;

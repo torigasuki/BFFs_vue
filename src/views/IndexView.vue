@@ -206,7 +206,10 @@ img {
   width: 100%;
   height: 648px;
 }
-
+.main-section{
+  max-width:1800px;
+  margin: 0 auto;
+}
 .title {
   display: flex;
 }
@@ -460,7 +463,8 @@ img {
 
 /***** 같이 놀기 card area *****/
 .with-card-container {
-  width: 1200;
+  justify-items: center;
+  align-items: center;
   margin:15px;
   margin-top: 70px;
   /* 그리드로 카드 자리 지정 */
@@ -537,15 +541,6 @@ img {
   font-weight: 450;
   font-size: 1rem;
   color: #909090;
-}
-.with-card-container {
-  width: 1200;
-  /* 그리드로 카드 자리 지정 */
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(500px, auto));
-  grid-template-rows: repeat(auto-fill, minmax(300px, auto));
-  row-gap: 10px;
-  column-gap: 20px;
 }
 .with-card-subtext {
   display: flex;

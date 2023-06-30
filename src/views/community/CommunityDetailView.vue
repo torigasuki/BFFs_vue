@@ -33,160 +33,160 @@
                 </div>
             </div>
         </section>
-        <section class="category-section">
-            <div class="search-category-area">
-                <div class="head-category-wrapper">
-                    <ul class="head-category">
-                        <div class="category-item-box">
-                            <router-link v-for="categories,index in categories"
-                                    :key="index" :to="`/community/${community_name}/category/${categories[2]}`">{{
-                                        categories[1] }}</router-link>
-                        </div>
-                        <router-link :to="`/community/manage/${community.communityurl}`" class="visit-button" v-if="adminids.includes(userid)">
-                            <span>관리</span>
-                            <svg height="16" width="16" xmlns="http://www.w3.org/2000/svg" version="1.1"
-                                viewBox="0 0 1024 1024">
-                                <path
-                                    d="M874.690416 495.52477c0 11.2973-9.168824 20.466124-20.466124 20.466124l-604.773963 0 188.083679 188.083679c7.992021 7.992021 7.992021 20.947078 0 28.939099-4.001127 3.990894-9.240455 5.996574-14.46955 5.996574-5.239328 0-10.478655-1.995447-14.479783-5.996574l-223.00912-223.00912c-3.837398-3.837398-5.996574-9.046027-5.996574-14.46955 0-5.433756 2.159176-10.632151 5.996574-14.46955l223.019353-223.029586c7.992021-7.992021 20.957311-7.992021 28.949332 0 7.992021 8.002254 7.992021 20.957311 0 28.949332l-188.073446 188.073446 604.753497 0C865.521592 475.058646 874.690416 484.217237 874.690416 495.52477z">
-                                </path>
-                            </svg>
-                        </router-link>
-                    </ul>
+        <section class="body-section">
+            <section class="category-section">
+                <div class="search-category-area">
+                    <div class="head-category-wrapper">
+                        <ul class="head-category">
+                            <div class="category-item-box">
+                                <router-link v-for="categories,index in categories"
+                                        :key="index" :to="`/community/${community_name}/category/${categories[2]}`">{{
+                                            categories[1] }}</router-link>
+                            </div>
+                            <router-link :to="`/community/manage/${community.communityurl}`" class="visit-button" v-if="adminids.includes(userid)">
+                                <span>관리</span>
+                                <svg height="16" width="16" xmlns="http://www.w3.org/2000/svg" version="1.1"
+                                    viewBox="0 0 1024 1024">
+                                    <path
+                                        d="M874.690416 495.52477c0 11.2973-9.168824 20.466124-20.466124 20.466124l-604.773963 0 188.083679 188.083679c7.992021 7.992021 7.992021 20.947078 0 28.939099-4.001127 3.990894-9.240455 5.996574-14.46955 5.996574-5.239328 0-10.478655-1.995447-14.479783-5.996574l-223.00912-223.00912c-3.837398-3.837398-5.996574-9.046027-5.996574-14.46955 0-5.433756 2.159176-10.632151 5.996574-14.46955l223.019353-223.029586c7.992021-7.992021 20.957311-7.992021 28.949332 0 7.992021 8.002254 7.992021 20.957311 0 28.949332l-188.073446 188.073446 604.753497 0C865.521592 475.058646 874.690416 484.217237 874.690416 495.52477z">
+                                    </path>
+                                </svg>
+                            </router-link>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </section>
-        
-        <div class="limit">
-            <div class="limits">
-                <h3>우리 커뮤니티의 금지어</h3>
-                <div class="input-box">
-                    <div class="forbidden-wrapper">
-                        <div v-if = "forbiddens.length != 0">
-                            <a v-for="(forbidden, index) in forbiddens" :key="index">   #{{ forbidden }} </a>
-                        </div> 
+            </section>
+            <div class="limit">
+                <div class="limits">
+                    <h3>우리 커뮤니티의 금지어</h3>
+                    <div class="input-box">
+                        <div class="forbidden-wrapper">
+                            <div v-if = "forbiddens.length != 0">
+                                <a v-for="(forbidden, index) in forbiddens" :key="index">   #{{ forbidden }} </a>
+                            </div> 
+                            <div v-else>
+                                해당 커뮤니티의 금지어가 없습니다.   
+                            </div>           
+                        </div>
+                    </div>
+
+                    <h3>우리 커뮤니티의 관리자</h3>
+                    <div class="member-area-admin">
+                        <div class="member-menu">
+                            <div class="member-content1">
+                                <span class="realname1">이름</span>
+                                <span class="nickname1">닉네임</span>
+                                <span class="feed1">메인 관리자</span>
+                                <span class="subadmin1">서브 관리자</span>
+                            </div>
+                        </div>
+                        <!-- 멤버 리스트 -->
+                        <div v-if="admins.length != 0">
+                            <div class="member-list" v-for="admin,index in admins" :key="index">
+                                <ul class="member-content">
+                                    <li id="realname">{{ admin.name }}</li>
+                                    <li id="nickname">{{ admin.nickname }}</li>
+                                    <li id="feed">
+                                        <img v-if="admin.is_comuadmin" id="checked" src="@/assets/checked.png">
+                                    </li>
+                                    <li id="subadmin">
+                                        <img v-if="admin.is_subadmin" id="checked" src="@/assets/checked.png"> 
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                         <div v-else>
-                            해당 커뮤니티의 금지어가 없습니다.   
-                        </div>           
-                    </div>
-                </div>
 
-                <h3>우리 커뮤니티의 관리자</h3>
-                <div class="member-area-admin">
-                    <div class="member-menu">
-                        <div class="member-content1">
-                            <span class="realname1">이름</span>
-                            <span class="nickname1">닉네임</span>
-                            <span class="feed1">메인 관리자</span>
-                            <span class="subadmin1">서브 관리자</span>
                         </div>
-                    </div>
-                    <!-- 멤버 리스트 -->
-                    <div v-if="admins.length != 0">
-                        <div class="member-list" v-for="admin,index in admins" :key="index">
-                            <ul class="member-content">
-                                <li id="realname">{{ admin.name }}</li>
-                                <li id="nickname">{{ admin.nickname }}</li>
-                                <li id="feed">
-                                    <img v-if="admin.is_comuadmin" id="checked" src="@/assets/checked.png">
-                                </li>
-                                <li id="subadmin">
-                                    <img v-if="admin.is_subadmin" id="checked" src="@/assets/checked.png"> 
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div v-else>
-                        
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <section class="container">
-            <div class="post-list" v-if="popularfeeds == null">
-                <section class="main-section">
-                    <div class="main-container">
-                        <div class="subtitle">
-                            <h3>아직 게시글이 없습니다</h3>
-                        </div>
-                    </div>
-                </section>                
-            </div>
-            <div class="post-list" v-else>
-                <section class="main-section">
-                    <div class="main-container">
-                        <div class="subtitle">
-                            <h2>인기 많은 게시글</h2>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="newpost" v-if="popularfeeds">
-                    <div class="posts" v-for="(feed, index) in popularfeeds" :key="index">
-                        <router-link :to="`${community_name}/feed/${feed.id}`" class="card">
-                            <div class="header">
-                                <div class="image"></div>
-                                <div>
-                                    <p class="title">{{feed.title}}</p>
-                                    <p class="name">{{feed.nickname}}</p>
-                                </div>
+            <section class="container">
+                <div class="post-list" v-if="popularfeeds == null">
+                    <section class="main-section">
+                        <div class="main-container">
+                            <div class="subtitle">
+                                <h3>아직 게시글이 없습니다</h3>
                             </div>
-                            <p v-html="feed.content" class="message"></p>
-                            <div class="button-group">
-                                <div class="with-text-view-box">
-                                    <svg class="icon" width="20" height="15" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"></path></svg>
-                                    <span class="with-text-view-content">{{feed.likes_count}}</span> 
-                                </div>
-                                <div class="with-text-view-box">
-                                    <img src="@/assets/comment.png" alt="댓글 아이콘 이미지">
-                                    <span class="with-text-view-content">{{feed.comments_count}}</span> 
-                                </div>
-                                <div class="with-text-view-box">
-                                    <img src="@/assets/view_look.png" alt="조회수 아이콘 이미지">
-                                    <span class="with-text-view-content">{{feed.view_count}}</span> 
-                                </div>
-                            </div>          
-                        </router-link>
-                    </div>
-                </section>
-
-                <section class="main-section">
-                    <div class="main-container">
-                        <div class="subtitle">
-                            <h2>새로운 게시글</h2>
                         </div>
-                    </div>
-                </section>
-
-                <section class="newpost" v-if="newfeeds">
-                    <div class="posts" v-for="(feed, index) in newfeeds" :key="index">
-                        <router-link :to="`${community_name}/feed/${feed.id}`" class="card">
-                            <div class="header">
-                                <div class="image"></div>
-                                <div>
-                                    <p class="title">{{feed.title}}</p>
-                                    <p class="name">{{feed.nickname}}</p>
-                                </div>
+                    </section>                
+                </div>
+                <div class="post-list" v-else>
+                    <section class="main-section">
+                        <div class="main-container">
+                            <div class="subtitle">
+                                <h2>인기 많은 게시글</h2>
                             </div>
-                            <div v-html="feed.content" class="message"></div>
-                            <div class="button-group">
-                                <div class="with-text-view-box">
-                                    <svg class="icon" width="20" height="15" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"></path></svg>
-                                    <span class="with-text-view-content">{{feed.likes_count}}</span> 
+                        </div>
+                    </section>
+
+                    <section class="newpost" v-if="popularfeeds">
+                        <div class="posts" v-for="(feed, index) in popularfeeds" :key="index">
+                            <router-link :to="`${community_name}/feed/${feed.id}`" class="card">
+                                <div class="header">
+                                    <div class="image"></div>
+                                    <div>
+                                        <p class="title">{{feed.title}}</p>
+                                        <p class="name">{{feed.nickname}}</p>
+                                    </div>
                                 </div>
-                                <div class="with-text-view-box">
-                                    <img src="@/assets/comment.png" alt="댓글 아이콘 이미지">
-                                    <span class="with-text-view-content">{{feed.comments_count}}</span> 
+                                <p v-html="feed.content" class="message"></p>
+                                <div class="button-group">
+                                    <div class="with-text-view-box">
+                                        <svg class="icon" width="20" height="15" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"></path></svg>
+                                        <span class="with-text-view-content">{{feed.likes_count}}</span> 
+                                    </div>
+                                    <div class="with-text-view-box">
+                                        <img src="@/assets/comment.png" alt="댓글 아이콘 이미지">
+                                        <span class="with-text-view-content">{{feed.comments_count}}</span> 
+                                    </div>
+                                    <div class="with-text-view-box">
+                                        <img src="@/assets/view_look.png" alt="조회수 아이콘 이미지">
+                                        <span class="with-text-view-content">{{feed.view_count}}</span> 
+                                    </div>
+                                </div>          
+                            </router-link>
+                        </div>
+                    </section>
+
+                    <section class="main-section">
+                        <div class="main-container">
+                            <div class="subtitle">
+                                <h2>새로운 게시글</h2>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="newpost" v-if="newfeeds">
+                        <div class="posts" v-for="(feed, index) in newfeeds" :key="index">
+                            <router-link :to="`${community_name}/feed/${feed.id}`" class="card">
+                                <div class="header">
+                                    <div class="image"></div>
+                                    <div>
+                                        <p class="title">{{feed.title}}</p>
+                                        <p class="name">{{feed.nickname}}</p>
+                                    </div>
                                 </div>
-                                <div class="with-text-view-box">
-                                    <img src="@/assets/view_look.png" alt="조회수 아이콘 이미지">
-                                    <span class="with-text-view-content">{{feed.view_count}}</span> 
-                                </div>
-                            </div>         
-                        </router-link>
-                    </div>
-                </section>
-            </div>
+                                <div v-html="feed.content" class="message"></div>
+                                <div class="button-group">
+                                    <div class="with-text-view-box">
+                                        <svg class="icon" width="20" height="15" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"></path></svg>
+                                        <span class="with-text-view-content">{{feed.likes_count}}</span> 
+                                    </div>
+                                    <div class="with-text-view-box">
+                                        <img src="@/assets/comment.png" alt="댓글 아이콘 이미지">
+                                        <span class="with-text-view-content">{{feed.comments_count}}</span> 
+                                    </div>
+                                    <div class="with-text-view-box">
+                                        <img src="@/assets/view_look.png" alt="조회수 아이콘 이미지">
+                                        <span class="with-text-view-content">{{feed.view_count}}</span> 
+                                    </div>
+                                </div>         
+                            </router-link>
+                        </div>
+                    </section>
+                </div>
+            </section>
         </section>
     </main>
 </template>
@@ -350,7 +350,10 @@ header {
 header >  #menu {
     background-color: #9E2067;
 }
-
+.body-section{
+    max-width:1700px;
+    margin: 0 auto;
+}
 .category-section {
     max-width: 700px;
     margin: 0 auto;

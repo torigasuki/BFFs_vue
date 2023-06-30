@@ -83,7 +83,7 @@ img {
 
 header > #menu {
     width: 348px;
-    height: 648px;
+    height: calc(100vh - 120px);
     background-color: #9E2067;
 }
 
