@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <section class="body-section">
         <section class="head-section">
             <div class="head-area">
                 <!-- 커뮤니티 카테고리 ~ 검색 부분 -->
@@ -68,7 +68,7 @@
                 </div>
             </div>
         </section>
-    </div>
+    </section>
 </template>
 
 <script>
@@ -128,7 +128,11 @@ a {
     color: inherit;
     text-decoration: none;
 }
-
+.body-section{
+    max-width:1800px;
+    margin:0 auto;
+    width: 100%;
+}
 /***** search words area *****/
 
 .search-words {

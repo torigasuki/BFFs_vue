@@ -53,282 +53,284 @@
           </div>
         </div>
       </section>
-      <section class="category-section">
-        <div class="search-category-area">
-          <div class="head-category-wrapper">
-            <!-- 커뮤니티 카테고리 -->
-            <ul class="head-category">
-              <div class="category-item-box">
-                <h2 style="color: #909090;">
-                  카테고리명 : {{ feed?.category_name }}
-                </h2>
+      <section class="body-section">
+        <section class="category-section">
+          <div class="search-category-area">
+            <div class="head-category-wrapper">
+              <!-- 커뮤니티 카테고리 -->
+              <ul class="head-category">
+                <div class="category-item-box">
+                  <h2 style="color: #909090;">
+                    카테고리명 : {{ feed?.category_name }}
+                  </h2>
+                </div>
+              </ul>
+            </div>
+            <!-- 검색 -->
+            <div class="search-box">
+              <div class="container-input">
+                <input
+                  autocomplete="off"
+                  type="text"
+                  placeholder=" Feed Search"
+                  name="text"
+                  class="input"
+                  v-model="searchname" @keyup.enter="searchFeed()"
+                />
+                <svg
+                  fill="#000000"
+                  width="20px"
+                  height="20px"
+                  viewBox="0 0 1920 1920"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z"
+                    fill-rule="evenodd"
+                  ></path>
+                </svg>
               </div>
-            </ul>
-          </div>
-          <!-- 검색 -->
-          <div class="search-box">
-            <div class="container-input">
-              <input
-                autocomplete="off"
-                type="text"
-                placeholder=" Feed Search"
-                name="text"
-                class="input"
-                v-model="searchname" @keyup.enter="searchFeed()"
-              />
-              <svg
-                fill="#000000"
-                width="20px"
-                height="20px"
-                viewBox="0 0 1920 1920"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z"
-                  fill-rule="evenodd"
-                ></path>
-              </svg>
             </div>
           </div>
-        </div>
-      </section>
-      <section class="main-section">
-        <div class="main-area">
-          <div class="main-container">
-            <!-- 게시 글 내용 전체 -->
-            <div class="main-content-wrapper" v-if="feed">
-              <div class="main-content-title">
-                <h2>{{ feed?.title }}</h2>
-              </div>
-              <div class="content-button-box">
-                <div class="content-view-box">
-                  <img src="@/assets/view_look.png" />
-                  <span class="text-view-content">{{ feed.view_count }}</span>
+        </section>
+        <section class="main-section">
+          <div class="main-area">
+            <div class="main-container">
+              <!-- 게시 글 내용 전체 -->
+              <div class="main-content-wrapper" v-if="feed">
+                <div class="main-content-title">
+                  <h2>{{ feed?.title }}</h2>
                 </div>
-                <button
-                  v-if="feedadmin.includes(this.userid)"
-                  class="noti-button"
-                  @click="addNotification()"
-                >
-                  {{ feed.is_notification ? '공지 취소' : '공지 등록' }}
-                  <svg viewBox="0 0 512 512" class="bell">
-                    <path
-                      d="M224 0c-17.7 0-32 14.3-32 32V49.9C119.5 61.4 64 124.2 64 200v33.4c0 45.4-15.5 89.5-43.8 124.9L5.3 377c-5.8 7.2-6.9 17.1-2.9 25.4S14.8 416 24 416H424c9.2 0 17.6-5.3 21.6-13.6s2.9-18.2-2.9-25.4l-14.9-18.6C399.5 322.9 384 278.8 384 233.4V200c0-75.8-55.5-138.6-128-150.1V32c0-17.7-14.3-32-32-32zm0 96h8c57.4 0 104 46.6 104 104v33.4c0 47.9 13.9 94.6 39.7 134.6H72.3C98.1 328 112 281.3 112 233.4V200c0-57.4 46.6-104 104-104h8zm64 352H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7s18.7-28.3 18.7-45.3z"
-                    ></path>
-                  </svg>
-                </button>
-                <!-- 어드민 -->
-              </div>
-              <div class="content-info-box">
-                <!-- 작성자 프로필로 이동 -->
-                <a style="color: #dddddd;">{{ feed.nickname }}</a>
-                <li>
-                  {{
-                    feed?.created_at?.slice(0, 10) +
-                      " " +
-                      feed?.created_at?.slice(11, 19)
-                  }}
-                </li>
-              </div>
-              <div class="main-text-content">
-                <div v-html="feed.content"></div>
-              </div>
-              <div class="function-box">
-                <div class="move-box">
-                  <a class="move-button" @click="moveFeed(data?.previous)">≪ 이전 글</a>
-                  <router-link :to="`/community/${communityurl}/category/${feed.category_url}`" class="move-button">목록으로</router-link>
-                  <a class="move-button" @click="moveFeed(data?.next)">다음 글 ≫</a>
-                </div>
-                <div class="like-box">
-                  <router-link
-                    v-if="feed.user === this.userid"
-                    class="content-edit-button"
-                    :to="`/${community.communityurl}/feed/update/${feed.id}`"
-                    >글 수정</router-link
-                  >
-                  <!-- 본인 -->
-                  <a
-                    v-if="feed.user === this.userid"
-                    class="content-delete-button"
-                    @click="deleteFeed()"
-                    >글 삭제</a
-                  >
-                  <!-- 본인 // 어드민 권한도 주는게 좋을 것 같음 -->
+                <div class="content-button-box">
+                  <div class="content-view-box">
+                    <img src="@/assets/view_look.png" />
+                    <span class="text-view-content">{{ feed.view_count }}</span>
+                  </div>
                   <button
-                    class="like-button"
-                    @click="toggleLike"
-                    :class="{ like: feed.like_bool }"
+                    v-if="feedadmin.includes(this.userid)"
+                    class="noti-button"
+                    @click="addNotification()"
                   >
-                    <svg
-                      class="icon"
-                      width="30"
-                      height="30"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                    {{ feed.is_notification ? '공지 취소' : '공지 등록' }}
+                    <svg viewBox="0 0 512 512" class="bell">
                       <path
-                        d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"
+                        d="M224 0c-17.7 0-32 14.3-32 32V49.9C119.5 61.4 64 124.2 64 200v33.4c0 45.4-15.5 89.5-43.8 124.9L5.3 377c-5.8 7.2-6.9 17.1-2.9 25.4S14.8 416 24 416H424c9.2 0 17.6-5.3 21.6-13.6s2.9-18.2-2.9-25.4l-14.9-18.6C399.5 322.9 384 278.8 384 233.4V200c0-75.8-55.5-138.6-128-150.1V32c0-17.7-14.3-32-32-32zm0 96h8c57.4 0 104 46.6 104 104v33.4c0 47.9 13.9 94.6 39.7 134.6H72.3C98.1 328 112 281.3 112 233.4V200c0-57.4 46.6-104 104-104h8zm64 352H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7s18.7-28.3 18.7-45.3z"
                       ></path>
                     </svg>
                   </button>
-                  <!--좋아요 숫자-->
-                  <p>{{ feed.likes_count }}</p>
+                  <!-- 어드민 -->
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="sub-area">
-          <div class="main-container">
-            <div class="sub-input-wrapper">
-              <div class="sub-text-info">
-                <p>댓글 |</p>
-                <p
-                  v-if="comment &&comment == '아직 댓글이 없습니다'"
-                  style="margin-left: 3px;"
-                >
-                  0
-                </p>
-                <p v-else style="margin-left: 3px;">
-                  {{ feed.comments_count }}
-                </p>
-              </div>
-              <textarea
-                v-model="inputComment"
-                autocomplete="off"
-                class="input-sub-text"
-                placeholder="여기에 댓글을 입력하세요"
-                @keyup.enter="createComment()"
-              ></textarea>
-              <button class="input-button" @click="createComment()">
-                입 력
-              </button>
-            </div>
-            <div class="sub-content-wrapper">
-              <!-- 댓글 1개 묶음 -->
-              <div v-if="comment == '아직 댓글이 없습니다'">
-                <p>{{ comment }}</p>
-              </div>
-              <div v-else>
-                <div class="comment-box"  v-for="(comment, index) in comment" :key="index">
-                  <!-- comment 내용 -->
-                  <div>
-                    <div class="comment-card">
-                      <!-- 댓글 수정용 div. display:none; 토글 필요 -->
-                      <div class="comment-update-box" v-if="comment.commenteditshow">
-                        <div class="comment-update-div">
-                          <p>댓글 수정</p>
-                          <textarea v-model="inputUpdateComment" class="update-textarea" @keyup.enter="editComment(comment.id)"></textarea>
-                          <button type="submit" class="update-submit-button" @click="editComment(comment.id)">수정 완료</button>
-                          <button class="update-quit-button" @click="commenteditshow(comment)">취소</button>
-                        </div>
-                      </div>
-
-                      <li class="comment-author">
-                        <router-link :to="`/profile/${comment?.user_id}`">{{
-                          comment?.nickname
-                        }}</router-link>
-                      </li>
-                      <li class="comment-date">
-                        작성일 {{ comment?.created_at?.slice(5, 10) }} 수정일 {{ comment?.updated_at?.slice(5, 10) }}
-                      </li>
-                      <li class="comment-text">
-                        {{ comment.text }}
-                      </li>
-                      <a class="cocomment-button" @click="cocommentShow(comment)">댓글 달기</a>
-                      <div
-                        class="comment-func-box"
-                        v-if="userid === comment.user_id"
+                <div class="content-info-box">
+                  <!-- 작성자 프로필로 이동 -->
+                  <a style="color: #dddddd;">{{ feed.nickname }}</a>
+                  <li>
+                    {{
+                      feed?.created_at?.slice(0, 10) +
+                        " " +
+                        feed?.created_at?.slice(11, 19)
+                    }}
+                  </li>
+                </div>
+                <div class="main-text-content">
+                  <div v-html="feed.content"></div>
+                </div>
+                <div class="function-box">
+                  <div class="move-box">
+                    <a class="move-button" @click="moveFeed(data?.previous)">≪ 이전 글</a>
+                    <router-link :to="`/community/${communityurl}/category/${feed.category_url}`" class="move-button">목록으로</router-link>
+                    <a class="move-button" @click="moveFeed(data?.next)">다음 글 ≫</a>
+                  </div>
+                  <div class="like-box">
+                    <router-link
+                      v-if="feed.user === this.userid"
+                      class="content-edit-button"
+                      :to="`/${community.communityurl}/feed/update/${feed.id}`"
+                      >글 수정</router-link
+                    >
+                    <!-- 본인 -->
+                    <a
+                      v-if="feed.user === this.userid"
+                      class="content-delete-button"
+                      @click="deleteFeed()"
+                      >글 삭제</a
+                    >
+                    <!-- 본인 // 어드민 권한도 주는게 좋을 것 같음 -->
+                    <button
+                      class="like-button"
+                      @click="toggleLike"
+                      :class="{ like: feed.like_bool }"
+                    >
+                      <svg
+                        class="icon"
+                        width="30"
+                        height="30"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
                       >
-                        <button
-                          class="comment-edit-btn"
-                          @click="commenteditshow(comment)"
-                        >
-                          <svg
-                            class="edit-icon"
-                            viewBox="0 0 512 512"
-                            height="17.5"
-                            width="15"
-                          >
-                            <path
-                              d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"
-                            ></path>
-                          </svg>
-                        </button>
-                        <button
-                          class="comment-delete-btn"
-                          @click="deleteComment(comment)"
-                        >
-                          <svg
-                            viewBox="0 0 15 17.5"
-                            height="17.5"
-                            width="15"
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="delete-icon"
-                          >
-                            <path
-                              transform="translate(-2.5 -1.25)"
-                              d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z"
-                              id="Fill"
-                            ></path>
-                          </svg>
-                        </button>
-                      </div>
-                    </div>
+                        <path
+                          d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"
+                        ></path>
+                      </svg>
+                    </button>
+                    <!--좋아요 숫자-->
+                    <p>{{ feed.likes_count }}</p>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="sub-area">
+            <div class="main-container">
+              <div class="sub-input-wrapper">
+                <div class="sub-text-info">
+                  <p>댓글 |</p>
+                  <p
+                    v-if="comment &&comment == '아직 댓글이 없습니다'"
+                    style="margin-left: 3px;"
+                  >
+                    0
+                  </p>
+                  <p v-else style="margin-left: 3px;">
+                    {{ feed.comments_count }}
+                  </p>
+                </div>
+                <textarea
+                  v-model="inputComment"
+                  autocomplete="off"
+                  class="input-sub-text"
+                  placeholder="여기에 댓글을 입력하세요"
+                  @keyup.enter="createComment()"
+                ></textarea>
+                <button class="input-button" @click="createComment()">
+                  입 력
+                </button>
+              </div>
+              <div class="sub-content-wrapper">
+                <!-- 댓글 1개 묶음 -->
+                <div v-if="comment == '아직 댓글이 없습니다'">
+                  <p>{{ comment }}</p>
+                </div>
+                <div v-else>
+                  <div class="comment-box"  v-for="(comment, index) in comment" :key="index">
+                    <!-- comment 내용 -->
+                    <div>
+                      <div class="comment-card">
+                        <!-- 댓글 수정용 div. display:none; 토글 필요 -->
+                        <div class="comment-update-box" v-if="comment.commenteditshow">
+                          <div class="comment-update-div">
+                            <p>댓글 수정</p>
+                            <textarea v-model="inputUpdateComment" class="update-textarea" @keyup.enter="editComment(comment.id)"></textarea>
+                            <button type="submit" class="update-submit-button" @click="editComment(comment.id)">수정 완료</button>
+                            <button class="update-quit-button" @click="commenteditshow(comment)">취소</button>
+                          </div>
+                        </div>
 
-                  <!-- 대댓글 입력 폼 -->
-                  <div class="coco-input-wrapper" v-if="comment.cocommentshow">
-                    <div class="coco-text-info">
-                      <p>대댓글 달기</p>
-                    </div>
-                    <textarea
-                      autocomplete="off"
-                      class="input-coco-text"
-                      placeholder="여기에 댓글을 입력하세요"
-                      v-model="inputCocomment" @keyup.enter="createCocomment(comment)"
-                    ></textarea>
-                    <button class="coco-submit-button" @click="createCocomment(comment)">입 력</button>
-                    <button class="coco-quit-button" @click="cocommentShow(comment)">취 소</button>
-                  </div>
-
-                  <!-- 대댓글 내용 -->
-                  <div class="cocommnet-box" v-for ="cocomment,index in comment.cocomment" :key="index">
-                    <p class="cocomment-deco">|</p>
-                    <div class="cocomment-card">
-                      <!-- 대댓글 수정용 div. display:none; 토글 필요 -->
-                      <div class="cocomment-update-box" v-if="cocomment.cocommenteditshow">
-                        <div class="cocomment-update-div">
-                          <p>대댓글 수정</p>
-                          <textarea v-model="inputUpdateCocomment" class="update-textarea" @keyup.enter="editCocomment(cocomment.id)"></textarea>
-                          <button type="submit" class="coco-update-submit-button" @click="editCocomment(cocomment.id)">수정 완료</button>
-                          <button class="coco-update-quit-button" @click="cocommenteditshow(cocomment)">취소</button>
+                        <li class="comment-author">
+                          <router-link :to="`/profile/${comment?.user_id}`">{{
+                            comment?.nickname
+                          }}</router-link>
+                        </li>
+                        <li class="comment-date">
+                          작성일 {{ comment?.created_at?.slice(5, 10) }} 수정일 {{ comment?.updated_at?.slice(5, 10) }}
+                        </li>
+                        <li class="comment-text">
+                          {{ comment.text }}
+                        </li>
+                        <a class="cocomment-button" @click="cocommentShow(comment)">댓글 달기</a>
+                        <div
+                          class="comment-func-box"
+                          v-if="userid === comment.user_id"
+                        >
+                          <button
+                            class="comment-edit-btn"
+                            @click="commenteditshow(comment)"
+                          >
+                            <svg
+                              class="edit-icon"
+                              viewBox="0 0 512 512"
+                              height="17.5"
+                              width="15"
+                            >
+                              <path
+                                d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"
+                              ></path>
+                            </svg>
+                          </button>
+                          <button
+                            class="comment-delete-btn"
+                            @click="deleteComment(comment)"
+                          >
+                            <svg
+                              viewBox="0 0 15 17.5"
+                              height="17.5"
+                              width="15"
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="delete-icon"
+                            >
+                              <path
+                                transform="translate(-2.5 -1.25)"
+                                d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z"
+                                id="Fill"
+                              ></path>
+                            </svg>
+                          </button>
                         </div>
                       </div>
+                    </div>
 
-                      <li class="comment-author"> {{cocomment.nickname}} </li>
-                      <li class="comment-date">
-                        작성일 {{ cocomment?.created_at?.slice(5, 10) }} 수정일 {{ cocomment?.updated_at?.slice(5, 10) }}
-                      </li>
-                      <li class="comment-text">
-                          {{cocomment.text}}
-                      </li>
-                      <div class="comment-func-box" v-if="userid === cocomment.user_id">
-                        <button class="comment-edit-btn" @click="cocommenteditshow(cocomment)">
-                          <svg class="edit-icon" viewBox="0 0 512 512" height="17.5" width="15">
-                            <path
-                                d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z">
-                            </path>
-                          </svg>
-                        </button>
-                        <button class="comment-delete-btn" @click="deleteCocomment(cocomment.id)">
-                          <svg viewBox="0 0 15 17.5" height="17.5" width="15"
-                              xmlns="http://www.w3.org/2000/svg" class="delete-icon">
-                              <path transform="translate(-2.5 -1.25)"
-                                  d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z"
-                                  id="Fill"></path>
-                          </svg>
-                        </button>
+                    <!-- 대댓글 입력 폼 -->
+                    <div class="coco-input-wrapper" v-if="comment.cocommentshow">
+                      <div class="coco-text-info">
+                        <p>대댓글 달기</p>
+                      </div>
+                      <textarea
+                        autocomplete="off"
+                        class="input-coco-text"
+                        placeholder="여기에 댓글을 입력하세요"
+                        v-model="inputCocomment" @keyup.enter="createCocomment(comment)"
+                      ></textarea>
+                      <button class="coco-submit-button" @click="createCocomment(comment)">입 력</button>
+                      <button class="coco-quit-button" @click="cocommentShow(comment)">취 소</button>
+                    </div>
+
+                    <!-- 대댓글 내용 -->
+                    <div class="cocommnet-box" v-for ="cocomment,index in comment.cocomment" :key="index">
+                      <p class="cocomment-deco">|</p>
+                      <div class="cocomment-card">
+                        <!-- 대댓글 수정용 div. display:none; 토글 필요 -->
+                        <div class="cocomment-update-box" v-if="cocomment.cocommenteditshow">
+                          <div class="cocomment-update-div">
+                            <p>대댓글 수정</p>
+                            <textarea v-model="inputUpdateCocomment" class="update-textarea" @keyup.enter="editCocomment(cocomment.id)"></textarea>
+                            <button type="submit" class="coco-update-submit-button" @click="editCocomment(cocomment.id)">수정 완료</button>
+                            <button class="coco-update-quit-button" @click="cocommenteditshow(cocomment)">취소</button>
+                          </div>
+                        </div>
+
+                        <li class="comment-author"> {{cocomment.nickname}} </li>
+                        <li class="comment-date">
+                          작성일 {{ cocomment?.created_at?.slice(5, 10) }} 수정일 {{ cocomment?.updated_at?.slice(5, 10) }}
+                        </li>
+                        <li class="comment-text">
+                            {{cocomment.text}}
+                        </li>
+                        <div class="comment-func-box" v-if="userid === cocomment.user_id">
+                          <button class="comment-edit-btn" @click="cocommenteditshow(cocomment)">
+                            <svg class="edit-icon" viewBox="0 0 512 512" height="17.5" width="15">
+                              <path
+                                  d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z">
+                              </path>
+                            </svg>
+                          </button>
+                          <button class="comment-delete-btn" @click="deleteCocomment(cocomment.id)">
+                            <svg viewBox="0 0 15 17.5" height="17.5" width="15"
+                                xmlns="http://www.w3.org/2000/svg" class="delete-icon">
+                                <path transform="translate(-2.5 -1.25)"
+                                    d="M15,18.75H5A1.251,1.251,0,0,1,3.75,17.5V5H2.5V3.75h15V5H16.25V17.5A1.251,1.251,0,0,1,15,18.75ZM5,5V17.5H15V5Zm7.5,10H11.25V7.5H12.5V15ZM8.75,15H7.5V7.5H8.75V15ZM12.5,2.5h-5V1.25h5V2.5Z"
+                                    id="Fill"></path>
+                            </svg>
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -336,7 +338,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </section>
       </section>
     </main>
   </div>
@@ -654,7 +656,10 @@ textarea{
   grid-template-columns: 75% 25%;
   grid-template-rows: 100px 50px;
 }
-
+.body-section{
+  max-width:1800px;
+  margin:0 auto;
+}
 .image-box {
   width: 100%;
   height: 100%;
@@ -1170,7 +1175,7 @@ textarea{
   margin: 0px 0px 50px 0px;
   display: grid;
 
-  grid-template-columns: 90px 80% 90px;
+  grid-template-columns: 60px auto 120px;
   grid-template-rows: 90px;
 }
 
@@ -1187,7 +1192,7 @@ textarea{
   padding: 0.5rem 0.8rem;
   grid-column: 2 / 3;
   margin: 0 auto;
-  width: 92%;
+  width: 94%;
 
   background-color: #05060f0a;
   border-radius: 0.5rem;

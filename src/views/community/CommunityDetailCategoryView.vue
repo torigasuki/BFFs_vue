@@ -32,105 +32,107 @@
                 </div>      
             </div>
         </section>
-        <section class="category-section">
-            <div class="search-category-area">
-                <div class="head-category-wrapper">
-                    <ul class="head-category">
-                        <div class="category-item-box">
-                            <router-link v-for="categories,index in categories"
-                                    :key="index" :to="`/community/${community_url}/category/${categories[2]}`">{{
-                                        categories[1] }}</router-link>
-                        </div>
-                    </ul>
-                </div>
-                <!-- 검색 -->
-                <div class="search-box">
-                    <div class="container-input">
-                        <input autocomplete="off" type="text" placeholder=" Feed Search" name="text" class="input" v-model="searchname" @keyup.enter="searchFeed()">
-                        <svg fill="#000000" width="20px" height="20px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z" fill-rule="evenodd"></path>
-                        </svg>
+        <section class="body-section">
+            <section class="category-section">
+                <div class="search-category-area">
+                    <div class="head-category-wrapper">
+                        <ul class="head-category">
+                            <div class="category-item-box">
+                                <router-link v-for="categories,index in categories"
+                                        :key="index" :to="`/community/${community_url}/category/${categories[2]}`">{{
+                                            categories[1] }}</router-link>
+                            </div>
+                        </ul>
                     </div>
-                </div>
-            </div>
-        </section>
-        <section class="main-section">
-            <div class="main-area">
-                <div class="main-container">
-                    <!-- category list 내용 -->
-                    <div class="main-content-wrapper" v-if="feeds?.length === 0">
-                        <h1 style="color:#707070; margin: 0 auto;">아직 게시글이 없습니다</h1>
-                    </div>
-                    <div class="main-content-wrapper" v-else>
-                        <!-- 게시글 1개 -->
-                        <div  v-for="feed,index in feeds" :key="index">
-                            <router-link :to="`/community/detail/${community_url}/purchase/${feed.id}`" v-if="category_url === 'groupbuy'">
-                                <div class="content-card">
-                                    <div class="image-box">
-                                        <img class="content-image" src="@/assets/room_image(3).jpg">
-                                    </div>
-                                    <div class="title-box">
-                                        <span class="content-title">
-                                            <span style="color: #9E2067;">[{{ feed.grouppurchase_status }}]</span>
-                                            {{ feed.title }}</span>
-                                    </div>
-                                    <p class="author">{{ feed.nickname }}</p>
-                                    <p class="content-date">{{ feed.created_at.slice(0,10) }} | {{ feed.created_at.slice(12,19) }}</p>
-                                    <div class="view-box">
-                                        <font-awesome-icon :icon="['fas', 'user']" size="xs" style="color: #909090;" class="icon"/>
-                                        <span class="content-count" style="margin-left: 5px;"><span style="color: #9E2067;">{{ feed.joined_user_count }} </span><span>/</span><span style="color: #9E2067;"> {{ feed.person_limit }}</span></span> 
-                                    </div>
-                                    <div class="like-box">
-                                        <img src="@/assets/view_look.png">
-                                        <span class="content-count">{{ feed.view_count }}</span>
-                                    </div>
-                                    <div class="comment-box">
-                                        <img src="@/assets/comment.png">
-                                        <span class="content-count">{{ feed.comments_count }}</span>
-                                    </div>
-                                </div>
-                            </router-link>
-                            <router-link :to="`/community/detail/${community_url}/feed/${feed.id}`" v-else>
-                                <div class="content-card">
-                                    <div class="image-box">
-                                        <img class="content-image" src="@/assets/room_image(3).jpg">
-                                    </div>
-                                    <div class="title-box">
-                                        <span class="content-title">{{ feed.title }}</span>
-                                    </div>
-                                    <p class="author">{{ feed.nickname }}</p>
-                                    <p class="content-date">{{ feed.created_at.slice(0,10) }} | {{ feed.created_at.slice(12,19) }}</p>
-                                    <div class="view-box">
-                                        <img src="@/assets/view_look.png">
-                                        <span class="content-count">{{ feed.view_count }}</span> 
-                                    </div>
-                                    <div class="like-box">
-                                        <img src="@/assets/like.png">
-                                        <span class="content-count">{{ feed.likes_count }}</span>
-                                    </div>
-                                    <div class="comment-box">
-                                        <img src="@/assets/comment.png">
-                                        <span class="content-count">{{ feed.comments_count }}</span>
-                                    </div>
-                                </div>
-                            </router-link>
-                        </div>
-                        <div class="page">
-                            <ul class="pagination modal">
-                                <li> <a href="#" class="first" @click="numberMove(1)" @click.prevent>≪</a></li>
-                                <li> <a href="#" class="arrow left" @click="pageMove(pagination.previous)" @click.prevent>﹤</a></li>
-                                <li v-if="pagination.re_before_page"> <a href="#" class="num" @click="numberMove(pagination.re_before_page)" @click.prevent>{{ pagination.re_before_page }}</a></li>
-                                <li v-if="pagination.before_page"> <a href="#" class="num" @click="numberMove(pagination.before_page)" @click.prevent>{{ pagination.before_page }}</a></li>
-                                <li v-if="pagination.current_page"> <a href="#" class="num active" @click="numberMove(pagination.current_page)" @click.prevent>{{ pagination.current_page }}</a></li>
-                                <li v-if="pagination.after_page"> <a href="#" class="num"  @click="numberMove(pagination.after_page)" @click.prevent>{{ pagination.after_page }}</a></li>
-                                <li v-if="pagination.re_after_page"> <a href="#" class="num"  @click="numberMove(pagination.re_after_page)" @click.prevent>{{ pagination.re_after_page }}</a></li>
-                                <li> <a href="#" class="arrow right" @click="pageMove(pagination.next)" @click.prevent>﹥</a></li>
-                                <li> <a href="#" class="last" @click="numberMove(pagination.last_page)" @click.prevent>≫</a></li>
-                            </ul>
+                    <!-- 검색 -->
+                    <div class="search-box">
+                        <div class="container-input">
+                            <input autocomplete="off" type="text" placeholder=" Feed Search" name="text" class="input" v-model="searchname" @keyup.enter="searchFeed()">
+                            <svg fill="#000000" width="20px" height="20px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z" fill-rule="evenodd"></path>
+                            </svg>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
+            <section class="main-section">
+                <div class="main-area">
+                    <div class="main-container">
+                        <!-- category list 내용 -->
+                        <div class="main-content-wrapper" v-if="feeds?.length === 0">
+                            <h1 style="color:#707070; margin: 0 auto;">아직 게시글이 없습니다</h1>
+                        </div>
+                        <div class="main-content-wrapper" v-else>
+                            <!-- 게시글 1개 -->
+                            <div  v-for="feed,index in feeds" :key="index">
+                                <router-link :to="`/community/detail/${community_url}/purchase/${feed.id}`" v-if="category_url === 'groupbuy'">
+                                    <div class="content-card">
+                                        <div class="image-box">
+                                            <img class="content-image" src="@/assets/room_image(3).jpg">
+                                        </div>
+                                        <div class="title-box">
+                                            <span class="content-title">
+                                                <span style="color: #9E2067;">[{{ feed.grouppurchase_status }}]</span>
+                                                {{ feed.title }}</span>
+                                        </div>
+                                        <p class="author">{{ feed.nickname }}</p>
+                                        <p class="content-date">{{ feed.created_at.slice(0,10) }} | {{ feed.created_at.slice(12,19) }}</p>
+                                        <div class="view-box">
+                                            <font-awesome-icon :icon="['fas', 'user']" size="xs" style="color: #909090;" class="icon"/>
+                                            <span class="content-count" style="margin-left: 5px;"><span style="color: #9E2067;">{{ feed.joined_user_count }} </span><span>/</span><span style="color: #9E2067;"> {{ feed.person_limit }}</span></span> 
+                                        </div>
+                                        <div class="like-box">
+                                            <img src="@/assets/view_look.png">
+                                            <span class="content-count">{{ feed.view_count }}</span>
+                                        </div>
+                                        <div class="comment-box">
+                                            <img src="@/assets/comment.png">
+                                            <span class="content-count">{{ feed.comments_count }}</span>
+                                        </div>
+                                    </div>
+                                </router-link>
+                                <router-link :to="`/community/detail/${community_url}/feed/${feed.id}`" v-else>
+                                    <div class="content-card">
+                                        <div class="image-box">
+                                            <img class="content-image" src="@/assets/room_image(3).jpg">
+                                        </div>
+                                        <div class="title-box">
+                                            <span class="content-title">{{ feed.title }}</span>
+                                        </div>
+                                        <p class="author">{{ feed.nickname }}</p>
+                                        <p class="content-date">{{ feed.created_at.slice(0,10) }} | {{ feed.created_at.slice(12,19) }}</p>
+                                        <div class="view-box">
+                                            <img src="@/assets/view_look.png">
+                                            <span class="content-count">{{ feed.view_count }}</span> 
+                                        </div>
+                                        <div class="like-box">
+                                            <img src="@/assets/like.png">
+                                            <span class="content-count">{{ feed.likes_count }}</span>
+                                        </div>
+                                        <div class="comment-box">
+                                            <img src="@/assets/comment.png">
+                                            <span class="content-count">{{ feed.comments_count }}</span>
+                                        </div>
+                                    </div>
+                                </router-link>
+                            </div>
+                            <div class="page">
+                                <ul class="pagination modal">
+                                    <li> <a href="#" class="first" @click="numberMove(1)" @click.prevent>≪</a></li>
+                                    <li> <a href="#" class="arrow left" @click="pageMove(pagination.previous)" @click.prevent>﹤</a></li>
+                                    <li v-if="pagination.re_before_page"> <a href="#" class="num" @click="numberMove(pagination.re_before_page)" @click.prevent>{{ pagination.re_before_page }}</a></li>
+                                    <li v-if="pagination.before_page"> <a href="#" class="num" @click="numberMove(pagination.before_page)" @click.prevent>{{ pagination.before_page }}</a></li>
+                                    <li v-if="pagination.current_page"> <a href="#" class="num active" @click="numberMove(pagination.current_page)" @click.prevent>{{ pagination.current_page }}</a></li>
+                                    <li v-if="pagination.after_page"> <a href="#" class="num"  @click="numberMove(pagination.after_page)" @click.prevent>{{ pagination.after_page }}</a></li>
+                                    <li v-if="pagination.re_after_page"> <a href="#" class="num"  @click="numberMove(pagination.re_after_page)" @click.prevent>{{ pagination.re_after_page }}</a></li>
+                                    <li> <a href="#" class="arrow right" @click="pageMove(pagination.next)" @click.prevent>﹥</a></li>
+                                    <li> <a href="#" class="last" @click="numberMove(pagination.last_page)" @click.prevent>≫</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </section>
     </div>
 </template>
@@ -282,7 +284,10 @@ a{
     justify-content: center;
     align-items: center;
 }
-
+.body-section{
+    max-width:1800px;
+    margin:0 auto;
+}
 .head_img {
     position: absolute;
     min-height: 220px;

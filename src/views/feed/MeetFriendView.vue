@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <section class="body-section">
         <section class="main-section">
             <div class="main-container">
                 <div class="subtitle">
@@ -20,75 +20,28 @@
                 </div>
             </div>  
         </section>
-
-            <section class="notice">
-                <div class="notice-list">
-                    <div class="card" v-for="(profile, index) in profile" :key=index>
-                        <router-link :to="`/profile/${profile.id}`">
-                            <div class="card-image">
-                                <img :src="profile.profileimageurl" v-if="profile.profileimage !== null && profile.profileimage.includes('profile_img')"/>
-                                <img :src="profile.profileimageurl.slice(33)" v-else-if="profile.profileimage !== null"/>
-                                <img src="@/assets/room_image(5).jpg" v-else />
-                            </div>
-                            <div class="category"> {{ profile.nickname }} | {{ profile.region }} </div>
-                            <div class="heading" v-if="profile.introduction != null"> {{ profile.introduction }}
-                                <div class="author"> By <span class="name">{{ profile.user_name }}</span></div>
-                                <div class="author"> 가입일 <span class="name">{{ profile.created_at.slice(0, 10) }}</span></div>
-                            </div>
-                            <div class="heading" v-else> 친구해요 !
-                                <div class="author"> By <span class="name">{{ profile.user_name }}</span></div>
-                                <div class="author"> 가입일 <span class="name">{{ profile.created_at.slice(0, 10) }}</span></div>
-                            </div>
-                        </router-link>
-                    </div>
-
-                    <!-- <div class="card">
-                        <div class="card-image"></div>
-                        <div class="category"> Illustration </div>
-                        <div class="heading"> A heading that must span over two lines
-                            <div class="author"> By <span class="name">Abi</span> 4 days ago</div>
+        <section class="notice">
+            <div class="notice-list">
+                <div class="card" v-for="(profile, index) in profile" :key=index>
+                    <router-link :to="`/profile/${profile.id}`">
+                        <div class="card-image">
+                            <img :src="profile.profileimageurl" v-if="profile.profileimage !== null && profile.profileimage.includes('profile_img')"/>
+                            <img :src="profile.profileimageurl.slice(33)" v-else-if="profile.profileimage !== null"/>
+                            <img src="@/assets/room_image(5).jpg" v-else />
                         </div>
-
-                    </div>
-
-                    <div class="card">
-                        <div class="card-image"></div>
-                        <div class="category"> Illustration </div>
-                        <div class="heading"> A heading that must span over two lines
-                            <div class="author"> By <span class="name">Abi</span> 4 days ago</div>
+                        <div class="category"> {{ profile.nickname }} | {{ profile.region }} </div>
+                        <div class="heading" v-if="profile.introduction != null"> {{ profile.introduction }}
+                            <div class="author"> By <span class="name">{{ profile.user_name }}</span></div>
+                            <div class="author"> 가입일 <span class="name">{{ profile.created_at.slice(0, 10) }}</span></div>
                         </div>
-
-                    </div>
-
-                    <div class="card">
-                        <div class="card-image"></div>
-                        <div class="category"> Illustration </div>
-                        <div class="heading"> A heading that must span over two lines
-                            <div class="author"> By <span class="name">Abi</span> 4 days ago</div>
+                        <div class="heading" v-else> 친구해요 !
+                            <div class="author"> By <span class="name">{{ profile.user_name }}</span></div>
+                            <div class="author"> 가입일 <span class="name">{{ profile.created_at.slice(0, 10) }}</span></div>
                         </div>
-
-                    </div>
-
-                    <div class="card">
-                        <div class="card-image"></div>
-                        <div class="category"> Illustration </div>
-                        <div class="heading"> A heading that must span over two lines
-                            <div class="author"> By <span class="name">Abi</span> 4 days ago</div>
-                        </div>
-
-                    </div>
-
-                    <div class="card">
-                        <div class="card-image"></div>
-                        <div class="category"> Illustration </div>
-                        <div class="heading"> A heading that must span over two lines
-                            <div class="author"> By <span class="name">Abi</span> 4 days ago</div>
-                        </div>
-
-                    </div> -->
+                    </router-link>
                 </div>
-            </section>
-
+            </div>
+        </section>
         <section class="main-section">
             <div class="main-container">
                 <div class="subtitle">
@@ -99,7 +52,7 @@
         <section class="notice">
             <div class="notice-list">
                 <div class="card" v-for="(profile, index) in newprofile" :key=index>
-                    <router-link :to="`/profile/${newprofile.id}`">
+                    <router-link :to="`/profile/${profile.id}`">
                         <div class="card-image">
                             <img :src="profile.profileimageurl" v-if="profile.profileimage !== null && profile.profileimage.includes('profile_img')"/>
                             <img :src="profile.profileimageurl.slice(33)" v-else-if="profile.profileimage !== null"/>
@@ -116,82 +69,9 @@
                         </div>
                     </router-link>
                 </div>
-
-                <!-- <div class="card">
-                    <div class="card-image"></div>
-                    <div class="category"> Illustration </div>
-                    <div class="heading"> A heading that must span over two lines
-                        <div class="author"> By <span class="name">Abi</span> 4 days ago</div>
-                    </div>
-
-                </div>
-
-                <div class="card">
-                    <div class="card-image"></div>
-                    <div class="category"> Illustration </div>
-                    <div class="heading"> A heading that must span over two lines
-                        <div class="author"> By <span class="name">Abi</span> 4 days ago</div>
-                    </div>
-
-                </div>
-
-                <div class="card">
-                    <div class="card-image"></div>
-                    <div class="category"> Illustration </div>
-                    <div class="heading"> A heading that must span over two lines
-                        <div class="author"> By <span class="name">Abi</span> 4 days ago</div>
-                    </div>
-
-                </div>
-
-                <div class="card">
-                    <div class="card-image"></div>
-                    <div class="category"> Illustration </div>
-                    <div class="heading"> A heading that must span over two lines
-                        <div class="author"> By <span class="name">Abi</span> 4 days ago</div>
-                    </div>
-
-                </div>
-
-                <div class="card">
-                    <div class="card-image"></div>
-                    <div class="category"> Illustration </div>
-                    <div class="heading"> A heading that must span over two lines
-                        <div class="author"> By <span class="name">Abi</span> 4 days ago</div>
-                    </div>
-
-                </div>
-
-                <div class="card">
-                    <div class="card-image"></div>
-                    <div class="category"> Illustration </div>
-                    <div class="heading"> A heading that must span over two lines
-                        <div class="author"> By <span class="name">Abi</span> 4 days ago</div>
-                    </div>
-
-                </div>
-
-                <div class="card">
-                    <div class="card-image"></div>
-                    <div class="category"> Illustration </div>
-                    <div class="heading"> A heading that must span over two lines
-                        <div class="author"> By <span class="name">Abi</span> 4 days ago</div>
-                    </div>
-
-                </div>
-
-
-                <div class="card">
-                    <div class="card-image"></div>
-                    <div class="category"> Illustration </div>
-                    <div class="heading"> A heading that must span over two lines
-                        <div class="author"> By <span class="name">Abi</span> 4 days ago</div>
-                    </div>
-
-                </div> -->
             </div>
         </section>
-    </div>
+    </section>
 </template>
 
 <script>
@@ -262,7 +142,11 @@ header >  #menu {
 header > .profile > h3 {
     padding: 48px 0 24px 118px;
 }
-
+.body-section{
+    max-width:1800px;
+    margin:0 auto;
+    width: 100%;
+}
 .submit-box {
     display: flex;
     justify-content: center;
