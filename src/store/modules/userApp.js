@@ -1,4 +1,5 @@
 import {
+    fetchProfileComuInfo,
     fetchProfile,
     fetchAllProfile,
     fetchMeetAI,
@@ -11,9 +12,13 @@ const state ={
     profile: [],
     menubar : false,
     meetai: {},
+    profilecomu: {}
 }
 
 const getters ={
+    fetchProfileComuInfo(state) {
+        return state.profilecomu
+    },
     fetchProfile(state) {
         return state.user
     },
@@ -29,6 +34,9 @@ const getters ={
 }
 
 const mutations ={
+    SET_PROFILE_COMU_INFO(state, profilecomu) {
+        state.profilecomu = profilecomu
+    },
     SET_USER_PROFILE(state, user) {
         state.user = user
     },
@@ -44,6 +52,16 @@ const mutations ={
 }
 
 const actions={
+    async FETCH_PROFILE_COMU_INFO(context) {
+        try {
+            const response = await fetchProfileComuInfo()
+            console.log(response)
+            context.commit('SET_PROFILE_COMU_INFO', response.data)
+            return response
+        } catch (error) {
+            console.log(error)
+        }
+    },
     async FETCH_USER_PROFILE(context, user_id) {
         try {
             const response = await fetchProfile(user_id)

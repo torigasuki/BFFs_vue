@@ -37,7 +37,7 @@
                                                 <img id="new-card-image" v-if="bookmark.image != null" :src="bookmark.imageurl">
                                                 <img id="new-card-image" v-else src="@/assets/comu_image(1).jpg">
                                             </div>
-                                            <span id="new-text-title" class="new-text-title community-text">{{ bookmark.title }}</span>
+                                            <span id="new-text-title" class="new-text-title">{{ bookmark.title }}</span>
                                             <span id="new-text-introduction" class="new-text-introduction">{{ bookmark.introduction }}</span>
                                         </router-link>
                                     </div>
@@ -47,10 +47,22 @@
                     </div>
 
                     <div class="posts">
-                        <h3>내 커뮤니티</h3>                        
+                        <div class="post-title-box">
+                            <h3>내 커뮤니티</h3>
+                            <router-link :to="`/my_community`" class="visit-button" v-if="userid===profile.id">
+                                <span>모아보기</span>
+                                <svg height="16" width="16" xmlns="http://www.w3.org/2000/svg" version="1.1"
+                                    viewBox="0 0 1024 1024">
+                                    <path
+                                        d="M874.690416 495.52477c0 11.2973-9.168824 20.466124-20.466124 20.466124l-604.773963 0 188.083679 188.083679c7.992021 7.992021 7.992021 20.947078 0 28.939099-4.001127 3.990894-9.240455 5.996574-14.46955 5.996574-5.239328 0-10.478655-1.995447-14.479783-5.996574l-223.00912-223.00912c-3.837398-3.837398-5.996574-9.046027-5.996574-14.46955 0-5.433756 2.159176-10.632151 5.996574-14.46955l223.019353-223.029586c7.992021-7.992021 20.957311-7.992021 28.949332 0 7.992021 8.002254 7.992021 20.957311 0 28.949332l-188.073446 188.073446 604.753497 0C865.521592 475.058646 874.690416 484.217237 874.690416 495.52477z">
+                                    </path>
+                                </svg>
+                            </router-link>
+                        </div>                        
                         <div class="main-container">
                             <div class="main-box">
                                 <div class="new-card-container">
+                                    
                                     <div class="new-card-wrapper" v-if="community?.length == 0">
                                         <p>내 커뮤니티가 없습니다</p>
                                     </div>
@@ -62,18 +74,7 @@
                                                 <img id="new-card-image" v-else src="@/assets/comu_image(1).jpg">
                                             </div>
                                             <span id="new-text-title" class="new-text-title">{{ community.title }}</span>
-                                            <span id="new-text-introduction" class="new-text-introduction community-text">{{ community.introduction }}</span>
-                                            <div class="button-box">
-                                                <router-link :to="`/community/manage/${community.communityurl}`" class="visit-button" v-if="userid===profile.id">
-                                                    <span>관리</span>
-                                                    <svg height="16" width="16" xmlns="http://www.w3.org/2000/svg" version="1.1"
-                                                        viewBox="0 0 1024 1024">
-                                                        <path
-                                                            d="M874.690416 495.52477c0 11.2973-9.168824 20.466124-20.466124 20.466124l-604.773963 0 188.083679 188.083679c7.992021 7.992021 7.992021 20.947078 0 28.939099-4.001127 3.990894-9.240455 5.996574-14.46955 5.996574-5.239328 0-10.478655-1.995447-14.479783-5.996574l-223.00912-223.00912c-3.837398-3.837398-5.996574-9.046027-5.996574-14.46955 0-5.433756 2.159176-10.632151 5.996574-14.46955l223.019353-223.029586c7.992021-7.992021 20.957311-7.992021 28.949332 0 7.992021 8.002254 7.992021 20.957311 0 28.949332l-188.073446 188.073446 604.753497 0C865.521592 475.058646 874.690416 484.217237 874.690416 495.52477z">
-                                                        </path>
-                                                    </svg>
-                                                </router-link>
-                                            </div>
+                                            <span id="new-text-introduction" class="new-text-introduction">{{ community.introduction }}</span>
                                         </router-link>
                                     </div>
                                 </div>
@@ -470,19 +471,22 @@ header > .profile > h3 {
  font-size: 20px;
  transition: all 0.4s ease-in;
 }
+.quit-button:hover {
+    background-color: rgb(185, 0, 0);
+}
+
 
 /***** 버튼 css *****/
 .visit-button {
     display: flex;
-    justify-content: left;
-    margin-left: -75px;
-    margin-top: 80px;
-    height: 2.5em;
+    margin-top: 15px;
+    margin-left: 30px;
+    height: 2.2em;
     width: 100px;
     align-items: center;
     justify-content: center;
-    background-color: #eeeeee4b;
-    border-radius: 3px;
+    background-color: #909090;
+    border-radius: 5px;
     letter-spacing: 1px;
     transition: all 0.2s linear;
     cursor: pointer;
@@ -491,20 +495,20 @@ header > .profile > h3 {
 .visit-button > span {
     font-size: 14px;
     font-weight: 600;
-    color: #9E2067;
+    color: #ffffff;
 }
 .visit-button > svg {
     margin-right: 5px;
     margin-left: 5px;
     transition: all 0.4s ease-in;
     transform: rotate(180deg);
-    fill: #9E2067;
+    fill: #ffffff;
 }
    
 .visit-button:hover > svg {
     font-size: 1.5em;
-    transform: translateX(4px) rotate(180deg);
-    fill: #9E2067;
+    transform: translateX(4px) rotate(180deg) scale(1.3);
+    fill: #ffffff;
 }
 .visit-button:hover {
     box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
@@ -862,6 +866,10 @@ header > .profile > h3 {
     box-shadow: 0 2px 5px rgba(70, 70, 70, 0.5);
 }
 
+.quit-button:hover {
+    background-color: rgb(185, 0, 0);
+}
+
 /***** 새로운 커뮤니티 area *****/
 .new-card-container {
     display: flex;
@@ -951,12 +959,8 @@ header > .profile > h3 {
     white-space: normal;
     text-overflow: ellipsis;
 }
-.community-text{
-    height:50% !important ;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    word-break: keep-all;
+.post-title-box {
+   display: inline-flex; 
 }
 .post-card {
   width: 100%;

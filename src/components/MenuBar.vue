@@ -14,11 +14,11 @@
                 <div class="ct_1">
                     <ul class="alone_play">
                         <li><h3><a>혼자 놀기</a></h3></li>
-                        <li><router-link :to="`/profile/${userid}`">내 프로필</router-link></li>
-                        <li><router-link :to="`/profile/update/${userid}`">내 프로필 수정하기</router-link></li>
-                        <li><router-link :to="`/profile/${userid}`">내 커뮤니티 관리하기</router-link></li>
-                        <li><router-link to="/meetfriend">친구 만나기</router-link></li>
-                        <li >
+                        <li class="move-btn"><router-link :to="`/profile/${userid}`">내 프로필</router-link></li>
+                        <li class="move-btn"><router-link :to="`/profile/update/${userid}`">내 프로필 수정하기</router-link></li>
+                        <li class="move-btn"><router-link :to="`/my_community`">내 커뮤니티 관리하기</router-link></li>
+                        <li class="move-btn"><router-link to="/meetfriend">친구 만나기</router-link></li>
+                        <li class="move-btn">
                             <h4>
                                 <router-link to="/meetai">AI Best Friend와 놀기!</router-link>  
                             </h4>    
@@ -27,9 +27,9 @@
                 </div>
                 <div class="ct_2">
                     <ul class="together_play">
-                        <li><h3><a href="">같이 놀기</a></h3></li>
-                        <li><router-link to="/community/main">같이 놀기 페이지로 이동</router-link></li>
-                        <li><router-link to="/community/create">커뮤니티 생성 신청하기</router-link></li>        
+                        <li><h3>같이 놀기</h3></li>
+                        <li class="move-btn"><router-link to="/community/main">같이 놀기 페이지로 이동</router-link></li>
+                        <li class="move-btn"><router-link to="/community/create">커뮤니티 생성 신청하기</router-link></li>        
                     </ul>
                 </div>
 
@@ -164,5 +164,13 @@ header > #menu > .ct_1 > .alone_play > li > h4 > a {
     font-style: italic;
     font-weight: bold;
     color: #f0f0f0;
+}
+
+.move-btn {
+    padding: 4px 0px;
+}
+
+.move-btn:hover {
+    transform: scale(1.1) translateX(10px);
 }
 </style>

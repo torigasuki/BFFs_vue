@@ -100,6 +100,20 @@ function fetchProfile(user_id){
     return axios.get(`${config.baseUrl}/user/${user_id}/`)
 }
 
+// 프로필, 내 전체 커뮤니티 조회
+function fetchProfileComuInfo() {
+    const token = access_token()
+    if (token) {
+        return axios.get(`${config.baseUrl}/user/mycommunity/`,{
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            }
+        }) 
+    } else {
+        return axios.get(`${config.baseUrl}/user/mycommunity/`)
+    }
+}
+
 // 프로필 수정
 function fetchProfileEdit(user_id, formData){
     return axios.patch(`${config.baseUrl}/user/${user_id}/`,
@@ -618,6 +632,7 @@ export {
     fetchPasswordReset,
     fetchAllProfile,
     fetchProfile,
+    fetchProfileComuInfo,
     fetchProfileEdit,
     fetchProfileDelete,
     fetchGuestBook,

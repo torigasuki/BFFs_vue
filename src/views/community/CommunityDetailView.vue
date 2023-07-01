@@ -850,7 +850,7 @@ header >  #menu {
 }
 
 .message {
-    width: 480px;
+    width: 280px;
     height: 250px;
     overflow: hidden;
     display: -webkit-box;

@@ -12,6 +12,7 @@ import CommunitySearchView from '../views/community/CommunitySearchView.vue'
 import CallBackView from '../views/user/CallBackView.vue'
 import FeedWriteView from '../views/feed/FeedWriteView.vue'
 import ProfileView from '../views/user/ProfileView.vue'
+import ProfileComuView from '../views/user/ProfileComuView.vue'
 import ProfileUpdateView from '../views/user/ProfileUpdateView.vue'
 import MeetAI from '../views/user/MeetAI.vue'
 import MeetFriendView from '../views/feed/MeetFriendView.vue'
@@ -110,6 +111,19 @@ export const router = new VueRouter({
             path: '/profile/update/:id',
             name: 'profile-update',
             component:ProfileUpdateView,
+            beforeEnter: (to, from, next) => {
+                if (localStorage.getItem('access_token')) {
+                    next()
+                } else {
+                    alert('로그인이 필요해요!')
+                    next('/user/login')
+                }
+            }    
+        },
+        {
+            path: '/my_community',
+            name: 'my-communities',
+            component:ProfileComuView,
             beforeEnter: (to, from, next) => {
                 if (localStorage.getItem('access_token')) {
                     next()
