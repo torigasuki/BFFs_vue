@@ -100,6 +100,20 @@ function fetchProfile(user_id){
     return axios.get(`${config.baseUrl}/user/${user_id}/`)
 }
 
+// 프로필, 내 전체 커뮤니티 조회
+function fetchProfileComuInfo() {
+    const token = access_token()
+    if (token) {
+        return axios.get(`${config.baseUrl}/user/mycommunity/`,{
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            }
+        }) 
+    } else {
+        return axios.get(`${config.baseUrl}/user/mycommunity/`)
+    }
+}
+
 // 프로필 수정
 function fetchProfileEdit(user_id, formData){
     return axios.patch(`${config.baseUrl}/user/${user_id}/`,
@@ -366,8 +380,8 @@ function fetchFeedEdit(feed_id,title,content) {
 }
 
 // 피드 삭제
-function fetchFeedDelete(feed_id) {
-    return axios.delete(`${config.baseUrl}/feed/${feed_id}/`,{
+function fetchFeedDelete(community_name,feed_id) {
+    return axios.delete(`${config.baseUrl}/community/${community_name}/${feed_id}/`,{
         headers: {
             'Authorization': `Bearer ${access_token()}`,
         }
@@ -430,7 +444,7 @@ function fetchGroupPurchaseCreate(community_url, title, content, product_name, p
 function fetchGroupPurchaseDetail(community_name, grouppurchase_id) {
     const token = access_token()
     if (token) {
-        return axios.get(`${config.baseUrl}/community/${community_name}/grouppurchase/${grouppurchase_id}/`,{
+        return axios.get(`${config.baseUrl}/community/${community_name}/feed/grouppurchase/${grouppurchase_id}/`,{
             headers: {
                 'Authorization': `Bearer ${token}`,
             }
@@ -442,7 +456,7 @@ function fetchGroupPurchaseDetail(community_name, grouppurchase_id) {
 
 // 공구 게시글 수정
 function fetchGroupPurchaseEdit(community_name, grouppurchase_id, title, content, product_name, product_number, product_price, person_limit, link, open_at, close_at, end_option, location, meeting_at) {
-    return axios.put(`${config.baseUrl}/community/${community_name}/grouppurchase/${grouppurchase_id}/`,{
+    return axios.put(`${config.baseUrl}/community/${community_name}/feed/grouppurchase/${grouppurchase_id}/`,{
         title, content, product_name, product_number, product_price, person_limit, link, open_at, close_at, end_option, location, meeting_at
     },{
         headers: {
@@ -454,7 +468,7 @@ function fetchGroupPurchaseEdit(community_name, grouppurchase_id, title, content
 
 // 공구 삭제
 function fetchGroupPurchaseDelete(community_name,grouppurchase_id) {
-    return axios.delete(`${config.baseUrl}/community/${community_name}/grouppurchase/${grouppurchase_id}/`,{
+    return axios.delete(`${config.baseUrl}/community/${community_name}/feed /grouppurchase/${grouppurchase_id}/`,{
         headers: {
             'Authorization': `Bearer ${access_token()}`,
         }
@@ -618,6 +632,7 @@ export {
     fetchPasswordReset,
     fetchAllProfile,
     fetchProfile,
+    fetchProfileComuInfo,
     fetchProfileEdit,
     fetchProfileDelete,
     fetchGuestBook,
