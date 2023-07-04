@@ -135,28 +135,35 @@ export default {
       async writeFeed() {
           try{
               const community_url = this.$route.params.community_name
-              const response = await this.$store.dispatch("FETCH_GROUPPURCHASE_CREATE", {
-                community_url,
+              const data = {
                 title: this.title,
                 content: this.content,
-                name: this.name,
-                number: this.number,
-                price: this.price,
-                person: this.person,
+                product_name: this.name,
+                product_number: this.number,
+                product_price: this.price,
+                person_limit: this.limit,
                 link: this.link,
-                open_at: this.open_at,
-                close_at: this.close_at,
+                open_at: this.open_at + ":00",
+                close_at: this.close_at + ":00",
                 end_option: this.end_option,
                 location: this.location,
-                meeting_at: this.meeting_at,
+                meeting_at: this.meeting_at + ":00",
+              }
+              const response = await this.$store.dispatch("FETCH_GROUPPURCHASE_CREATE", {
+                community_url, data
               });
               if(response.status === 201){
                 this.snotify("success",response.data.message)
                 this.$router.push({name: "community-detail", params: {name: this.$route.params.community_name}});
               }
           }catch(error){
-            console.log(error)
+            if (error.response.data.message) {
+              this.snotify("error",error.response.data.message);
+            } else if (error.response.data.error) {
+              this.snotify("error",error.response.data.error);
+            } else {
               this.snotify("error","빈 칸을 입력해주세요");
+            }
           }
       },
       async handleImageAdded(file, Editor, cursorLocation, resetUploader) {
