@@ -163,33 +163,6 @@
                                 </div>
                             </div>
                         </div> 
-
-                        <!--<div class="main-container-3">
-                            <h3 class="gp-menu-title">내가 참여 중인 공동구매</h3>
-                            <div class="main-box-3">
-                                <div class="new-card-wrapper-2" v-if="feed?.length == 0">
-                                    <p>참여중인 공동구매가 없습니다</p>
-                                </div>
-                                <div class="new-card-wrapper-2" v-else>  
-                                    <div class="my-feeds-box">
-                                        <div class="main-card-wrapper">
-                                            <router-link :to="`/community/detail/${grouppurchase.community_url}/groupbuy/${grouppurchase.id}`" v-for="(grouppurchase, index) in grouppurchase" :key=index>
-                                                <div class="gp-content-card">
-                                                    <div class="gp-title-box">
-                                                        <span class="content-title">{{ grouppurchase.title }}</span>
-                                                    </div>
-                                                    <span id="gp-product-name" class="gp-product-name"><div v-html="grouppurchase.product_name"></div></span>
-                                                    <li>시작일</li>
-                                                    <p class="gp-content-date">{{ grouppurchase.open_at.slice(0,10) }} | {{ grouppurchase.open_at.slice(12,19) }}</p>
-                                                    <li>마감일</li>
-                                                    <p class="gp-content-date">{{ grouppurchase.close_at.slice(0,10) }} | {{ grouppurchase.close_at.slice(12,19) }}</p>
-                                                </div>
-                                            </router-link>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>--> 
                     </div>
 
                     <div class="main-container-3" v-if="purchaseopen">
@@ -231,7 +204,7 @@
                             <img :src="profile.profileimageurl.slice(33)" v-else-if="profile.profileimage !== null" @click='openModal'/>
                             <img src="@/assets/room_image(5).jpg" v-else />
                         </div>
-                            <div class="category"> {{ profile.nickname }} | {{ profile.region }} </div>
+                        <div class="category"> {{ profile.nickname }} | {{ profile.region }} </div>
                             <div class="heading" v-if="profile.introduction != null"> {{ profile.introduction }}
                                 <div class="author"> By <span class="name">{{ profile.user_name }}</span></div>
                                 <div class="author"> 가입일 <span class="name">{{ profile.created_at.slice(0, 10) }}</span></div>
@@ -253,7 +226,6 @@
                                 </div>               
                             </div>
                         </div>
-                    </div>
 
                     <div class="radioinput">
                         <button class="value" :class="{ 'active': notificationopen}" @click="notificationOpen">
@@ -1543,7 +1515,6 @@ header > .profile > h3 {
     margin: 20px 0px;
     padding: 10px 10px;
     width: 95%;
-    height: 320px;
     overflow-y: auto;
     overflow-x: hidden;
 }
