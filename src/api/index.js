@@ -126,11 +126,13 @@ function fetchProfileEdit(user_id, formData){
 }
 
 // 프로필 삭제 (회원탈퇴)
-function fetchProfileDelete(user_id){
-    return axios.delete(`${config.baseUrl}/user/${user_id}/`,{
+function fetchProfileDelete(user_id, password){
+    return axios.delete(`${config.baseUrl}/user/${user_id}/`, {
         headers: {
             'Authorization': `Bearer ${access_token()}`,
-        }
+            'Content-Type': 'application/json',
+        },
+        data: { password },
     })
 }
 

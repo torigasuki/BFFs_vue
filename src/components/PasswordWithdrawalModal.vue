@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="modal-card">
     <img class="logo" src="@/assets/mlogo.png"/>
     <span class="card__title">User Withdrawal</span>
     <p class="card__content">
@@ -7,7 +7,7 @@
       Below.
     </p>
     <div class="card__form">
-      <input placeholder="Your Password" type="text" v-model="password" />
+      <input v-model="password" placeholder="Your Password" type="password" @keyup.enter="sendPassword"/>
       <button class="wdpassword" @click="sendPassword">Send Password</button>
     </div>
   </div>
@@ -15,6 +15,8 @@
 
 <script>
 import { fetchProfileDelete } from "../api/index.js";
+import bus from '@/utils/bus.js'
+
 export default {
   data() {
     return {
@@ -24,25 +26,38 @@ export default {
   methods: {
     async sendPassword() {
       if (this.password == "") {
-        console.log("비밀번호를 입력해주세요.");
+        this.snotify('warning','비밀번호를 입력해주세요')
       } else {
         try {
-          const response = await fetchProfileDelete(this.password);
-          console.log(response);
-          if (response.status === 200) {
-            console.log("비밀번호 전송 성공");
+          const user_id = this.$route.params.id;
+          const response = await fetchProfileDelete(user_id, this.password);
+          if (response.status === 204) {
+              this.logout();
           }
-        } catch (error) {
-          console.log(error);
-        }
+          } catch (error) {
+              this.snotify('error','계정 탈퇴를 실패하였습니다')
+          } 
       }
+    },
+    logout() {
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
+        localStorage.removeItem('payload');
+        this.$router.push('/').catch(() => {});
+        this.snotify('success',"계정이 탈퇴되었습니다");
+    },
+    snotify(type,message){
+        bus.$emit('showSnackbar',{
+            type,
+            message
+        });
     },
   },
 };
 </script>
 
 <style scoped>
-.card {
+.modal-card {
   width: 240px;
   height: 254px;
   padding: 0 15px;
@@ -51,7 +66,6 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 12px;
   background: #fff;
   border-radius: 20px;
   position: absolute;
@@ -62,7 +76,7 @@ export default {
   border: 1px solid #dfdfdf;
 }
 
-.card > * {
+.modal-card > * {
   margin: 0;
 }
 

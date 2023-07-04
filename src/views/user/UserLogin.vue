@@ -108,9 +108,17 @@ export default {
                     this.$router.push('/');
                 }
             }catch(error){
-                this.snotify('error','아이디 또는 비밀번호가 일치하지 않습니다.')
-                this.email = '';
-                this.password = '';
+                if (error.response.status == 400) {
+                    if(error.response.data.non_field_errors){
+                        this.snotify('error',error.response.data.non_field_errors[0])
+                    }
+                    else{
+                        this.snotify('error','아이디 또는 비밀번호가 일치하지 않습니다.')
+                        this.email = '';
+                        this.password = '';
+                    }
+                }
+                    
             }
         },
         snotify(type,message){
