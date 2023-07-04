@@ -119,9 +119,10 @@ export default {
                     this.loadershow = true;
                 }
 
+                const user_input = this.text;
                 this.text = '';
 
-                const response = await fetchMeetAICreate(this.text);
+                const response = await fetchMeetAICreate(user_input);
                 if (response.status === 200) {
                     this.firstloader = this.loadershow = false;
                     this.conversation.push(response.data.ai);
