@@ -5,15 +5,29 @@
             <div class="head-area">
                 <!-- 커뮤니티 카테고리 ~ 검색 부분 -->
                 <div class="search-category-area">
+                    <div class="scroll-btn-box left">
+                        <button class="scroll-btn-l">
+                            <svg stroke-width="4" stroke="currentColor" viewBox="0 0 24 24" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linejoin="round" stroke-linecap="round"></path>
+                            </svg>
+                        </button>
+                    </div>
                     <div class="head-category-wrapper">
                         <!-- 커뮤니티 카테고리 -->
                         <ul class="head-category">
-                            <div class="category-item-box">
+                            <div id="category-item-box" class="category-item-box">
                                 <li class="category-item" v-for="(community, index) in community" :key=index>
                                     <router-link type="button" class="nav-link" :to="`/community/detail/${community.communityurl}`">{{community.title}}</router-link>
                                 </li>
                             </div>
                         </ul>
+                    </div>
+                    <div class="scroll-btn-box right">
+                        <button class="scroll-btn-r">
+                            <svg stroke-width="4" stroke="currentColor" viewBox="0 0 24 24" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linejoin="round" stroke-linecap="round"></path>
+                            </svg>
+                        </button>
                     </div>
                     <!-- 검색 -->
                     <div class="search-box">
@@ -345,24 +359,26 @@ a {
 .search-category-area {
     display: grid;
     margin: 5px 5px 5px 5px;
+    padding-left:30px;
     padding-right: 3%;
     justify-content: space-between;
 
-    grid-template-columns: 70% 30%;
+    grid-template-columns: 30px 65% 30px 30%;
 }
 
 .head-category-wrapper {
     display: flex;
     justify-content: left;
-    height: 72px;
+    height: 80px;
     width: auto;
-    padding: 10px, 10px, 10px, 10px;
+    grid-column: 2/3;
 }
 
 .head-category {
     display: block;
     min-width: 100px;
     overflow: hidden;
+    padding-left: 4px;
 }
 
 .category-item-box {
@@ -370,6 +386,7 @@ a {
     flex-wrap: nowrap;
     overflow-x: auto;
     max-width: 100%;
+    scroll-behavior: smooth;
 
     -ms-overflow-style: none; /* 인터넷 익스플로러 */
     scrollbar-width: none; /* 파이어폭스 */
@@ -407,6 +424,90 @@ a {
     color: white;
 }
 
+/***** 커뮤니티 scroll 버튼 area *****/
+.scroll-btn-box {
+    align-items: center;
+    margin: auto;
+    padding-bottom: 10px;
+}
+
+.scroll-btn-box :left{
+    grid-column: 1/2;
+}
+.scroll-btn-box :right{
+    grid-column: 3/4;
+}
+
+.scroll-btn-r {
+  padding: 0;
+  margin: 0;
+  width: 30px;
+  height: 50px;
+  border: none;
+  background: none;
+  color: #c0c0c0;
+}
+
+.scroll-btn-r {
+  --hovered-color: #9e2067;
+  position: relative;
+  font-weight: 600;
+  font-size: 20px;
+  gap: 0.5rem;
+  align-items: center;
+  fill: #909090;
+}
+
+.scroll-btn-r:hover::after {
+  width: 100%;
+}
+
+.scroll-btn-r:hover svg  {
+  transform: translateX(4px) scale(1.3);
+  color: var(--hovered-color)
+}
+
+.scroll-btn-r svg {
+  transition: 0.2s;
+  position: relative;
+  width: 15px;
+}
+
+.scroll-btn-l {
+  padding: 0;
+  margin: 0;
+  width: 30px;
+  height: 50px;
+  border: none;
+  background: none;
+  color: #c0c0c0;
+  transform: rotate(180deg);
+}
+
+.scroll-btn-l {
+  --hovered-color: #9e2067;
+  position: relative;
+  font-weight: 600;
+  font-size: 20px;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.scroll-btn-l:hover::after {
+  width: 100%;
+}
+
+.scroll-btn-l:hover svg  {
+  transform: translateX(4px) scale(1.3);
+  color: var(--hovered-color)
+}
+
+.scroll-btn-l svg {
+  transition: 0.2s;
+  position: relative;
+  width: 15px;
+}
+
 
 /***** search area *****/
 
@@ -416,7 +517,7 @@ a {
     justify-content: center;
     align-items: center;
 
-    grid-column: 2;
+    grid-column: 4/5;
 }
 
 .container-input {
