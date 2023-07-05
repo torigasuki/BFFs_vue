@@ -64,7 +64,7 @@
                             <div class="author"> By <span class="name">{{ profile.user_name }}</span></div>
                             <div class="author"> 가입일 <span class="name">{{ profile.created_at.slice(0, 10) }}</span></div>
                         </div>
-                        <div class="guestbook-comment">
+                        <div class="submit-wrapper">
                             <div class="submit-box">
                                 <router-link :to="`/profile/update/${profile.id}`" class="write-btn" @click="editProfile()">수정
                                     <svg class="write-btn-svg" viewBox="0 0 512 512">
@@ -447,19 +447,14 @@ header > .profile > h3 {
 
 /* 유저 프로필 */
 
-.guestbook-comment > .submit-box {
-    display: flex;
-}
-
-.guestbook-comment {
+.submit-wrapper {
     height: 150px;
     float: right;
     width: 235px;
-    padding-right: 100px;
     padding-top: 50px;
 }
 
-.guestbook-comment > .submit-box {
+.submit-wrapper > .submit-box {
     display: flex;
     height: 43px;
     top: 0;
@@ -487,7 +482,8 @@ header > .profile > h3 {
 }
 
 .quit-button:hover {
-    background-color: rgb(185, 0, 0);
+    transition: all 0.25s ease-in;
+    background-color: #454545;
 }
 
 /* 프로필 수정 button */
