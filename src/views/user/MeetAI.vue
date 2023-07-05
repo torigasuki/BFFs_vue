@@ -106,27 +106,29 @@ export default {
         },
         async createConversation() {
             try {
-                if (!this.text || this.text==="") {
+                if (this.text==""||this.text=="\n") {
+                    this.text = '';
                     return this.snotify('info',"하고싶은 말을 적어주세요");
                 }
-                
-                this.conversation.push(this.text);
-                this.isDisabled = true;
-                
-                if (this.conversation.length === 0) {
-                    this.firstloader = true;
-                } else {
-                    this.loadershow = true;
-                }
+                else{
+                        this.conversation.push(this.text);
+                    this.isDisabled = true;
+                    
+                    if (this.conversation.length === 0) {
+                        this.firstloader = true;
+                    } else {
+                        this.loadershow = true;
+                    }
 
-                const user_input = this.text;
-                this.text = '';
+                    const user_input = this.text;
+                    this.text = '';
 
-                const response = await fetchMeetAICreate(user_input);
-                if (response.status === 200) {
-                    this.firstloader = this.loadershow = false;
-                    this.conversation.push(response.data.ai);
-                    this.isDisabled = false;
+                    const response = await fetchMeetAICreate(user_input);
+                    if (response.status === 200) {
+                        this.firstloader = this.loadershow = false;
+                        this.conversation.push(response.data.ai);
+                        this.isDisabled = false;
+                    }
                 }
             } catch (error) {
                 if (error.response.status == 500) {
