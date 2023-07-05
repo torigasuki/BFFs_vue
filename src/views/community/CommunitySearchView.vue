@@ -33,7 +33,6 @@
                             v-for="(community,index) in community" :key="index">
                             <div class="with-card-text">
                                 <span class="with-text-title">{{ community.title }}</span>
-                                <!-- <span class="with-text-region">서울</span> -->
                                 <div class="with-card-category">
                                     <div class="with-card-category-box" v-for="category,index in community.categories"
                                         :key="index">
@@ -367,7 +366,7 @@ a {
     grid-template-columns: repeat(auto-fill, minmax(500px, auto));
     grid-template-rows:repeat(auto-fill, minmax(300px, auto));  
     row-gap: 10px;
-column-gap: 20px;
+    column-gap: 20px;
 }
 
 .with-card-box {

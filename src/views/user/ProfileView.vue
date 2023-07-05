@@ -549,7 +549,6 @@ header > .profile > h3 {
 
 .quit-button {
  display: flex;
- /* height: 3em; */
  width: 100px;
  align-items: center;
  justify-content: center;
@@ -630,7 +629,6 @@ header > .profile > h3 {
 
 .community {
     margin: auto;
-    /*margin-top: 40px;*/
     height: 50%;
     flex-direction: row;
     flex-wrap: wrap;
@@ -658,10 +656,6 @@ header > .profile > h3 {
 }
 
 .card-image {
-  /*background-color: rgb(236, 236, 236);
-  background-size: cover;
-  background-repeat: no-repeat;*/
-  
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -804,43 +798,6 @@ header > .profile > h3 {
 .user_profile .card .card-image{
     cursor: pointer;
 }
- /*.user-guestbook > .submit-box > .create-button {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    outline: none;
-    border: none;
-    cursor: pointer;
-    padding: 20px 28px 25px;
-    font-size: 8px;
-    font-weight: 700;
-    color: hsl(0, 0%, 100%);
-    border-radius: 5px;
-    text-transform: uppercase;
-    transition: all 0.2s ease-in-out;
-    position: relative;
-    background-color: #a92278;
-    box-shadow: 0 2px 5px rgba(70, 70, 70, 0.5);
-}
-.writer > .guestbook-comment {
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: 928px; 
-    height: 84px;     
-    margin: 0 auto; 
-}
-.writer > .guestbook-comment > p {
-        margin-left: 12px;
-}
-.writer > .guestbook-comment >.submit-box {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    height: 41px;  
-    right: 4px;
-    margin: auto;
-    margin-right: 44px;
-}*/
 
 .guestbook-comment > .submit-box {
     display: flex;
@@ -849,8 +806,6 @@ header > .profile > h3 {
 .guestbook-comment {
     height: 100px;
     float: right;
-    /*width: 235px;*/
-    /*padding-right: 100px;*/
     padding-top: 50px;
 }
 
@@ -861,7 +816,6 @@ header > .profile > h3 {
     bottom: 0;
     left: 33%;
     margin: 0 auto;
-    /*margin-right:28px;*/
 }
 
 .input-box {
@@ -1401,9 +1355,7 @@ header > .profile > h3 {
 }
 
 /* guestbook 수정 div, textarea, button */
-.guestbook-update-box {
-    /* display: none; */
-    
+.guestbook-update-box {    
     position: absolute;
     width: 100%;
     height: 100%;
@@ -1665,7 +1617,6 @@ header > .profile > h3 {
 }
 
 .gp-menu-title {
-    /*margin-left: 20px;*/
     grid-column: 3 / 4;
     grid-row: 1 / 2;
 }

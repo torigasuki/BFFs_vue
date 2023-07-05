@@ -10,7 +10,9 @@
                             <div class="make-new-box">
                                 <p>내가 관리자인 커뮤니티가 없습니다.</p>
                                 <li>새로운 커뮤니티를 만들어보세요!</li>
-                                <div class="create-button"><span>새 커뮤니티 만들기</span></div>
+                                <router-link to="/community/create">
+                                    <div class="create-button"><span>새 커뮤니티 만들기</span></div>
+                                </router-link>
                             </div>
                         </div>
                         <div class="new-card-wrapper-2" v-else> 
@@ -90,18 +92,9 @@ export default {
             return this.data.profile;
         },
         community() {
-            console.log("⭐️")
-            console.log(this.data)
             return this.data.community;
         },
     },
-    // data() {
-    //     return {
-    //         userid: '',
-    //         inputComment: '',
-    //         inputUpdateComment: "",
-    //     }
-    // },
     created() {
         this.$store.dispatch("FETCH_PROFILE_COMU_INFO");
     },
