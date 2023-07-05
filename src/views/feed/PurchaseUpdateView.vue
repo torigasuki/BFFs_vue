@@ -46,8 +46,6 @@
             <dt class="open-at">모집 시작시간</dt>
             <dd class="open-at-text">
               <div class="input-date-wrapper">
-                <!-- js로 오늘 날짜 가져와서 띄워주어야함 / step 10분 단위로 시간 받기 / min=선택 시간 제한, 현재 시간 넣기 -->
-                <!-- https://sorto.me/docs/Web/HTML/Element/input/datetime-local#%EC%84%A0%ED%83%9D-%EA%B0%80%EB%8A%A5%ED%95%9C-%EB%82%A0%EC%A7%9C-%EB%B0%8F-%EC%8B%9C%EA%B0%84-%EB%B2%94%EC%9C%84-%EC%A0%9C%ED%95%9C%ED%95%98%EA%B8%B0 -->
                 <input class="gp-input-box" type="datetime-local" v-model="open_at" min="" step="600">
               </div>
             </dd>

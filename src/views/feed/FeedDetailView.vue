@@ -147,14 +147,12 @@
                       :to="`/${community.communityurl}/feed/update/${feed.id}`"
                       >글 수정</router-link
                     >
-                    <!-- 본인 -->
                     <a
                       v-if="feed.user === this.userid || feedadmin.includes(this.userid)"
                       class="content-delete-button"
                       @click="deleteFeed()"
                       >글 삭제</a
                     >
-                    <!-- 본인 // 어드민 권한도 주는게 좋을 것 같음 -->
                     <button
                       class="like-button"
                       @click="toggleLike"
@@ -1567,9 +1565,7 @@ textarea{
 }
 
 /* comment 수정 div, textarea, button */
-.comment-update-box {
-    /* display: none; */
-    
+.comment-update-box {    
     position: absolute;
     width: 100%;
     height: 100%;
@@ -1664,9 +1660,7 @@ textarea{
 }
 
 /* cocomment 수정 div, button */
-.cocomment-update-box {
-    /* display: none; */
-    
+.cocomment-update-box {    
     position: absolute;
     width: 100%;
     height: 100%;

@@ -493,14 +493,6 @@ header >  #menu {
     cursor: pointer;
 }
 
-
-/* main {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-} */
-
 .head-area {
     width: 100%;
     height: 150px;
@@ -569,8 +561,6 @@ header >  #menu {
 }
 
 
-
-
 /* 북마크 button css */
 
 .bookmark {
@@ -633,8 +623,6 @@ header >  #menu {
     border-radius: 50%;
     z-index: -1;
 }
-  
-
   
 @keyframes puff-out-center {
     0% {
@@ -730,8 +718,6 @@ header >  #menu {
     float: left;
     color : #909090; 
     font-size: 0.9rem;
-    /* margin-block-start: 0.3em;
-    margin-block-end: 0.5em;    */
 }
 
 .container {
@@ -770,7 +756,6 @@ header >  #menu {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    /* justify-content: space-evenly; */
 }
 
 /* 좋아요, 채팅, 조회수 버튼 이미지 아이콘*/
@@ -953,7 +938,6 @@ header >  #menu {
     fill: #9E2067;
 }
 .visit-button:hover {
-    /*box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;*/
     transform: translateY(-3px);
 }
 </style>

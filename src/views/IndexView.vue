@@ -13,13 +13,6 @@
         </div>
       </div>
     </div>
-    <!--<section class="head-section">
-      <div class="head-area">
-          <img id="head_img" src="#" />
-          <img id="head_title_img" src="#" />
-          <p class="head-title">당신의 찐친을 만나보세요</p>
-      </div>
-    </section>-->
     <section class="main-section">
       <div class="main-area"></div>
       <div class="main-container">
@@ -89,7 +82,6 @@
             >
               <div class="with-card-text">
                 <span class="with-text-title">{{ community.title }}</span>
-                <!-- <span class="with-text-region">서울</span> -->
                 <div class="with-card-category">
                   <div
                     class="with-card-category-box"

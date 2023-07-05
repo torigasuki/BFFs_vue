@@ -1,8 +1,11 @@
 <template>
     <div>
+        <Transition name="fade">
+            <password-withdrawal-modal v-if="modalopen" @close="modalopen=false"></password-withdrawal-modal>
+        </Transition>
+        <div class="modal-overlay" v-if="modalopen" @click="modalopen=false"></div>
         <div class="inner">
             <div class="mypage">
-
                 <div class="list">
                     <h3>내 커뮤니티 모아보기</h3>
                     <div class="main-box">
@@ -10,7 +13,9 @@
                             <div class="make-new-box">
                                 <p>내가 관리자인 커뮤니티가 없습니다.</p>
                                 <li>새로운 커뮤니티를 만들어보세요!</li>
-                                <div class="create-button"><span>새 커뮤니티 만들기</span></div>
+                                <router-link to="/community/create">
+                                    <div class="create-button"><span>새 커뮤니티 만들기</span></div>
+                                </router-link>
                             </div>
                         </div>
                         <div class="new-card-wrapper-2" v-else> 
@@ -68,7 +73,7 @@
                                         </path>
                                     </svg>
                                 </router-link>
-                                <button class="quit-button" @click="deleteUserCheck()">탈퇴</button>
+                                <button class="quit-button" @click="PasswordWithdrawalModal">탈퇴</button>
                             </div>               
                         </div>
                     </div>
@@ -79,29 +84,29 @@
 </template>
 
 <script>
+import PasswordWithdrawalModal from "@/components/PasswordWithdrawalModal.vue";
 import { mapGetters } from "vuex";
-import  { fetchProfileDelete } from "@/api/index.js";
 import bus from '@/utils/bus.js'
 
 export default {
+    components: {
+        PasswordWithdrawalModal,
+    },
+    data(){
+        return{
+            modalopen: false,
+            password:'',
+        }
+    },
     computed: {
         ...mapGetters({"data":"fetchProfileComuInfo"}),
         profile() {
             return this.data.profile;
         },
         community() {
-            console.log("⭐️")
-            console.log(this.data)
             return this.data.community;
         },
     },
-    // data() {
-    //     return {
-    //         userid: '',
-    //         inputComment: '',
-    //         inputUpdateComment: "",
-    //     }
-    // },
     created() {
         this.$store.dispatch("FETCH_PROFILE_COMU_INFO");
     },
@@ -113,21 +118,8 @@ export default {
         }
     },
     methods: {
-        deleteUserCheck() {
-            const check = confirm('계정을 비활성화 하시겠습니까?')
-            if (check) {
-                this.deleteUser();
-            }
-        },
-        async deleteUser() {
-            try {                
-                const response = await fetchProfileDelete(this.userid)
-                if (response.status === 204) {
-                    this.snotify('info',response.data.message)
-                }
-            } catch (error) {
-                this.snotify('error','계정 비활성화에 실패했습니다.')
-            } 
+        PasswordWithdrawalModal(){
+            this.modalopen = true;
         },
         snotify(type,message){
             bus.$emit('showSnackbar',{
@@ -639,5 +631,13 @@ header > .profile > h3 {
     padding-bottom: 5px;
     margin-left: 15px;
 }
-
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 999;
+}
 </style>

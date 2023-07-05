@@ -106,27 +106,29 @@ export default {
         },
         async createConversation() {
             try {
-                if (!this.text || this.text==="") {
+                if (this.text==""||this.text=="\n") {
+                    this.text = '';
                     return this.snotify('info',"하고싶은 말을 적어주세요");
                 }
-                
-                this.conversation.push(this.text);
-                this.isDisabled = true;
-                
-                if (this.conversation.length === 0) {
-                    this.firstloader = true;
-                } else {
-                    this.loadershow = true;
-                }
+                else{
+                        this.conversation.push(this.text);
+                    this.isDisabled = true;
+                    
+                    if (this.conversation.length === 0) {
+                        this.firstloader = true;
+                    } else {
+                        this.loadershow = true;
+                    }
 
-                const user_input = this.text;
-                this.text = '';
+                    const user_input = this.text;
+                    this.text = '';
 
-                const response = await fetchMeetAICreate(user_input);
-                if (response.status === 200) {
-                    this.firstloader = this.loadershow = false;
-                    this.conversation.push(response.data.ai);
-                    this.isDisabled = false;
+                    const response = await fetchMeetAICreate(user_input);
+                    if (response.status === 200) {
+                        this.firstloader = this.loadershow = false;
+                        this.conversation.push(response.data.ai);
+                        this.isDisabled = false;
+                    }
                 }
             } catch (error) {
                 if (error.response.status == 500) {
@@ -344,18 +346,11 @@ body {
   
 /* loader 로딩  */
 
-/* js쪽에서 이걸로 Hide 옵션을 줄 수 있습니다! */
-/* <script>
-    $(window).load(function() {
-     $('.loader').addClass('hide');
-    });
-</script>  */
 .hide {
   display: none;
 }
 
 .loader {
-/* background-color: blue; */
   padding : 10px 5px;
   justify-content: center;
   align-items: center;
@@ -381,17 +376,14 @@ body {
 
 @keyframes loader-bar-animation {
 0% {
-    /* transform: translateX(-100%) rotate(270deg); */
     transform: translateX(-100%);
 }
 
 50% {
-    /* transform: translateX(100%) rotate(-90deg); */
     transform: translateX(100%);
 }
 
 100% {
-    /* transform: translateX(-100%) rotate(270deg); */
     transform: translateX(-100%);
 }
 }

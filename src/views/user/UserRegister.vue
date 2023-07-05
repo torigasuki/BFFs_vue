@@ -236,8 +236,6 @@ h1{
 .policy-textarea {
     width: 100%;
     min-width: 680px;
-    /*max-width: 700px;
-    min-width: 200px;*/
     height: 200px;
     resize: none;
     overflow-x: auto;

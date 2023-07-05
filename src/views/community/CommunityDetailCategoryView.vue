@@ -334,11 +334,11 @@ a{
     z-index: 1;
     
     width: 90%;
-    height: 80px;
+    height: 85px;
     margin: 15px 30px;
 
     overflow-x: hidden;
-    overflow-y: hidden;
+    overflow-y: auto;
 }
 
 .head-introduction {
