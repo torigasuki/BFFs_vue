@@ -16,6 +16,7 @@
 <script>
 import { fetchProfileDelete } from "../api/index.js";
 import bus from '@/utils/bus.js'
+import jwt_decode from "jwt-decode";
 
 export default {
   data() {
@@ -29,7 +30,9 @@ export default {
         this.snotify('warning','비밀번호를 입력해주세요')
       } else {
         try {
-          const user_id = this.$route.params.id;
+          const token = localStorage.getItem('access_token')
+          const user_id = jwt_decode(token).user_id
+          console.log(user_id)
           const response = await fetchProfileDelete(user_id, this.password);
           if (response.status === 204) {
               this.logout();
