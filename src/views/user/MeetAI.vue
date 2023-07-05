@@ -344,18 +344,11 @@ body {
   
 /* loader 로딩  */
 
-/* js쪽에서 이걸로 Hide 옵션을 줄 수 있습니다! */
-/* <script>
-    $(window).load(function() {
-     $('.loader').addClass('hide');
-    });
-</script>  */
 .hide {
   display: none;
 }
 
 .loader {
-/* background-color: blue; */
   padding : 10px 5px;
   justify-content: center;
   align-items: center;
@@ -381,17 +374,14 @@ body {
 
 @keyframes loader-bar-animation {
 0% {
-    /* transform: translateX(-100%) rotate(270deg); */
     transform: translateX(-100%);
 }
 
 50% {
-    /* transform: translateX(100%) rotate(-90deg); */
     transform: translateX(100%);
 }
 
 100% {
-    /* transform: translateX(-100%) rotate(270deg); */
     transform: translateX(-100%);
 }
 }

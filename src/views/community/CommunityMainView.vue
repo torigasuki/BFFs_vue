@@ -103,7 +103,6 @@
                                 <img id="new-card-image" v-else src="@/assets/comu_image(1).jpg">
                             </div>
                             <span id="new-text-title" class="new-text-title">{{ newcommunity.title }}</span>
-                            <!-- <span id="new-text-region" class="new-text-region">경기</span> -->
                             <span id="new-text-introduction" class="new-text-introduction">{{ newcommunity.introduction }}</span>
                         </router-link>
 
@@ -123,7 +122,6 @@
                             v-for="(community,index) in community" :key="index">
                             <div class="with-card-text">
                                 <span class="with-text-title">{{ community.title }}</span>
-                                <!-- <span class="with-text-region">서울</span> -->
                                 <div class="with-card-category">
                                     <div class="with-card-category-box" v-for="category,index in community.categories"
                                         :key="index">

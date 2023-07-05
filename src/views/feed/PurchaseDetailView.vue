@@ -168,7 +168,6 @@
                   </div>
                   <div class="like-box">
                     <a v-if="feed.user === this.userid" class="content-edit-button"  @click="editFeed()">글 수정</a>
-                    <!-- 본인 -->
                     <a v-if="feed.user === this.userid" class="content-delete-button" @click="deleteFeed()" >글 삭제</a>
                   </div>
                 </div>
@@ -783,7 +782,6 @@ transition: 0.3s ease-out;
 
 .party-button p::before {
 position: absolute;
-/*   box-sizing: border-box; */
 content: "Subscribe";
 width: 0%;
 inset: 0;
@@ -1069,7 +1067,6 @@ transition-delay: 0.2s;
 
 .ended-button {
     position: relative;
-    /*display: flex;*/
     align-items: center;
     justify-content: flex-start;
     width: 115px;
@@ -1900,9 +1897,7 @@ transition-delay: 0.2s;
     cursor: pointer;
 }
 /* comment 수정 div, textarea, button */
-.comment-update-box {
-  /* display: none; */
-  
+.comment-update-box {  
   position: absolute;
   width: 100%;
   height: 100%;

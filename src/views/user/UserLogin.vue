@@ -137,8 +137,6 @@ export default {
 <style scoped>
 .back{
     width:100%;
-    /*background-color: #9E2067;*/
-    /*background-image: url('@/assets/8094129.jpg');*/
     position: relative;
 }
 .back-img {
@@ -228,16 +226,12 @@ export default {
 
 .left-line {
     flex-grow: 1;
-    /* margin-left: 0px;
-    width: 40%; */
     height: 1px;
     background-color: white;
 }
 
 .right-line {
     flex-grow: 1;
-    /* margin-right: 0px;
-    width: 40%; */
     height: 1px;
     background-color: white;
 }
