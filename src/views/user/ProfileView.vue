@@ -566,9 +566,6 @@ header > .profile > h3 {
  font-size: 20px;
  transition: all 0.4s ease-in;
 }
-.quit-button:hover {
-    background-color: rgb(185, 0, 0);
-}
 
 
 /***** 버튼 css *****/
