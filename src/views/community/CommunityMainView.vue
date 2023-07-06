@@ -15,7 +15,7 @@
                     <div class="head-category-wrapper">
                         <!-- 커뮤니티 카테고리 -->
                         <ul class="head-category">
-                            <div id="category-item-box" class="category-item-box">
+                            <div id="category-item-box" class="category-item-box" ref="scrollWrapper" @mousedown="mouseDown" @mouseleave="mouseLeave" @mouseup="mouseUp" @mousemove="mouseMove">
                                 <li class="category-item" v-for="(community, index) in community" :key=index>
                                     <router-link type="button" class="nav-link" :to="`/community/detail/${community.communityurl}`">{{community.title}}</router-link>
                                 </li>
@@ -182,6 +182,9 @@ export default {
     data() {
         return {
             searchname: "",
+            ismousedown: false,
+            startX: 0,
+            scrollLeft: 0,
         }
     },
     computed: {
@@ -221,6 +224,27 @@ export default {
         this.$store.dispatch("FETCH_COMMUNITY_LIST");
     },    
     methods: {
+        mouseDown(e){
+            const scrollWrapper = this.$refs.scrollWrapper;
+            this.ismousedown = true;
+            this.startX = e.pageX - scrollWrapper.offsetLeft;
+            this.scrollLeft = scrollWrapper.scrollLeft;
+        },
+        mouseLeave(){
+            this.ismousedown = false;
+        },
+        mouseUp(){
+            this.ismousedown = false;
+        },
+        mouseMove(e){
+            if (!this.ismousedown) return
+
+            e.preventDefault()
+            const scrollWrapper = this.$refs.scrollWrapper;
+            const X = e.pageX - scrollWrapper.offsetLeft;
+            const beforescrollLeft = (X - this.startX) * 1;
+            scrollWrapper.scrollLeft = this.scrollLeft - beforescrollLeft;
+        },
         async addBookmark() {
             try {
                 const response = await fetchCommunityBookmark(
