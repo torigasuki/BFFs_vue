@@ -1198,7 +1198,6 @@ textarea{
   grid-column: 1 / 2;
 }
 .sub-text-info p {
-  margin-right: 3px;
   padding-top: 20px;
 }
 
