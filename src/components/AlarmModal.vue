@@ -1,15 +1,15 @@
 <template>
-    <div class="main">
-        <div class="currentplaying">
-            <p class="heading">알림 목록</p>
+    <div class="alarm-main">
+        <div class="alarm-currentplaying">
+            <p class="alarm-heading">알림 목록</p>
         </div>
-        <div class="songs">
-            <div class="loader" v-for="alarm, index in alarms" :key="index">
-                <div class="song">
-                    <div class="song-name">
+        <div class="alarm-songs">
+            <div class="alarm-loader" v-for="alarm, index in alarms" :key="index">
+                <div class="alarm-song">
+                    <div class="alarm-song-name">
                         <router-link :to="`/community/detail/${alarm.community_name}/feed/${alarm.feed}`">
-                            <p class="name" style="font-size: 14px; margin-bottom: 0px; color: #909090;">{{ alarm.created_at }}</p>
-                            <p class="name">{{ alarm.message }}</p>
+                            <p class="alarm-name" style="font-size: 14px; margin-bottom: 0px; color: #909090;">{{ alarm.created_at }}</p>
+                            <p class="alarm-name">{{ alarm.message }}</p>
                         </router-link>
                         <div @click="alarmDelete(alarm.id,index)">
                             <font-awesome-icon :icon="['fas', 'xmark']" style="color: black;" class="icon"/>
@@ -18,8 +18,8 @@
                 </div>
             </div>
         </div>
-        <div class="currentplaying2" @click="allalarmDelete()">
-            <p class="heading2">모두 지우기</p>
+        <div class="alarm-currentplaying2" @click="allalarmDelete()">
+            <p class="alarm-heading2">모두 지우기</p>
         </div>   
     </div>
 </template>
@@ -69,11 +69,11 @@ export default {
 
 </script>
 
-<style>
+<style scope>
 a {
     text-decoration: none;
 }
-.main {
+.alarm-main {
   background-color: white;
   padding: 1em;
   padding-bottom: 1.1em;
@@ -89,29 +89,29 @@ a {
   border: 1px solid #e7eae8;
 }
 
-.songs {
+.alarm-songs {
 display: flex;
 flex-direction: column;
 gap: .5rem;
 height: 210px;
 overflow-y: auto;
 }
-.songs::-webkit-scrollbar {
+.alarm-songs::-webkit-scrollbar {
 width: 5px;
 }
-.songs::-webkit-scrollbar-track {
+.alarm-songs::-webkit-scrollbar-track {
 background: #f1f1f1;
 }
-.songs::-webkit-scrollbar-thumb {
+.alarm-songs::-webkit-scrollbar-thumb {
 background: #888;
 }
-.song-name {
+.alarm-song-name {
   display: flex; 
   align-items: center;
   justify-content: space-between;
   height: 70px;
 }
-.loader {
+.alarm-loader {
   display: flex;
   flex-direction: row;
   height: 4em;
@@ -123,18 +123,18 @@ background: #888;
   transition: .4s ease-in-out;
 }
 
-.loader:hover {
+.alarm-loader:hover {
   cursor: pointer;
   background-color: lightgray;
 }
 
-.currentplaying {
+.alarm-currentplaying {
   display: flex;
   align-self: center;
 width: 100%;
 border-radius: .5rem;
 }
-.currentplaying2 {
+.alarm-currentplaying2 {
   display: flex;
   align-self: center;
 width: 100%;
@@ -142,13 +142,13 @@ border-radius: .5rem;
 
 }
 
-.spotify {
+.alarm-spotify {
   width: 50px;
   height: 50px;
   margin-right: 0.6em;
 }
 
-.heading {
+.alarm-heading {
     letter-spacing: 10px;
     color: #555555;
 font-size: 1.1em;
@@ -158,7 +158,7 @@ margin: 0 auto;
 margin-top: 18px;
 margin-bottom: 18px;
 }
-.heading2 {
+.alarm-heading2 {
     letter-spacing: 2px;
     color: #909090;
 font-size: 14px;
@@ -169,13 +169,7 @@ margin-top: 10px;
 cursor: pointer;
 }
 
-.loading {
-  display: flex;
-  margin-top: 1em;
-  margin-left: 0.3em;
-}
-
-.load {
+.alarm-load {
   width: 2px;
   height: 33px;
   background-color: limegreen;
@@ -184,55 +178,28 @@ cursor: pointer;
   margin: 0.1em;
 }
 
-.load:nth-child(1) {
+.alarm-load:nth-child(1) {
   animation-delay: 0.2s;
 }
 
-.load:nth-child(2) {
+.alarm-load:nth-child(2) {
   animation-delay: 0.4s;
 }
 
-.load:nth-child(3) {
+.alarm-load:nth-child(3) {
   animation-delay: 0.6s;
 }
 
-.play {
-  position: relative;
-  left: 0.35em;
-  height: 1.6em;
-  width: 1.6em;
-  clip-path: polygon(50% 50%, 100% 50%, 75% 6.6%);
-  background-color: black;
-  transform: rotate(-90deg);
-  align-self: center;
-  margin-top: 0.7em;
-  justify-self: center;
-}
-
-.albumcover {
-  position: relative;
-  margin-right: 1em;
-  height: 40px;
-  width: 40px;
-  background-color: rgb(233, 232, 232);
-  align-self: center;
-  border-radius: 5px;
-}
-
-.song {
+.alarm-song {
   position: relative;
   transform: rotate(180deg);
   color: black;
   align-self: center;
   width: 100%;
 }
-.name {
+.alarm-name {
     margin-top: 0px;
     color: black;
-}
-
-.artist {
-  font-size: 0.6em;
 }
 
 @keyframes move6 {
