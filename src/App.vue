@@ -6,6 +6,11 @@
       <router-view id="app_content"></router-view>
       <footer-bar id="footer"></footer-bar>
     </div>
+    <div>
+      <button id="top-button" @click="scrollTop">
+        ↑
+      </button>
+    </div>
     <vue-snotify></vue-snotify>
   </div>
 </template>
@@ -56,7 +61,13 @@ export default {
           this.loading = false
         }, 500);
       }
-    }
+    },
+    scrollTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      })
+    },
   }
 }
 
@@ -99,6 +110,7 @@ body::-webkit-scrollbar{
   flex-direction: column;
   min-height: 100vh;
   overflow: hidden;
+  position: relative;
 }
 #app_content{
   flex: 1;
@@ -110,7 +122,6 @@ body::-webkit-scrollbar{
   opacity: 0.95;
   width:400px !important;
   left: calc(50% - 400px / 2) !important;
-
 }
 .snotify-centerTop{
   top:50px !important;
@@ -122,5 +133,33 @@ body::-webkit-scrollbar{
   right: 0px !important; 
   height: 60% !important;
   background-repeat: no-repeat;
+}
+#top-button{
+  font-size: 20px;
+  background-color: white;
+  color: black;
+  width: 45px;
+  height: 45px;
+  opacity: 0.75;
+  border: 1px solid #e7eae8;
+  border-radius: 8px;
+  cursor: pointer;
+  animation: bounce_513 1s infinite;
+
+  position: fixed;
+  right: 25px;
+  bottom: 30px;
+}
+@keyframes bounce_513 {
+  0%,
+    100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+
+  50% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
 }
 </style>

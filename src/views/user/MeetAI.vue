@@ -106,7 +106,7 @@ export default {
         },
         async createConversation() {
             try {
-                if (this.text==""||this.text=="\n") {
+                if (this.text==""||this.text=="\n"|| this.text.replace(/\s|| /gi, "").length === 0) {
                     this.text = '';
                     return this.snotify('info',"하고싶은 말을 적어주세요");
                 }

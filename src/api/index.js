@@ -607,6 +607,22 @@ function fetchMeetAICreate(user_input) {
     })
 }
 
+// 알람 삭제 
+function fetchAlarmDelete(alarm_id) {
+    return axios.delete(`${config.baseUrl}/alarm/${alarm_id}/`,{
+        headers: {
+            'Authorization': `Bearer ${access_token()}`,
+        }
+    })
+}
+function fetchAllAlarmDelete() {
+    return axios.delete(`${config.baseUrl}/alarm/`,{
+        headers: {
+            'Authorization': `Bearer ${access_token()}`,
+        }
+    })
+}
+
 export {
     fetchSignup,
     fetchLogin,
@@ -667,5 +683,7 @@ export {
     fetchGroupPurchaseCommentEdit,
     fetchGroupPurchaseCommentDelete,
     fetchMeetAI,
-    fetchMeetAICreate
+    fetchMeetAICreate,
+    fetchAlarmDelete,
+    fetchAllAlarmDelete
 }
