@@ -180,7 +180,7 @@
                 <div class="sub-text-info">
                   <p>댓글 |</p>
                   <p v-if="comment &&comment == '아직 댓글이 없습니다'" style="margin-left: 3px;">0</p>
-                  <p v-else style="margin-left: 3px;">{{ feed.comment_count }}</p>
+                  <p v-else style="margin-left: 3px;">{{ comments_count }}</p>
                 </div>
                 <textarea
                   v-model="inputComment"
@@ -294,6 +294,9 @@ export default {
       ...mapGetters({ data: "fetchGroupPurchaseDetail" }),
       feed() {
           return this.data?.grouppurchase;
+      },
+      comments_count() {
+          return this.data?.grouppurchase?.comments_count;
       },
       community() {
           return this.data?.community;

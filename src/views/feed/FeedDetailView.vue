@@ -189,7 +189,7 @@
                     0
                   </p>
                   <p v-else style="margin-left: 3px;">
-                    {{ feed.comments_count }}
+                    {{ comments_count }}
                   </p>
                 </div>
                 <textarea
@@ -369,6 +369,9 @@ export default {
     },
     feed() {
       return this.data?.feed;
+    },
+    comments_count() {
+      return this.data?.feed?.comments_count;
     },
     feedadmin() {
       return this.data.admin.map(admin => admin.user_id);
