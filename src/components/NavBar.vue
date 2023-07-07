@@ -158,8 +158,11 @@ export default {
         },
         createWebSocket() {
             const socket = new WebSocket(
-                `ws://127.0.0.1:8000/ws/alarm/?token=${localStorage.getItem('access_token')}`
+                `wss://api.makebestie.com/ws/alarm/?token=${localStorage.getItem('access_token')}`
             );
+            socket.onerror = (error) => {
+                console.log(error);
+            };
             socket.onmessage = (event) => {
                 const data = JSON.parse(event.data);
                 this.$store.dispatch('getAlarm',data);
