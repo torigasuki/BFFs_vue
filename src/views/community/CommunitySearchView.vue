@@ -36,7 +36,7 @@
                                 <div class="with-card-category">
                                     <div class="with-card-category-box" v-for="category,index in community.categories"
                                         :key="index">
-                                        <router-link :to="`/community/${community.communityurl}/category/${category[1]}`">{{
+                                        <router-link :to="`/community/${community.communityurl}/category/${category[2]}`">{{
                                             category[1] }}</router-link>
                                     </div>
                                 </div>
@@ -100,7 +100,7 @@ export default {
                 this.$store.dispatch("search_community", name)
 
                 if (this.fetchSearchCommunity?.length === 0) {
-                    this.notify("찾으시는 검색 결과가 없습니다")
+                    this.snotify('error',"찾으시는 검색 결과가 없습니다")
                     this.searchname = '';
                 }
             }

@@ -539,8 +539,7 @@ img {
 .with-card-subtext {
   display: flex;
   margin-top: 14px;
-  justify-content: center;
-  text-align: center;
+  text-align: left;
 }
 .with-card-text-box {
   padding-right: 20px;

@@ -23,7 +23,7 @@
         <section class="notice">
             <div class="notice-list">
                 <div class="card" v-for="(profile, index) in newprofile" :key=index>
-                    <router-link :to="`/profile/${profile.id}`">
+                    <router-link :to="`/profile/${profile.user_id}`">
                         <div class="card-image">
                             <img :src="profile.profileimageurl" v-if="profile.profileimage !== null && profile.profileimage.includes('profile_img')"/>
                             <img :src="profile.profileimageurl.slice(33)" v-else-if="profile.profileimage !== null"/>

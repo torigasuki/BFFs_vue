@@ -46,7 +46,7 @@
                             <div class="main-box">
                                 <div class="new-card-container">
                                     <div class="new-card-wrapper">
-                                        <p>준비중입니다</p>
+                                        <p>상단의 알림 표시를 눌러보세요:)<br><br>내 게시글의 댓글과 내 댓글의 대댓글 알림이 가능합니다!</p>
                                     </div>
                                 </div>
                             </div>

@@ -122,7 +122,7 @@
                 </div>
                 <div class="content-info-box">
                   <!-- 작성자 프로필로 이동 -->
-                  <a style="color: #dddddd;">{{ feed.nickname }}</a>
+                  <router-link :to="`/profile/${feed.user}`">{{ feed.nickname }}</router-link>
                   <li>
                     {{
                       feed?.created_at?.slice(0, 10) +
@@ -999,7 +999,7 @@ textarea{
 .text-view-content {
   text-align: center;
   margin-left: 4px;
-  color: #dddddd;
+  color: #909090;
   font-weight: 400;
   font-size: 1.1rem;
 }
@@ -1018,10 +1018,12 @@ textarea{
 
 .content-info-box a {
   margin-right: 8px;
+  color: #909090;
 }
 
 .content-info-box li {
   margin-right: 8px;
+  color: #909090;
 }
 
 .main-text-content {

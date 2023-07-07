@@ -75,7 +75,7 @@ export default {
                 this.$store.dispatch("search_user", {user});
 
                 if (this.fetchSearchUser?.length === 0) {
-                    this.notify("찾으시는 검색 결과가 없습니다")
+                    this.snotify('error',"찾으시는 검색 결과가 없습니다")
                     this.user = '';
                 }
             }
