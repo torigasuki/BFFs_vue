@@ -1,178 +1,178 @@
 <template>
-<div>
-    <section class="body-section">
-        <section class="head-section">
-            <div class="head-area">
-                <!-- 커뮤니티 카테고리 ~ 검색 부분 -->
-                <div class="search-category-area">
-                    <div class="scroll-btn-box left">
-                        <button class="scroll-btn-l">
-                            <svg stroke-width="4" stroke="currentColor" viewBox="0 0 24 24" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linejoin="round" stroke-linecap="round"></path>
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="head-category-wrapper">
-                        <!-- 커뮤니티 카테고리 -->
-                        <ul class="head-category">
-                            <div id="category-item-box" class="category-item-box" ref="scrollWrapper" @mousedown="mouseDown" @mouseleave="mouseLeave" @mouseup="mouseUp" @mousemove="mouseMove">
-                                <li class="category-item" v-for="(community, index) in community" :key=index>
-                                    <router-link type="button" class="nav-link" :to="`/community/detail/${community.communityurl}`">{{community.title}}</router-link>
-                                </li>
+    <div>
+        <section class="body-section">
+            <section class="head-section">
+                <div class="head-area">
+                    <!-- 커뮤니티 카테고리 ~ 검색 부분 -->
+                    <div class="search-category-area">
+                        <div class="scroll-btn-box left">
+                            <button class="scroll-btn-l">
+                                <svg stroke-width="4" stroke="currentColor" viewBox="0 0 24 24" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linejoin="round" stroke-linecap="round"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="head-category-wrapper">
+                            <!-- 커뮤니티 카테고리 -->
+                            <ul class="head-category">
+                                <div id="category-item-box" class="category-item-box" ref="scrollWrapper" @mousedown="mouseDown" @mouseleave="mouseLeave" @mouseup="mouseUp" @mousemove="mouseMove">
+                                    <li class="category-item" v-for="(community, index) in community" :key=index>
+                                        <router-link type="button" class="nav-link" :to="`/community/detail/${community.communityurl}`">{{community.title}}</router-link>
+                                    </li>
+                                </div>
+                            </ul>
+                        </div>
+                        <div class="scroll-btn-box right">
+                            <button class="scroll-btn-r">
+                                <svg stroke-width="4" stroke="currentColor" viewBox="0 0 24 24" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linejoin="round" stroke-linecap="round"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <!-- 검색 -->
+                        <div class="search-box">
+                            <div class="container-input">
+                                <input type="text" placeholder="Community Search" name="text" class="input" autocomplete="off" v-model="searchname" @keyup.enter="searchCommunity()">
+                                <svg fill="#000000" width="20px" height="20px" viewBox="0 0 1920 1920"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z"
+                                        fill-rule="evenodd"></path>
+                                </svg>
                             </div>
-                        </ul>
-                    </div>
-                    <div class="scroll-btn-box right">
-                        <button class="scroll-btn-r">
-                            <svg stroke-width="4" stroke="currentColor" viewBox="0 0 24 24" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linejoin="round" stroke-linecap="round"></path>
-                            </svg>
-                        </button>
-                    </div>
-                    <!-- 검색 -->
-                    <div class="search-box">
-                        <div class="container-input">
-                            <input type="text" placeholder="Community Search" name="text" class="input" autocomplete="off" v-model="searchname" @keyup.enter="searchCommunity()">
-                            <svg fill="#000000" width="20px" height="20px" viewBox="0 0 1920 1920"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z"
-                                    fill-rule="evenodd"></path>
-                            </svg>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <section class="main-section">
-            <div class="main-area"></div>
-            <div class="main-container">
-                <div class="main-title">
-                    <h3>| 추천 커뮤니티 </h3>
-                </div>
-                <div class="main-box">
-                    <!-- 관심-random 카드 섹션 -->
-                    <div class="random-card-wrapper">
-                        <router-link :to="`/community/detail/${newcommunity?.communityurl}`" class="random-card-image-box">
-                            <div class="random-comu-info">
-                                <h1 id="random-comu-title">{{popularcommunity?.title}}</h1>
-                                <p id="randon-comu-introduction">{{popularcommunity?.introduction}}</p>
-                            </div>
-                            <img id="new-card-image" v-if="popularcommunity?.image != null" :src="popularcommunity?.imageurl">
-                            <img id="new-card-image" v-else src="@/assets/comu_image(1).jpg">                        
-                        </router-link>                    
-                        <ul class="random-subtitle">
-                            <h4>⭐️ 이 커뮤니티의 인기 글 ⭐️</h4>
-                        </ul>
-                        <!-- random-comu의 인기 게시글 -->
-                        <ul class="random-text-box">
-                            <li id="" v-for="(feeds, index) in popularfeeds" :key=index>
-                                <router-link :to="`/community/detail/${popularcommunity?.communityurl}/feed/${feeds.id}`">
-                                    <div class="random-text-wrapper">
-                                        <div class="random-text-content-box">
-                                            <a class="random-text-content">{{feeds.title}}</a>
+            </section>
+            <section class="main-section">
+                <div class="main-area"></div>
+                <div class="main-container">
+                    <div class="main-title">
+                        <h3>| 추천 커뮤니티 </h3>
+                    </div>
+                    <div class="main-box">
+                        <!-- 관심-random 카드 섹션 -->
+                        <div class="random-card-wrapper">
+                            <router-link :to="`/community/detail/${popularcommunity?.communityurl}`" class="random-card-image-box">
+                                <div class="random-comu-info">
+                                    <h1 id="random-comu-title">{{popularcommunity?.title}}</h1>
+                                    <p id="randon-comu-introduction">{{popularcommunity?.introduction}}</p>
+                                </div>
+                                <img id="new-card-image" v-if="popularcommunity?.image != null" :src="popularcommunity?.imageurl">
+                                <img id="new-card-image" v-else src="@/assets/comu_image(1).jpg">                        
+                            </router-link>                    
+                            <ul class="random-subtitle">
+                                <h4>⭐️ 이 커뮤니티의 인기 글 ⭐️</h4>
+                            </ul>
+                            <!-- random-comu의 인기 게시글 -->
+                            <ul class="random-text-box">
+                                <li id="" v-for="(feeds, index) in popularfeeds" :key=index>
+                                    <router-link :to="`/community/detail/${popularcommunity?.communityurl}/feed/${feeds.id}`">
+                                        <div class="random-text-wrapper">
+                                            <div class="random-text-content-box">
+                                                <a class="random-text-content">{{feeds.title}}</a>
+                                            </div>
+                                            <div class="random-text-view-box">
+                                                <img src="@/assets/view_look.png">
+                                                <span class="random-text-view">{{feeds.view_count}}</span>
+                                            </div>
                                         </div>
-                                        <div class="random-text-view-box">
-                                            <img src="@/assets/view_look.png">
-                                            <span class="random-text-view">{{feeds.view_count}}</span>
+                                    </router-link>
+                                </li>
+                            </ul>
+                            <div class="bookmark" style="z-index: 999;">
+                                <input v-if = "hasAccessToken" type="checkbox" id="checkboxInput" @click="addBookmark" :checked="bookmark"/>
+                                <input v-else type="checkbox" id="checkboxInput" @click.prevent.prevent="notlogin" :checked="bookmark"/>
+                                <label for="checkboxInput" class="bookmark">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 384 512" class="svgIcon"><path d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9 4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z"></path></svg>
+                                </label>
+                            </div>
+                            <div class="button-box">
+                                <router-link :to="`/community/detail/${popularcommunity?.communityurl}`" class="visit-button">
+                                    <span>방문</span>
+                                    <svg height="16" width="16" xmlns="http://www.w3.org/2000/svg" version="1.1"
+                                        viewBox="0 0 1024 1024">
+                                        <path
+                                            d="M874.690416 495.52477c0 11.2973-9.168824 20.466124-20.466124 20.466124l-604.773963 0 188.083679 188.083679c7.992021 7.992021 7.992021 20.947078 0 28.939099-4.001127 3.990894-9.240455 5.996574-14.46955 5.996574-5.239328 0-10.478655-1.995447-14.479783-5.996574l-223.00912-223.00912c-3.837398-3.837398-5.996574-9.046027-5.996574-14.46955 0-5.433756 2.159176-10.632151 5.996574-14.46955l223.019353-223.029586c7.992021-7.992021 20.957311-7.992021 28.949332 0 7.992021 8.002254 7.992021 20.957311 0 28.949332l-188.073446 188.073446 604.753497 0C865.521592 475.058646 874.690416 484.217237 874.690416 495.52477z">
+                                        </path>
+                                    </svg>
+                                </router-link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="main-container">
+                    <div class="main-title">
+                        <h3>| 새로 생긴 커뮤니티 </h3>
+                    </div>
+                    <div class="main-box">
+                        <div v-if="newcommunity?.length == 0">
+                            <p>새로운 커뮤니티가 없습니다</p>
+                        </div>
+                        <div class="new-card-wrapper" v-else>
+                            <!-- 새 커뮤니티 카드 박스 -->
+                            <router-link :to="`/community/detail/${newcommunity?.communityurl}`" class="new-card-box" v-for="(newcommunity, index) in newcommunity" :key=index>
+                                <div class="new-card-image">
+                                    <img id="new-card-image" v-if="newcommunity.image != null" :src="newcommunity.imageurl">
+                                    <img id="new-card-image" v-else src="@/assets/comu_image(1).jpg">
+                                </div>
+                                <span id="new-text-title" class="new-text-title">{{ newcommunity.title }}</span>
+                                <span id="new-text-introduction" class="new-text-introduction">{{ newcommunity.introduction }}</span>
+                            </router-link>
+    
+                        </div>
+                    </div>
+                </div>
+                <div class="main-container">
+                    <div class="main-title2">
+                        <span>
+                            <h3>| 내가 같이 놀고 있어요!</h3>
+                        </span>
+                    </div>
+                    <div class="main-box">
+                        <div class="with-card-container" id="profile-card-list">
+                            <!-- 함께 놀기 카드 박스 -->
+                            <router-link :to="`/community/detail/${community.communityurl}`" class="with-card-box"
+                                v-for="(community,index) in community" :key="index">
+                                <div class="with-card-text">
+                                    <span class="with-text-title">{{ community.title }}</span>
+                                    <div class="with-card-category">
+                                        <div class="with-card-category-box" v-for="category,index in community.categories"
+                                            :key="index">
+                                            <router-link :to="`/community/${community.communityurl}/category/${category[2]}`">{{
+                                                category[1] }}</router-link>
                                         </div>
                                     </div>
-                                </router-link>
-                            </li>
-                        </ul>
-                        <div class="bookmark" style="z-index: 999;">
-                            <input v-if = "hasAccessToken" type="checkbox" id="checkboxInput" @click="addBookmark" :checked="bookmark"/>
-                            <input v-else type="checkbox" id="checkboxInput" @click.prevent.prevent="notlogin" :checked="bookmark"/>
-                            <label for="checkboxInput" class="bookmark">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 384 512" class="svgIcon"><path d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9 4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z"></path></svg>
-                            </label>
-                        </div>
-                        <div class="button-box">
-                            <router-link :to="`/community/detail/${newcommunity?.communityurl}`" class="visit-button">
-                                <span>방문</span>
-                                <svg height="16" width="16" xmlns="http://www.w3.org/2000/svg" version="1.1"
-                                    viewBox="0 0 1024 1024">
-                                    <path
-                                        d="M874.690416 495.52477c0 11.2973-9.168824 20.466124-20.466124 20.466124l-604.773963 0 188.083679 188.083679c7.992021 7.992021 7.992021 20.947078 0 28.939099-4.001127 3.990894-9.240455 5.996574-14.46955 5.996574-5.239328 0-10.478655-1.995447-14.479783-5.996574l-223.00912-223.00912c-3.837398-3.837398-5.996574-9.046027-5.996574-14.46955 0-5.433756 2.159176-10.632151 5.996574-14.46955l223.019353-223.029586c7.992021-7.992021 20.957311-7.992021 28.949332 0 7.992021 8.002254 7.992021 20.957311 0 28.949332l-188.073446 188.073446 604.753497 0C865.521592 475.058646 874.690416 484.217237 874.690416 495.52477z">
-                                    </path>
-                                </svg>
+                                </div>
+                                <div class="card-content-wrapper">
+                                    <div class="card-text-image">
+                                        <div class="with-card-image">
+                                            <img :src="community.imageurl" v-if="community.image != null" />
+                                            <img src="@/assets/comu_image(1).jpg" v-else />
+                                        </div>
+                                    </div>
+                                    <div class="with-card-text-box">
+    
+                                        <div class="with-card-subtext" v-for="(feed,index) in community.feeds.slice(0, 5)"
+                                            :key="index">
+                                            <div class="with-text-content-box">
+                                                <router-link :to="`/community/detail/${community.communityurl}/feed/${feed.id}/`" class="with-text-content">{{ feed.title }}</router-link>
+                                            </div>
+                                            <div class="with-text-view-box">
+                                                <img src="@/assets/view_look.png" />
+                                                <span class="with-text-view-content">{{ feed.view_count }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </router-link>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="main-container">
-                <div class="main-title">
-                    <h3>| 새로 생긴 커뮤니티 </h3>
-                </div>
-                <div class="main-box">
-                    <div v-if="newcommunity?.length == 0">
-                        <p>새로운 커뮤니티가 없습니다</p>
-                    </div>
-                    <div class="new-card-wrapper" v-else>
-                        <!-- 새 커뮤니티 카드 박스 -->
-                        <router-link :to="`/community/detail/${newcommunity?.communityurl}`" class="new-card-box" v-for="(newcommunity, index) in newcommunity" :key=index>
-                            <div class="new-card-image">
-                                <img id="new-card-image" v-if="newcommunity.image != null" :src="newcommunity.imageurl">
-                                <img id="new-card-image" v-else src="@/assets/comu_image(1).jpg">
-                            </div>
-                            <span id="new-text-title" class="new-text-title">{{ newcommunity.title }}</span>
-                            <span id="new-text-introduction" class="new-text-introduction">{{ newcommunity.introduction }}</span>
-                        </router-link>
-
-                    </div>
-                </div>
-            </div>
-            <div class="main-container">
-                <div class="main-title2">
-                    <span>
-                        <h3>| 내가 같이 놀고 있어요!</h3>
-                    </span>
-                </div>
-                <div class="main-box">
-                    <div class="with-card-container" id="profile-card-list">
-                        <!-- 함께 놀기 카드 박스 -->
-                        <router-link :to="`/community/detail/${community.communityurl}`" class="with-card-box"
-                            v-for="(community,index) in community" :key="index">
-                            <div class="with-card-text">
-                                <span class="with-text-title">{{ community.title }}</span>
-                                <div class="with-card-category">
-                                    <div class="with-card-category-box" v-for="category,index in community.categories"
-                                        :key="index">
-                                        <router-link :to="`/community/${community.communityurl}/category/${category[1]}`">{{
-                                            category[1] }}</router-link>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-content-wrapper">
-                                <div class="card-text-image">
-                                    <div class="with-card-image">
-                                        <img :src="community.imageurl" v-if="community.image != null" />
-                                        <img src="@/assets/comu_image(1).jpg" v-else />
-                                    </div>
-                                </div>
-                                <div class="with-card-text-box">
-
-                                    <div class="with-card-subtext" v-for="(feed,index) in community.feeds.slice(0, 5)"
-                                        :key="index">
-                                        <div class="with-text-content-box">
-                                            <router-link :to="`/community/detail/${community.communityurl}/feed/${feed.id}/`" class="with-text-content">{{ feed.title }}</router-link>
-                                        </div>
-                                        <div class="with-text-view-box">
-                                            <img src="@/assets/view_look.png" />
-                                            <span class="with-text-view-content">{{ feed.view_count }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </router-link>
-                    </div>
-                </div>
-            </div>
+            </section>
         </section>
-    </section>
-</div>
-</template>
+    </div>
+    </template>
 
 <script>
 import { mapGetters } from "vuex";
@@ -915,8 +915,7 @@ a {
 .with-card-subtext{
     display: flex;
     margin-top: 14px;
-    justify-content: center;
-    text-align: center;
+    text-align: left;
 }
 .with-card-text-box {
     padding-right: 20px;

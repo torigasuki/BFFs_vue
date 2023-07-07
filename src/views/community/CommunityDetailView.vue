@@ -124,10 +124,14 @@
                         <div class="posts" v-for="(feed, index) in popularfeeds" :key="index">
                             <router-link :to="`${community_name}/feed/${feed.id}`" class="card">
                                 <div class="header">
-                                    <div class="image"></div>
-                                    <div>
+                                    <div class="image">
+                                        <img :src="feed.profileimageurl" v-if="feed.profileimage !== null && feed.profileimage.includes('profile_img')"/>
+                                        <img :src="feed.profileimageurl.slice(33)" v-else-if="feed.profileimage !== null"/>
+                                        <img src="@/assets/unity.png" v-else />
+                                    </div>
+                                    <div class="title-name">
                                         <p class="title">{{feed.title}}</p>
-                                        <p class="name">{{feed.nickname}}</p>
+                                        <router-link :to="`/profile/${feed.user}`" class="name">{{feed.nickname}}</router-link>
                                     </div>
                                 </div>
                                 <p v-html="feed.content" class="message"></p>
@@ -161,10 +165,14 @@
                         <div class="posts" v-for="(feed, index) in newfeeds" :key="index">
                             <router-link :to="`${community_name}/feed/${feed.id}`" class="card">
                                 <div class="header">
-                                    <div class="image"></div>
-                                    <div>
+                                    <div class="image">
+                                        <img :src="feed.profileimageurl" v-if="feed.profileimage !== null && feed.profileimage.includes('profile_img')"/>
+                                        <img :src="feed.profileimageurl.slice(33)" v-else-if="feed.profileimage !== null"/>
+                                        <img src="@/assets/unity.png" v-else />
+                                    </div>
+                                    <div class="title-name">
                                         <p class="title">{{feed.title}}</p>
-                                        <p class="name">{{feed.nickname}}</p>
+                                        <router-link :to="`/profile/${feed.user}`" class="name">{{feed.nickname}}</router-link>
                                     </div>
                                 </div>
                                 <div v-html="feed.content" class="message"></div>
@@ -202,7 +210,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(["fetchFeedList", "fetchCommunityDetail"]),
+        ...mapGetters(["fetchCommunityDetail"]),
         community_name() {
             return this.$route.params.name;
         },
@@ -213,8 +221,8 @@ export default {
             return this.fetchCommunityDetail.data?.categories || [];
         },
         forbiddens(){
-            if(this.fetchCommunityDetail.data.forbiddenword){
-                return this.fetchCommunityDetail.data.forbiddenword
+            if(this.fetchCommunityDetail.data?.forbiddenword){
+                return this.fetchCommunityDetail.data?.forbiddenword
             }else{
                 return []
             }
@@ -234,15 +242,15 @@ export default {
             return adminIds;
         },
         popularfeeds(){
-            if (Array.isArray(this.fetchFeedList.results) && this.fetchFeedList.results.length > 0) {
-                return [...this.fetchFeedList.results].sort((a, b) => new Date(b.view_count) - new Date(a.view_count));
+            if (Array.isArray(this.fetchCommunityDetail.data?.feeds) && this.fetchCommunityDetail.data?.feeds.length > 0) {
+                return [...this.fetchCommunityDetail.data?.feeds].sort((a, b) => new Date(b.view_count) - new Date(a.view_count)).slice(0, 4);
             } else {
                 return null;
             }
         },
         newfeeds(){
-            if (Array.isArray(this.fetchFeedList.results) && this.fetchFeedList.results.length > 0) {
-                return [...this.fetchFeedList.results].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+            if (Array.isArray(this.fetchCommunityDetail.data?.feeds) && this.fetchCommunityDetail.data?.feeds.length > 0) {
+                return [...this.fetchCommunityDetail.data?.feeds].sort((a, b) => new Date(b.created_at) - new Date(a.created_at)).slice(0, 4);
             } else {
                 return null;
             }
@@ -805,17 +813,25 @@ header >  #menu {
 }
 
 .header .image {
-  height: 4rem;
-  width: 4rem;
+    position: relative;
+    overflow: hidden;
+  height: 64px;
+  width: 64px;
   border-radius: 9999px;
+}
+.header .image img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 100%;
+    width: 100%;
   object-fit: cover;
-  background-color: transparent;
-  background-image: url("@/assets/unity.png");
-  background-size: cover;
-  background-repeat: no-repeat;  
 }
 
-
+.title-name {
+    width: calc(100% - 64px - 1rem);
+}
 .title {
   margin-top: 0.25rem;
   font-size: 1.125rem;
