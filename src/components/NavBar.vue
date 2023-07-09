@@ -66,11 +66,10 @@ export default {
     mounted() {
         window.addEventListener('scroll', this.handleScroll);
         this.checkLogin();
-	    
-    	this.createWebSocket();
+	this.createWebSocket();
     },
     beforeDestroy() {
-        window.removeEventListener('scroll', this.handleScroll);
+	window.removeEventListener('scroll', this.handleScroll);
     },
     watch: {
         '$route'() {
