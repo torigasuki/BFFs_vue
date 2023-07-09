@@ -164,6 +164,7 @@ export default {
                 console.log(error);
             };
             socket.onmessage = (event) => {
+                console.log(event);
                 const data = JSON.parse(event.data);
                 this.$store.dispatch('getAlarm',data);
             };
