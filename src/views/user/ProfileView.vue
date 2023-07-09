@@ -24,13 +24,13 @@
                 
                 <div class="list">
                     <div class="bookmark">
-                        <h3>{{ profile.nickname }}님의 마이페이지</h3>
+                        <h3>{{ profile?.nickname }}님의 마이페이지</h3>
                         <div class="main-container">
                             <div class="main-box">
                                 <div class="new-card-container">
                                     <div class="new-card-wrapper" v-if="!(notificationopen || bookmarkopen || communityopen || feedopen || purchaseopen)">
-                                        <p v-if="userid===profile.id">오른쪽에서 보고싶은 내 정보를 눌러보세요:)<br><br>내 정보 공개는 내 정보 수정에서 가능합니다!</p>
-                                        <p v-else>{{ profile.nickname }}님에게 방명록을 남겨 인사해보세요!</p>
+                                        <p v-if="userid===profile?.id">오른쪽에서 보고싶은 내 정보를 눌러보세요:)<br><br>내 정보 공개는 내 정보 수정에서 가능합니다!</p>
+                                        <p v-else>{{ profile?.nickname }}님에게 방명록을 남겨 인사해보세요!</p>
                                     </div>
                                 </div>
                             </div>
@@ -86,7 +86,7 @@
                                 <svg style="width:20px;" id="Line" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path fill="#7D8590" id="XMLID_1646_" d="m17.074 30h-2.148c-1.038 0-1.914-.811-1.994-1.846l-.125-1.635c-.687-.208-1.351-.484-1.985-.824l-1.246 1.067c-.788.677-1.98.631-2.715-.104l-1.52-1.52c-.734-.734-.78-1.927-.104-2.715l1.067-1.246c-.34-.635-.616-1.299-.824-1.985l-1.634-.125c-1.035-.079-1.846-.955-1.846-1.993v-2.148c0-1.038.811-1.914 1.846-1.994l1.635-.125c.208-.687.484-1.351.824-1.985l-1.068-1.247c-.676-.788-.631-1.98.104-2.715l1.52-1.52c.734-.734 1.927-.779 2.715-.104l1.246 1.067c.635-.34 1.299-.616 1.985-.824l.125-1.634c.08-1.034.956-1.845 1.994-1.845h2.148c1.038 0 1.914.811 1.994 1.846l.125 1.635c.687.208 1.351.484 1.985.824l1.246-1.067c.787-.676 1.98-.631 2.715.104l1.52 1.52c.734.734.78 1.927.104 2.715l-1.067 1.246c.34.635.616 1.299.824 1.985l1.634.125c1.035.079 1.846.955 1.846 1.993v2.148c0 1.038-.811 1.914-1.846 1.994l-1.635.125c-.208.687-.484 1.351-.824 1.985l1.067 1.246c.677.788.631 1.98-.104 2.715l-1.52 1.52c-.734.734-1.928.78-2.715.104l-1.246-1.067c-.635.34-1.299.616-1.985.824l-.125 1.634c-.079 1.035-.955 1.846-1.993 1.846zm-5.835-6.373c.848.53 1.768.912 2.734 1.135.426.099.739.462.772.898l.18 2.341 2.149-.001.18-2.34c.033-.437.347-.8.772-.898.967-.223 1.887-.604 2.734-1.135.371-.232.849-.197 1.181.089l1.784 1.529 1.52-1.52-1.529-1.784c-.285-.332-.321-.811-.089-1.181.53-.848.912-1.768 1.135-2.734.099-.426.462-.739.898-.772l2.341-.18h-.001v-2.148l-2.34-.18c-.437-.033-.8-.347-.898-.772-.223-.967-.604-1.887-1.135-2.734-.232-.37-.196-.849.089-1.181l1.529-1.784-1.52-1.52-1.784 1.529c-.332.286-.81.321-1.181.089-.848-.53-1.768-.912-2.734-1.135-.426-.099-.739-.462-.772-.898l-.18-2.341-2.148.001-.18 2.34c-.033.437-.347.8-.772.898-.967.223-1.887.604-2.734 1.135-.37.232-.849.197-1.181-.089l-1.785-1.529-1.52 1.52 1.529 1.784c.285.332.321.811.089 1.181-.53.848-.912 1.768-1.135 2.734-.099.426-.462.739-.898.772l-2.341.18.002 2.148 2.34.18c.437.033.8.347.898.772.223.967.604 1.887 1.135 2.734.232.37.196.849-.089 1.181l-1.529 1.784 1.52 1.52 1.784-1.529c.332-.287.813-.32 1.18-.089z"></path><path id="XMLID_1645_" fill="#7D8590" d="m16 23c-3.859 0-7-3.141-7-7s3.141-7 7-7 7 3.141 7 7-3.141 7-7 7zm0-12c-2.757 0-5 2.243-5 5s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5z"></path></svg>
                                 내 커뮤니티
                             </h3>
-                            <router-link :to="`/my_community`" class="visit-button" v-if="userid===profile.id">
+                            <router-link :to="`/my_community`" class="visit-button" v-if="userid===profile?.id">
                                 <span>모아보기</span>
                                 <svg height="16" width="16" xmlns="http://www.w3.org/2000/svg" version="1.1"
                                     viewBox="0 0 1024 1024">
@@ -204,7 +204,7 @@
                             <img :src="profile.profileimageurl.slice(33)" v-else-if="profile.profileimage !== null" @click='openModal'/>
                             <img src="@/assets/room_image(5).jpg" v-else />
                         </div>
-                        <div class="category"> {{ profile.nickname }} | {{ profile.region }} </div>
+                        <div class="category"> {{ profile?.nickname }} | {{ profile.region }} </div>
                             <div class="heading" v-if="profile.introduction != null"> {{ profile.introduction }}
                                 <div class="author"> By <span class="name">{{ profile.user_name }}</span></div>
                                 <div class="author"> 가입일 <span class="name">{{ profile.created_at.slice(0, 10) }}</span></div>
@@ -213,9 +213,9 @@
                                 <div class="author"> By <span class="name">{{ profile.user_name }}</span></div>
                                 <div class="author"> 가입일 <span class="name">{{ profile.created_at.slice(0, 10) }}</span></div>
                             </div>
-                            <div class="guestbook-comment" v-if="userid===profile.id">
+                            <div class="guestbook-comment" v-if="userid===user?.id">
                                 <div class="submit-box">
-                                    <router-link :to="`/profile/update/${profile.id}`" class="Btn" @click="editProfile()">수정
+                                    <router-link :to="`/profile/update/${profile?.id}`" class="Btn" @click="editProfile()">수정
                                         <svg class="Btn-svg" viewBox="0 0 512 512">
                                             <path
                                                 d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z">
@@ -282,7 +282,7 @@
                                         </div>
                                     </div>
 
-                                    <li class="guestbook-author"><router-link :to="`/profile/${guestbook.user}`">{{ guestbook.nickname }}</router-link></li>
+                                    <li class="guestbook-author"><router-link :to="`/profile/${guestbook.user}`">{{ guestbook?.nickname }}</router-link></li>
                                     <li class="guestbook-date">작성일 {{ guestbook.created_at.slice(5, 10) }} 수정일 {{ guestbook.updated_at.slice(5, 10) }}</li>
                                     <li class="guestbook-text">
                                         {{ guestbook.comment }}
@@ -326,6 +326,9 @@ export default {
         ...mapGetters({"data":"fetchProfile"}),
         profile() {
             return this.data.profile;
+        },
+        user(){
+            return this.profile.user;
         },
         bookmark() {
             return this.data.bookmark;
@@ -458,35 +461,35 @@ export default {
             this.profileModal = false;
         },
         notificationOpen() {
-            if (this.profile.id !== this.userid && !this.profile.is_agreed) {
+            if (this.profile?.id !== this.userid && !this.profile.is_agreed) {
                 this.snotify('warning','정보를 미공개한 사용자입니다.')
             } else {
                 this.notificationopen = !this.notificationopen
             }
         },
         feedOpen() {
-            if (this.profile.id !== this.userid && !this.profile.is_agreed) {
+            if (this.profile?.id !== this.userid && !this.profile.is_agreed) {
                 this.snotify('warning','정보를 미공개한 사용자입니다.')
             } else {
                 this.feedopen = !this.feedopen
             }
         },
         communityOpen() {
-            if (this.profile.id !== this.userid && !this.profile.is_agreed) {
+            if (this.profile?.id !== this.userid && !this.profile.is_agreed) {
                 this.snotify('warning','정보를 미공개한 사용자입니다.')
             } else {
                 this.communityopen = !this.communityopen
             }
         },
         bookmarkOpen() {
-            if (this.profile.id !== this.userid && !this.profile.is_agreed) {
+            if (this.profile?.id !== this.userid && !this.profile.is_agreed) {
                 this.snotify('warning','정보를 미공개한 사용자입니다.')
             } else {
                 this.bookmarkopen = !this.bookmarkopen
             }
         },
         purchaseOpen() {
-            if (this.profile.id !== this.userid && !this.profile.is_agreed) {
+            if (this.profile?.id !== this.userid && !this.profile.is_agreed) {
                 this.snotify('warning','정보를 미공개한 사용자입니다.')
             } else {
                 this.purchaseopen = !this.purchaseopen

@@ -9,7 +9,7 @@
                         <dt>email</dt>
                         <dd>
                             <div class="input-box">
-                                <input readonly autocomplete="off" id="comu-title" class="input-title" type="comu-title" v-model="profile.user_email">
+                                <input readonly autocomplete="off" id="comu-title" class="input-title" type="comu-title" v-model="user.email">
                             </div>
                         </dd>
                     </dl>
@@ -17,7 +17,7 @@
                         <dt>name</dt>
                         <dd>
                             <div class="input-box">
-                                <input readonly autocomplete="off" id="comu-title" class="input-title" type="comu-title" v-model="profile.user_name">
+                                <input readonly autocomplete="off" id="comu-title" class="input-title" type="comu-title" v-model="user.name">
                             </div>
                         </dd>
                     </dl>
@@ -122,6 +122,9 @@ export default {
         profile() {
             return this.fetchProfile.profile;
         },
+        user(){
+            return this.profile?.user
+        }
     },
     watch:{
         $route(){

@@ -22,21 +22,21 @@
         </section>
         <section class="notice">
             <div class="notice-list">
-                <div class="card" v-for="(profile, index) in profile" :key=index>
-                    <router-link :to="`/profile/${profile.id}`">
+                <div class="card" v-for="(user, index) in searchuser" :key=index>
+                    <router-link :to="`/profile/${user.id}`">
                         <div class="card-image">
-                            <img :src="profile.profileimageurl" v-if="profile.profileimage !== '' && profile.profileimage.includes('profile_img')"/>
-                            <img :src="profile.profileimageurl.slice(33)" v-else-if="profile.profileimage !== ''"/>
+                            <img :src="user.profile.profileimageurl" v-if="user.profile.profileimage !== null && user.profile.profileimage.includes('profile_img')"/>
+                            <img :src="user.profile.profileimageurl?.slice(33)" v-else-if="user.profile.profileimage !== null"/>
                             <img src="@/assets/room_image(5).jpg" v-else />
                         </div>
-                        <div class="category"> {{ profile.nickname }} | {{ profile.region }} </div>
-                        <div class="heading" v-if="profile.introduction != null"> {{ profile.introduction }}
-                            <div class="author"> By <span class="name">{{ profile.user_name }}</span></div>
-                            <div class="author"> 가입일 <span class="name">{{ profile.created_at.slice(0, 10) }}</span></div>
+                        <div class="category"> {{ user.profile.nickname }} | {{ user.profile.region }} </div>
+                        <div class="heading" v-if="user.profile.introduction != null"> {{ user.profile.introduction }}
+                            <div class="author"> By <span class="name">{{ user.profile.nickname }}</span></div>
+                            <div class="author"> 가입일 <span class="name">{{ user.pfofile?.created_at.slice(0, 10) }}</span></div>
                         </div>
                         <div class="heading" v-else> 친구해요 !
-                            <div class="author"> By <span class="name">{{ profile.user_name }}</span></div>
-                            <div class="author"> 가입일 <span class="name">{{ profile.created_at.slice(0, 10) }}</span></div>
+                            <div class="author"> By <span class="name">{{ user.profile.nickname }}</span></div>
+                            <div class="author"> 가입일 <span class="name">{{ user.pfofile?.created_at.slice(0, 10) }}</span></div>
                         </div>
                     </router-link>
                 </div>
@@ -52,7 +52,7 @@ import bus from '@/utils/bus.js';
 export default {
     computed: {
         ...mapGetters(["fetchSearchUser"]),
-        profile() {
+        searchuser() {
             return this.fetchSearchUser;
         },
     },
