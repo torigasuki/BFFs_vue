@@ -66,6 +66,8 @@ export default {
     mounted() {
         window.addEventListener('scroll', this.handleScroll);
         this.checkLogin();
+	    
+    	this.createWebSocket();
     },
     beforeDestroy() {
         window.removeEventListener('scroll', this.handleScroll);
