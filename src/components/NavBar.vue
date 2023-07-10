@@ -66,9 +66,10 @@ export default {
     mounted() {
         window.addEventListener('scroll', this.handleScroll);
         this.checkLogin();
+	this.createWebSocket();
     },
     beforeDestroy() {
-        window.removeEventListener('scroll', this.handleScroll);
+	window.removeEventListener('scroll', this.handleScroll);
     },
     watch: {
         '$route'() {
@@ -114,7 +115,6 @@ export default {
                 next();
             }
         });
-        this.createWebSocket();
     },
     methods: {
         menuShow() {
@@ -160,11 +160,7 @@ export default {
             const socket = new WebSocket(
                 `wss://api.makebestie.com/ws/alarm/?token=${localStorage.getItem('access_token')}`
             );
-            socket.onerror = (error) => {
-                console.log(error);
-            };
             socket.onmessage = (event) => {
-                console.log(event);
                 const data = JSON.parse(event.data);
                 this.$store.dispatch('getAlarm',data);
             };
