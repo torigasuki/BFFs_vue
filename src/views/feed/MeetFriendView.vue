@@ -31,11 +31,11 @@
                         </div>
                         <div class="category"> {{ profile.nickname }} | {{ profile.region }} </div>
                         <div class="heading" v-if="profile.introduction != null"> {{ profile.introduction }}
-                            <div class="author"> By <span class="name">{{ profile.user_name }}</span></div>
+                            <div class="author"> By <span class="name">{{ profile.user.name }}</span></div>
                             <div class="author"> 가입일 <span class="name">{{ profile.created_at.slice(0, 10) }}</span></div>
                         </div>
                         <div class="heading" v-else> 인사말이 없습니다
-                            <div class="author"> By <span class="name">{{ profile.user_name }}</span></div>
+                            <div class="author"> By <span class="name">{{ profile.user.name }}</span></div>
                             <div class="author"> 가입일 <span class="name">{{ profile.created_at.slice(0, 10) }}</span></div>
                         </div>
                     </router-link>
